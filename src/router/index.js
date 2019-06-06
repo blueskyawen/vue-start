@@ -8,7 +8,7 @@ import Help from '@/components/Help'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: HelloWorld },
+  { path: '/', redirect: '/hello' },
   { path: '/hello', component: HelloWorld },
   { path: '/basic', component: Basic },
   { path: '/advance', component: Advance },
