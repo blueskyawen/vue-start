@@ -130,11 +130,17 @@
       <p>直接使用对象添加删除属性不能出发组件内对象的变化，必须使用VUE的set和delete方法</p>
       <p>{{setanddeltete}}</p>
     </div>
+    <div class="axios">
+      <p>{{dataInfo}}</p>
+      <p style="color: red;">{{errorInfo}}</p>
+      <button @click="getHttp">get_data</button>
+    </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import axios from 'axios'
 var Child = {
   template: '<div><h1 @click="event2">{{msg}}222</h1><h2>{{propha}}</h2><h3>{{propB}}</h3></div>',
   props: {
@@ -192,7 +198,9 @@ export default {
       bgColor: '#e6e6e6',
       donghua: {show1: false, show2: true, show3: false},
       docState: 'saved',
-      products: myproduct
+      products: myproduct,
+      dataInfo: {},
+      errorInfo: {}
     }
   },
   computed: {
@@ -278,6 +286,14 @@ export default {
       // delete (this.products.price)无效
       Vue.set(this.products, 'qty', 22)
       Vue.delete(this.products, 'price')
+    },
+    getHttp: function () {
+      axios
+        .get('data01.json')
+        .then(response => (this.dataInfo = response))
+        .catch(function (error) { // 请求失败处理
+          console.log(error)
+        })
     }
   },
   watch: {
