@@ -140,7 +140,7 @@
 
 <script>
 import Vue from 'vue'
-import axios from 'axios'
+
 var Child = {
   template: '<div><h1 @click="event2">{{msg}}222</h1><h2>{{propha}}</h2><h3>{{propB}}</h3></div>',
   props: {
@@ -288,7 +288,7 @@ export default {
       Vue.delete(this.products, 'price')
     },
     getHttp: function () {
-      axios
+      this.http
         .get('data01.json')
         .then(response => (this.dataInfo = response))
         .catch(function (error) { // 请求失败处理
