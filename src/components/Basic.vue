@@ -288,12 +288,23 @@ export default {
       Vue.delete(this.products, 'price')
     },
     getHttp: function () {
-      this.http
+      this.axios
         .get('data01.json')
         .then(response => (this.dataInfo = response))
         .catch(function (error) { // 请求失败处理
           console.log(error)
         })
+      /* Vue.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
+
+      this.axios.get(api).then((response) => {
+        console.log(response.data)
+      })
+
+      this.$http.get(api).then((response) => {
+        console.log(response.data)
+      }) */
     }
   },
   watch: {
