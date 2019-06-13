@@ -19,6 +19,15 @@
       <label>msg-v-html</label>
       <div class="input-item" v-html="htmlMsg"><span>***</span></div>
     </div>
+    <div class="form-group">
+      <label>msg-reverse</label>
+      <div class="input-item">{{helloMsg}}</div>
+      <span class="input-oper" v-on:click="reverseMsg">reverseMsg</span>
+    </div>
+    <div class="form-group">
+      <label>过滤器-pipe</label>
+      <div class="input-item">{{helloMsg | capitalize | capitalize2('2.5.1')}}</div>
+    </div>
   </div>
 </template>
 
@@ -29,12 +38,29 @@ export default {
     return {
       message: 'hello template',
       htmlMsg: '<span style="color:blue">菜鸟教程(会替换原子节点)</span>',
-      disableInputMsg: false
+      disableInputMsg: false,
+      helloMsg: 'hello vue'
     }
   },
   methods: {
     disableMsgInput: function () {
-      this.disableInputMsg = !this.disableInputMsg;
+      this.disableInputMsg = !this.disableInputMsg
+    },
+    reverseMsg: function () {
+      this.helloMsg = this.helloMsg.split('').reverse().join('')
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      var tmpvalues = value.toString().split(' ').map(function (item) {
+        return item.charAt(0).toUpperCase() + item.slice(1)
+      })
+      return tmpvalues.join(' ')
+    },
+    capitalize2: function (value, version) {
+      if (!value) return ''
+      return value + version + ' !!'
     }
   }
 }
