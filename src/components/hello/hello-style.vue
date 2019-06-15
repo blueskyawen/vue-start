@@ -15,14 +15,17 @@
     <div class="form-group">
       <label>class-bind</label>
       <div class="text-items">
-        <div :class="{textClass1: num1 > 5, 'textClass2': num2 > 10}">{{classText[0]}}</div>
+        <div :class="['textClass1']">{{classText[0]}}</div>
+        <div :class="{textClass1: num1 > 5, 'textClass2': num2 > 10}">{{classText[0]}}只适合切换式的绑定</div>
         <div :class="classObj">{{classText[1]}}</div>
-        <div :class="['textClass2', num1 > 6 ? 'textClass3' : '']">{{classText[2]}}</div>
+        <div :class="['textClass2', num1 > 6 ? 'textClass3' : '']">{{classText[2]}}使用变量或常量加引号</div>
+        <div :class="[baseClass.class2, { textClass3: num1 > 8} ]">{{classText[2]}}数组对象成员里必须使用class常量</div>
       </div>
     </div>
     <div class="form-group">
       <label>style-bind</label>
-      <div class="text-items">
+      <div class="text-items" :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }">
+        <div :style="{color: 'red'}">{{styleText[0]}}适合直接书写内联</div>
         <div :style="{color: baseStyle.color, 'background-color': baseStyle.bgColor, fontSize: num2 > 10 ? baseStyle.sizez + 'px' : '14px'}">{{styleText[0]}}</div>
         <div :style="styleObj">{{styleText[1]}}</div>
         <div :style="[baseStyles3, num1 > 6 ? baseStyles2 : {}, num2 > 10 ? baseStyles1 : {}]">{{styleText[2]}}</div>
@@ -54,6 +57,11 @@ export default {
       },
       baseStyles3: {
         backgroundColor: '#ccffff'
+      },
+      baseClass: {
+        class1: 'textClass1',
+        class2: 'textClass2',
+        class3: 'textClass3'
       }
     }
   },
@@ -122,7 +130,7 @@ export default {
     font-weight: 600;
     background-color: antiquewhite;
   }
-  .textClass2 {
+  .textClass3 {
     color: green !important;
   }
 </style>
