@@ -7,81 +7,7 @@
           <input v-model.trim="message" placeholder="编辑我……" v-yc-color="bgColor">
         </div>
       </div>
-      <div class="form-group">
-        <label>{{'多行文本'}}</label>
-        <div class="input-item">
-          <textarea v-model.lazy="areaMsg" placeholder="多行文本输入……" v-yc-color:update="bgColor"></textarea>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>{{'Age'}}</label>
-        <div class="input-item">
-          <input type="number" v-model.lazy.number="age" placeholder="输入……" />
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Likes</label>
-        <div class="input-item">
-          <span>
-            <input type="checkbox" id="checkAllLikes" v-model="checkAllLikes" @change="checkAllLikess">
-            <label for="checkAllLikes">全选</label>
-          </span>
-          <span v-for="like in likeList" :key="like.value">
-            <input type="checkbox" :id="like.value" :value="like.value" v-model="likeNames">
-            <label :for="like.value">{{like.key}}</label>
-          </span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="isAggre">{{'Aggrement'}}</label>
-        <div class="input-item">
-          <span>
-            <input type="checkbox" id="isAggre" v-model="isAggre">
-          </span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Sex</label>
-        <div class="input-item">
-          <span>
-            <input type="radio" id="man" value="man" v-model="sex">
-            <label for="man">Man</label>
-          </span>
-          <span>
-            <input type="radio" id="woman" value="woman" v-model="sex">
-            <label for="woman">Woman</label>
-          </span>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>City</label>
-        <div class="input-item">
-          <select v-model="city" name="city">
-            <option value="">选择一个</option>
-            <option value="shanghai">上海</option>
-            <option value="hangzhou">杭州</option>
-            <option value="beijing">北京</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Color</label>
-        <div class="input-item">
-          <input type="color" v-model="bgColor">
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="button-item">
-          <button @click.prevent="submit()">提交</button>
-        </div>
-      </div>
     </form>
-    <p>{{formData}}</p>
-    <div class="zujian">
-      <runoob :message="message" :num="age"></runoob>
-      <button-counter :prop-c="'232'" v-on:increment="incrementTotal($event)"></button-counter>
-      <yc-child :propha="555" @childChange="ycChange"></yc-child>
-    </div>
     <div class="donghua">
       <div>
         <transition>
@@ -125,10 +51,6 @@
       <p>当混入的methods方法时，调用是先搜索组建方法，再搜索混入的方法；所以组件方法调用优先级会高一些</p>
       <button @click="hellworld">method-hello</button>
       <button @click="samemethod">method-samemethod</button>
-    </div>
-    <div class="setanddel">
-      <p>直接使用对象添加删除属性不能出发组件内对象的变化，必须使用VUE的set和delete方法</p>
-      <p>{{setanddeltete}}</p>
     </div>
     <div class="axios">
       <p>{{dataInfo}}</p>

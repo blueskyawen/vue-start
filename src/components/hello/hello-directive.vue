@@ -43,6 +43,34 @@
       <label class="for-input">Watch price</label>
       <div class="input-item">{{price}}</div>
     </div>
+    <div class="form-group">
+      <label class="for-input">v-if管理复元素-nokey</label>
+      <div class="text-items">
+        <div v-if="showUseName">
+          <span>Usernam</span>
+          <input placeholder="Enter username" />
+        </div>
+        <div v-else>
+          <span>Email</span>
+          <input placeholder="Enter Email" />
+        </div>
+      </div>
+      <span class="input-oper" @click.capture="switchInput">SwitchInput</span>
+    </div>
+    <div class="form-group">
+      <label class="for-input">v-if管理复元素-haskey</label>
+      <div class="text-items">
+        <div v-if="showUseName2">
+          <span>Username</span>
+          <input placeholder="Enter username" key="usename" />
+        </div>
+        <div v-else>
+          <span>Email</span>
+          <input placeholder="Enter Email" key="email" />
+        </div>
+      </div>
+      <span class="input-oper" @click.capture="showUseName2 = !showUseName2">SwitchInput</span>
+    </div>
   </div>
 </template>
 
@@ -50,7 +78,8 @@
 var siteData = {
   name: '菜鸟教程',
   url: 'http://www.runoob.com',
-  slogan: '学的不仅是技术, 更是梦想！'}
+  slogan: '学的不仅是技术, 更是梦想！'
+}
 
 export default {
   name: 'helloDirective',
@@ -61,7 +90,9 @@ export default {
       showNumInput: true,
       numList: [ { value: 16 }, { value: 45 }, { value: 12 } ],
       site: siteData,
-      price: 6 * 2300
+      price: 6 * 2300,
+      showUseName: true,
+      showUseName2: true
     }
   },
   methods: {
@@ -84,6 +115,9 @@ export default {
     delObjectAtrr: function () {
       this.$delete(siteData, 'url')
       // console.log(this)
+    },
+    switchInput: function () {
+      this.showUseName = !this.showUseName
     }
   },
   watch: {
