@@ -16,12 +16,19 @@
       <div class="input-item"  v-else>{{'数字: others'}}</div>
     </div>
     <div class="form-group">
-      <label class="for-input">v-for-array</label>
+      <label class="for-input">v-for-array-in</label>
       <div class="input-item">
         <span v-for="num in numList" :key="num.value">{{num.value}}</span>
       </div>
       <span class="input-oper" @click.stop="addNumlist">add</span>
       <span class="input-oper" @click.stop="delNumlist">delete</span>
+      <span class="input-oper" @click.stop="reserveNumlist">reserve</span>
+    </div>
+    <div class="form-group">
+      <label class="for-input">v-for-array-of</label>
+      <div class="input-item">
+        <span v-for="(num, index) of numList" :key="index">No.{{index}}-{{num.value}}</span>
+      </div>
     </div>
     <div class="form-group">
       <label>v-for-object</label>
@@ -107,6 +114,9 @@ export default {
     },
     delNumlist: function () {
       this.numList.pop()
+    },
+    reserveNumlist: function () {
+      this.numList.reverse()
     },
     addObjectAtrr: function () {
       var key = 'new' + this.getRandomNum()

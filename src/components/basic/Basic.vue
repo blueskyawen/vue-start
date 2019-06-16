@@ -7,12 +7,16 @@
           {{tabItem.label}}</div>
       </div>
       <div class="vc-tab-content">
-        <basicDirective v-if="curTab === 'directiveComp'"></basicDirective>
-        <basicAnimate v-else-if="curTab === 'animate'"></basicAnimate>
-        <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
-        <basicSetter v-else-if="curTab === 'dynmacDetect'"></basicSetter>
-        <basicAxios v-else-if="curTab === 'axios'"></basicAxios>
-        <div v-else>Not Found</div>
+        <transition name="tabShow" appear appear-class="tabShow-enter"
+                    appear-to-class="tabShow-enter-to"
+                    appear-active-class="tabShow-enter-active">
+          <basicDirective v-if="curTab === 'directiveComp'"></basicDirective>
+          <basicAnimate v-else-if="curTab === 'animate'"></basicAnimate>
+          <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
+          <basicSetter v-else-if="curTab === 'dynmacDetect'"></basicSetter>
+          <basicAxios v-else-if="curTab === 'axios'"></basicAxios>
+          <div v-else>Not Found</div>
+        </transition>
       </div>
     </div>
   </div>
@@ -114,5 +118,20 @@ export default {
   .vc-tabs .vc-tab-content {
     width: inherit;
     padding: 20px;
+  }
+  .tabShow-enter {
+    opacity: 0;
+    margin-left: -100px;
+  }
+  .tabShow-leave-to {
+    opacity: 0;
+    margin-left: 200px;
+  }
+  .tabShow-enter-to, .tabShow-leave {
+    opacity: 1;
+    margin-left: 0;
+  }
+  .tabShow-enter-active {
+    transition: all 1s linear;
   }
 </style>
