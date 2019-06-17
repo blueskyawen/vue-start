@@ -5,6 +5,7 @@ import helloTemplate from '@/components/hello/hello-template'
 import helloDirective from '@/components/hello/hello-directive'
 import helloStyle from '@/components/hello/hello-style'
 import helloForm from '@/components/hello/hello-form'
+import helloEvent from '@/components/hello/hello-event'
 import Basic from '@/components/basic/Basic'
 import Advance from '@/components/Advance'
 import Help from '@/components/Help'
@@ -20,7 +21,8 @@ const routes = [
       { path: 'template', component: helloTemplate },
       { path: 'innerDirective', component: helloDirective },
       { path: 'styles', component: helloStyle },
-      { path: 'form', component: helloForm }
+      { path: 'form', component: helloForm },
+      { path: 'event', component: helloEvent }
     ]
   },
   { path: '/basic', component: Basic },

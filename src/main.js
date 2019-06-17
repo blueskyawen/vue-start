@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 Vue.use(VueAxios, axios)
 
 Vue.config.productionTip = false
+Vue.config.keyCodes.awen = 67
 
 Vue.directive('yc-color', {
   bind: function (el, binding, vnode) {

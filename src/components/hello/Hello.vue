@@ -24,7 +24,8 @@ export default {
         {label: '模板', value: 'template', routeLink: 'template'},
         {label: '内置指令', value: 'innerDirective', routeLink: 'innerDirective'},
         {label: '样式绑定', value: 'styles', routeLink: 'styles'},
-        {label: '表单', value: 'form', routeLink: 'form'}
+        {label: '表单', value: 'form', routeLink: 'form'},
+        {label: '事件', value: 'event', routeLink: 'event'}
       ]
     }
   }

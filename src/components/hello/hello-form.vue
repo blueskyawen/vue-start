@@ -79,7 +79,7 @@
       <div class="form-group">
         <label></label>
         <div class="input-item">
-          <button @click.prevent="submit()">提交</button>
+          <button @click.prevent="submit">提交</button>
         </div>
       </div>
     </form>
@@ -137,8 +137,11 @@ export default {
         this.likeNames = []
       }
     },
-    submit: function () {
+    submit: function (event) {
       alert(JSON.stringify(this.formData, null, 4))
+      if (event) {
+        console.log(event.target.tagName)
+      }
     }
   }
 }
