@@ -23,11 +23,23 @@
       <span class="input-oper" @click.stop="addNumlist">add</span>
       <span class="input-oper" @click.stop="delNumlist">delete</span>
       <span class="input-oper" @click.stop="reserveNumlist">reserve</span>
+      <span class="input-oper" @click.stop="ascendNumlist">升序</span>
+      <span class="input-oper" @click.stop="descendNumlist">降序</span>
+      <span class="input-oper" @click.stop="modNum1">modNum1</span>
     </div>
     <div class="form-group">
       <label class="for-input">v-for-array-of</label>
       <div class="input-item">
         <span v-for="(num, index) of numList" :key="index">No.{{index}}-{{num.value}}</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>v-for-array-with-template</label>
+      <div class="input-item">
+        <template v-for="(num, index) of numList" v-if="num.value > 20">
+          <span style="color: #3399ff" :key="index">No.{{index}} : </span>
+          <span style="color: #ff6600" :key="num">{{num.value}}</span>
+        </template>
       </div>
     </div>
     <div class="form-group">
@@ -128,6 +140,15 @@ export default {
     },
     switchInput: function () {
       this.showUseName = !this.showUseName
+    },
+    ascendNumlist: function () {
+      this.numList.sort((a, b) => { return a.value - b.value })
+    },
+    descendNumlist: function () {
+      this.numList.sort((a, b) => { return b.value - a.value })
+    },
+    modNum1: function () {
+      this.$set(this.numList, 0, {value: this.getRandomNum()})
     }
   },
   watch: {
