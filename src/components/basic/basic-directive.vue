@@ -5,7 +5,7 @@
       <div class="demo-item">
         <global-compt-1></global-compt-1>
         <div class="fenge"></div>
-        <global-compt-2 :message="msg1.text" :num="msg1.num" @eventCompt2="handleEventCompt2"
+        <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt2="handleEventCompt2"
                         @eventCompt02="handleEvent2Compt2"></global-compt-2>
         <div class="fenge"></div>
         <global-compt-3 prop-c="hello vue" :prop-e="num"></global-compt-3>

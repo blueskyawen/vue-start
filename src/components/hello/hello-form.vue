@@ -63,7 +63,7 @@
         <label class="for-input">City</label>
         <div class="input-item">
           <select v-model="city" name="city">
-            <option value="">选择一个</option>
+            <option disabled value="">选择一个</option>
             <option value="shanghai">上海</option>
             <option value="hangzhou">杭州</option>
             <option value="beijing">北京</option>
@@ -71,9 +71,39 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="for-input">mutil Citys</label>
+        <div class="input-item">
+          <select v-model="mutilcitys" name="city" multiple>
+            <option disabled value="">选择一个</option>
+            <option>上海</option>
+            <option>杭州</option>
+            <option>北京</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
         <label>Color</label>
         <div class="input-item">
           <input type="color" v-model="bgColor">
+        </div>
+      </div>
+      <div class="fenge"></div>
+      <h4>绑定到动态属性，属性的值可以不是字符串</h4>
+      <div class="form-group">
+        <label for="isLoveFish" class="for-input">isLoveFish</label>
+        <div class="input-item">
+          <span>
+            <input type="checkbox" id="isLoveFish" v-model="isLoveFish" true-value="Yes" false-value="No" />
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="isLoveFish" class="for-input">Like-bind-object</label>
+        <div class="input-item">
+          <select v-model="objLike" name="Likes">
+            <option disabled value="">选择一个</option>
+            <option v-for="item of likeList" :key="item.value" :value="item">{{item.key}}</option>
+          </select>
         </div>
       </div>
       <div class="form-group">
@@ -105,8 +135,11 @@ export default {
       isAggre: true,
       sex: 'man',
       city: 'shanghai',
+      mutilcitys: [],
       obj: {},
-      bgColor: '#e6e6e6'
+      bgColor: '#e6e6e6',
+      isLoveFish: 'Yes',  // Yes or No,
+      objLike: {}
     }
   },
   computed: {
@@ -120,7 +153,10 @@ export default {
         city: this.city,
         age: this.age,
         obj: this.obj,
-        bgColor: this.bgColor
+        bgColor: this.bgColor,
+        mutilcitys: this.mutilcitys,
+        isLoveFish: this.isLoveFish,
+        objLike: this.objLike
       }
     }
   },
@@ -208,5 +244,11 @@ export default {
   .form-group > .text-items > div .check-item {
     float: left;
     margin-right: 20px;
+  }
+  form .fenge {
+    width: 100%;
+    height: 3px;
+    margin-bottom: 3px;
+    border-bottom: dashed 1px #999;
   }
 </style>
