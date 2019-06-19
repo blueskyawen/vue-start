@@ -7,7 +7,7 @@ import helloStyle from '@/components/hello/hello-style'
 import helloForm from '@/components/hello/hello-form'
 import helloEvent from '@/components/hello/hello-event'
 import Basic from '@/components/basic/Basic'
-import Advance from '@/components/Advance'
+import Advance from '@/components/advance/advance'
 import Help from '@/components/Help'
 
 Vue.use(VueRouter)

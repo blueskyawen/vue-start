@@ -138,7 +138,8 @@ export default {
       mutilcitys: [],
       obj: {},
       bgColor: '#e6e6e6',
-      isLoveFish: 'Yes',  // Yes or No,
+      // Yes or No
+      isLoveFish: 'Yes',
       objLike: {}
     }
   },

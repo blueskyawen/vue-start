@@ -6,9 +6,20 @@
         <global-compt-1></global-compt-1>
         <div class="fenge"></div>
         <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt2="handleEventCompt2"
-                        @eventCompt02="handleEvent2Compt2"></global-compt-2>
+                        @eventCompt02="handleEvent2Compt2" @eventCompt01="msg2 += $event"></global-compt-2>
+        <p>{{msg2}}</p>
         <div class="fenge"></div>
         <global-compt-3 prop-c="hello vue" :prop-e="num"></global-compt-3>
+        <div class="fenge"></div>
+      </div>
+    </div>
+    <div class="demo-item-group">
+      <label class="hasMao">使用组件is="component_name"</label>
+      <div class="demo-item">
+        <ol>
+          <li is="global-compt-1"></li>
+          <li is="global-compt-3"></li>
+        </ol>
         <div class="fenge"></div>
       </div>
     </div>
@@ -122,14 +133,18 @@ Vue.component('global-compt-2', {
     }
   },
   template: '<div><h3>{{name}}: {{message + num}}</h3>' +
-    '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent">Event-compt2</button>' +
-    '<button :style="btnStyle" @click="emitEvent2">Event2-compt2</button></div>',
+    '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent">Event-no-emit-value</button>' +
+    '<button :style="btnStyle" @click="emitEvent2">Event2-emit2-values</button>' +
+    '<button :style="btnStyle" @click="emitEvent1">Event2-emit1-values</button></div>',
   methods: {
     emitEvent: function () {
       this.$emit('eventCompt2')
     },
     emitEvent2: function () {
       this.$emit('eventCompt02', this.name, 666)
+    },
+    emitEvent1: function () {
+      this.$emit('eventCompt01', 666)
     }
   }
 })
@@ -201,7 +216,8 @@ export default {
         fontsizee: '20px',
         text: 'hello vue directive!',
         bgColor: '#ffffcc'
-      }
+      },
+      msg2: 'compt'
     }
   },
   components: {

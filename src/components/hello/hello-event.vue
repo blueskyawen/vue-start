@@ -26,7 +26,7 @@
     <div class="form-group">
       <label>自定义按键修饰符别名</label>
       <div class="input-item">
-        <input class="d-width" @keyup.awen="KeyupBtin('awen', $event)" v-model="keyMsg.awen">
+        <input class="d-width" @keyup.f1="KeyupBtin('awen', $event)" v-model="keyMsg.awen">
       </div>
     </div>
   </div>
@@ -37,7 +37,7 @@ import Vue from 'vue'
 
 Vue.config.keyCodes = {
   v: 86,
-  f1: 112,
+  f1: 67,
   awen: 67,
   up: [38, 87]
 }
