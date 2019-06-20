@@ -7,8 +7,8 @@
         <div class="fenge"></div>
         <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt2="handleEventCompt2"
                         @eventCompt02="handleEvent2Compt2" @eventCompt01="msg2 += $event"
-                        v-bind:counter.sync="counter"></global-compt-2>
-        <p>msg2: {{msg2}}; counter: {{counter}}</p>
+                        v-bind:counter.sync="clickCounter" v-bind.sync="personObj"></global-compt-2>
+        <p>msg2: {{msg2}}; clickCounter: {{clickCounter}}; personObj: {{personObj}}</p>
         <div class="fenge"></div>
         <global-compt-3 prop-c="hello vue" :prop-e="num" @focus="foucsComp3"></global-compt-3>
         <div class="fenge"></div>
@@ -118,7 +118,7 @@ Vue.component('global-compt-1', {
 })
 // 全局组件可以不生明就互相引用
 Vue.component('global-compt-2', {
-  props: ['message', 'num', 'counter'],
+  props: ['message', 'num', 'counter', 'msg', 'age'],
   data () {
     return {
       name: 'global-component02',
@@ -137,7 +137,9 @@ Vue.component('global-compt-2', {
     '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent">Event-no-emit-value</button>' +
     '<button :style="btnStyle" @click="emitEvent2">Event2-emit2-values</button>' +
     '<button :style="btnStyle" @click="emitEvent1">Event2-emit1-values</button>' +
-    '<button :style="btnStyle" @click="emitCounter">Event3-emit1-counter</button></div>',
+    '<button :style="btnStyle" @click="emitCounter">双向绑定-emit-update:counter</button>' +
+    '<div>双向绑定-emit-update:object-msg: <input @change="emitObject1" :value="msg"/></div>' +
+    '<div>双向绑定-emit-update:object-age: <input type="numner" @change.number="emitObject2" :value="age"/></div></div>',
   methods: {
     emitEvent: function () {
       this.$emit('eventCompt2')
@@ -150,7 +152,13 @@ Vue.component('global-compt-2', {
     },
     emitCounter: function ($event) {
       let cout = this.counter + 5
-      this.$emit('update:title', cout)
+      this.$emit('update:counter', cout)
+    },
+    emitObject1: function ($event) {
+      this.$emit('update:msg', $event.target.value)
+    },
+    emitObject2: function ($event) {
+      this.$emit('update:age', $event.target.value)
     }
   }
 })
@@ -240,7 +248,8 @@ export default {
         bgColor: '#ffffcc'
       },
       msg2: 'compt',
-      counter: 8
+      clickCounter: 3,
+      personObj: {msg: 'lilei', age: 18}
     }
   },
   components: {
