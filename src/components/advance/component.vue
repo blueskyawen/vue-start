@@ -4,25 +4,26 @@
       <vc-form-group class="vc-from-group">
         <vc-form-label class="vc-from-label">用户名</vc-form-label>
         <vc-form-control class="vc-from-control">
-          <vc-input v-model="name"></vc-input>
+          <vc-input v-model="name" placeholder="输入用户名" autocomplete="on" required></vc-input>
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
         <vc-form-label class="vc-from-label">密码</vc-form-label>
         <vc-form-control class="vc-from-control">
-          <vc-input type="password" v-model="password"></vc-input>
+          <vc-input type="password" v-model="password" placeholder="输入密码" autocomplete="off" required>
+          </vc-input>
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
         <vc-form-label class="vc-from-label">数量</vc-form-label>
         <vc-form-control class="vc-from-control">
-          <vc-input type="number" v-model="num"></vc-input>
+          <vc-input type="number" v-model="num" required></vc-input>
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
         <vc-form-label class="vc-from-label">文本域</vc-form-label>
         <vc-form-control class="vc-from-control">
-          <vc-textarea v-model="description"></vc-textarea>
+          <vc-textarea v-model="description" placeholder="输入文本"></vc-textarea>
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
@@ -62,16 +63,6 @@
 </template>
 
 <script>
-import vcinput from '@/components/share/vc-input'
-import vctextarea from '@/components/share/vc-textarea'
-import vcformgroup from '@/components/share/vc-form-group'
-import vcformcontrol from '@/components/share/vc-form-control'
-import vcformlabel from '@/components/share/vc-form-label'
-import vcbutton from '@/components/share/vc-button'
-import vcradio from '@/components/share/vc-radio'
-import vccheckbox from '@/components/share/vc-checkbox'
-import vcmutilcheckbox from '@/components/share/vc-mutil-checkbox'
-
 export default {
   name: 'component',
   data () {
@@ -95,22 +86,13 @@ export default {
       ],
       likes2: [
         {value: 'fish', name: '鱼肉', checked: false},
-        {value: 'pid', name: '猪肉', checked: false},
-        {value: 'apple', name: '苹果', checked: false}
+        {value: 'pig', name: '猪肉', checked: false},
+        {value: 'apple', name: '苹果', checked: false},
+        {value: 'duck', name: '烤鸭', checked: false},
+        {value: 'watermelon', name: '西瓜', checked: false}
       ],
       selectedLikes: ['fish']
     }
-  },
-  components: {
-    'vc-input': vcinput,
-    'vc-textarea': vctextarea,
-    'vc-form-group': vcformgroup,
-    'vc-form-control': vcformcontrol,
-    'vc-form-label': vcformlabel,
-    'vc-button': vcbutton,
-    'vc-radio': vcradio,
-    'vc-checkbox': vccheckbox,
-    'vc-mutil-checkbox': vcmutilcheckbox
   },
   computed: {
     dataInfo: function () {

@@ -6,10 +6,11 @@
         <global-compt-1></global-compt-1>
         <div class="fenge"></div>
         <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt2="handleEventCompt2"
-                        @eventCompt02="handleEvent2Compt2" @eventCompt01="msg2 += $event"></global-compt-2>
-        <p>{{msg2}}</p>
+                        @eventCompt02="handleEvent2Compt2" @eventCompt01="msg2 += $event"
+                        v-bind:counter.sync="counter"></global-compt-2>
+        <p>msg2: {{msg2}}; counter: {{counter}}</p>
         <div class="fenge"></div>
-        <global-compt-3 prop-c="hello vue" :prop-e="num"></global-compt-3>
+        <global-compt-3 prop-c="hello vue" :prop-e="num" @focus="foucsComp3"></global-compt-3>
         <div class="fenge"></div>
       </div>
     </div>
@@ -117,7 +118,7 @@ Vue.component('global-compt-1', {
 })
 // 全局组件可以不生明就互相引用
 Vue.component('global-compt-2', {
-  props: ['message', 'num'],
+  props: ['message', 'num', 'counter'],
   data () {
     return {
       name: 'global-component02',
@@ -135,7 +136,8 @@ Vue.component('global-compt-2', {
   template: '<div><h3>{{name}}: {{message + num}}</h3>' +
     '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent">Event-no-emit-value</button>' +
     '<button :style="btnStyle" @click="emitEvent2">Event2-emit2-values</button>' +
-    '<button :style="btnStyle" @click="emitEvent1">Event2-emit1-values</button></div>',
+    '<button :style="btnStyle" @click="emitEvent1">Event2-emit1-values</button>' +
+    '<button :style="btnStyle" @click="emitCounter">Event3-emit1-counter</button></div>',
   methods: {
     emitEvent: function () {
       this.$emit('eventCompt2')
@@ -145,10 +147,15 @@ Vue.component('global-compt-2', {
     },
     emitEvent1: function () {
       this.$emit('eventCompt01', 666)
+    },
+    emitCounter: function ($event) {
+      let cout = this.counter + 5
+      this.$emit('update:title', cout)
     }
   }
 })
 Vue.component('global-compt-3', {
+  inheritAttrs: false,
   props: {
     propA: Number,
     propB: [Number, String],
@@ -170,7 +177,22 @@ Vue.component('global-compt-3', {
       }
     }
   },
-  template: '<div><h3>global-component03</h3><div>{{propC}} : {{propE}} : {{propD}}</div></div>'
+  computed: {
+    inputListeners: function () {
+      // `Object.assign` 将所有的对象合并为一个新对象
+      return Object.assign({},
+        // 我们从父级添加所有的监听器
+        this.$listeners
+      )
+    }
+  },
+  methods: {
+    focusIt: function () {
+      alert('focusIt')
+    }
+  },
+  template: '<div><h3>global-component03</h3><input type="text" v-on="inputListeners" >' +
+    '<div>{{propC}} : {{propE}} : {{propD}}</div></div>'
 })
 // 局部组件
 var localCompt01 = {
@@ -217,7 +239,8 @@ export default {
         text: 'hello vue directive!',
         bgColor: '#ffffcc'
       },
-      msg2: 'compt'
+      msg2: 'compt',
+      counter: 8
     }
   },
   components: {
@@ -263,6 +286,9 @@ export default {
       var tmpindex = Math.random() * 10 > 5 ? 0 : 1
       // 无效果 this.focusData.fontsizee = this.sizess[tmpindex]
       this.focusData = {text: 'hello vue directive!', fontsizee: this.sizess[tmpindex]}
+    },
+    foucsComp3: function () {
+      alert('Focus Event compt2')
     }
   }
 }

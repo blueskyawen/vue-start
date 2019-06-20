@@ -1,18 +1,15 @@
 <template>
   <div class="nc-form-group-item">
-    <input autocomplete="on" :type="type" :value="value" @input="valueChange" />
+    <input :value="value" v-bind="$attrs" @input="valueChange" />
   </div>
 </template>
 
 <script>
 export default {
   name: 'vc-input',
+  inheritAttrs: false,
   props: {
-    value: String,
-    type: {
-      type: String,
-      default: 'text'
-    }
+    value: String
   },
   data () {
     return {

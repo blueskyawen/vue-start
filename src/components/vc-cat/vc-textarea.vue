@@ -2,8 +2,8 @@
   <div class="nc-form-textarea" :style="{height: height, width: width}">
     <textarea name="textarea"
               :value="value"
-              @input="$emit('input', $event.target.value)"
-              :placeholder="placeholder"
+              v-on="inputListeners"
+              v-bind="$attrs"
               maxlength="100">
     </textarea>
   </div>
@@ -12,11 +12,24 @@
 <script>
 export default {
   name: 'vc-textarea',
+  inheritAttrs: false,
   props: {
     value: String,
     height: {type: String, default: 'auto'},
-    width: {type: String, default: '100%'},
-    placeholder: {type: String, default: '请输入'}
+    width: {type: String, default: '100%'}
+  },
+  computed: {
+    inputListeners: function () {
+      var vm = this
+      return Object.assign({},
+        this.$listeners,
+        {
+          input: function ($event) {
+            vm.$emit('input', $event.target.value)
+          }
+        }
+      )
+    }
   }
 }
 </script>

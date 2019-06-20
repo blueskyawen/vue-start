@@ -5,8 +5,10 @@ import App from './App'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import vcCat from './components/vc-cat'
 
 Vue.use(VueAxios, axios)
+Vue.use(vcCat)
 
 Vue.config.productionTip = false
 Vue.config.keyCodes.awen = 67
