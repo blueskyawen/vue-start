@@ -22,8 +22,8 @@ export default {
   data () {
     return {
       tabItems: [
-        {label: '自定义组件', value: 'component', comp: 'componentd'},
-        {label: '自定义指令', value: 'directive', comp: 'directived'}
+        {label: '基础组件设计', value: 'component', comp: 'componentd'},
+        {label: '基础指令设计', value: 'directive', comp: 'directived'}
       ],
       curTab: 'component',
       curCompt: 'componentd'

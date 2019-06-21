@@ -10,9 +10,11 @@
         <transition name="tabShow" appear appear-class="tabShow-enter"
                     appear-to-class="tabShow-enter-to"
                     appear-active-class="tabShow-enter-active">
-          <basicDirective v-if="curTab === 'directiveComp'"></basicDirective>
+          <basicComponent v-if="curTab === 'component'"></basicComponent>
+          <basicDirective v-else-if="curTab === 'directive'"></basicDirective>
           <basicAnimate v-else-if="curTab === 'animate'"></basicAnimate>
           <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
+          <basicSlot v-else-if="curTab === 'slot'"></basicSlot>
           <basicSetter v-else-if="curTab === 'dynmacDetect'"></basicSetter>
           <basicAxios v-else-if="curTab === 'axios'"></basicAxios>
           <div v-else>Not Found</div>
@@ -28,22 +30,32 @@ import basicAnimate from './basic-animate'
 import basicExtend from './basic-extend'
 import basicSetter from './basic-setter'
 import basicAxios from './basic-axios'
+import basicComponent from './basic-component'
+import basicSlot from './basic-slot'
 
 export default {
   name: 'Basic',
   data () {
     return {
       tabItems: [
-        {label: '指令组件', value: 'directiveComp', selected: false},
+        {label: '组件', value: 'component', selected: false},
+        {label: '指令', value: 'directive', selected: false},
         {label: '过渡&动画', value: 'animate', selected: false},
         {label: '混入', value: 'extend', selected: false},
+        {label: '插槽', value: 'slot', selected: false},
         {label: '动态检测', value: 'dynmacDetect', selected: false},
         {label: 'Axios', value: 'axios', selected: false}
       ],
-      curTab: 'directiveComp'
+      curTab: 'component'
     }
   },
-  components: { basicDirective, basicAnimate, basicExtend, basicSetter, basicAxios },
+  components: { basicDirective,
+    basicAnimate,
+    basicExtend,
+    basicSetter,
+    basicAxios,
+    basicComponent,
+    basicSlot },
   beforeCreate: function () {
     console.log('Basic ===== beforeCreate')
   },

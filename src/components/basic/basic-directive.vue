@@ -1,39 +1,6 @@
 <template>
   <div class="basicDirective">
     <div class="demo-item-group">
-      <label class="hasMao">全局组件</label>
-      <div class="demo-item">
-        <global-compt-1></global-compt-1>
-        <div class="fenge"></div>
-        <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt2="handleEventCompt2"
-                        @eventCompt02="handleEvent2Compt2" @eventCompt01="msg2 += $event"
-                        v-bind:counter.sync="clickCounter" v-bind.sync="personObj"></global-compt-2>
-        <p>msg2: {{msg2}}; clickCounter: {{clickCounter}}; personObj: {{personObj}}</p>
-        <div class="fenge"></div>
-        <global-compt-3 prop-c="hello vue" :prop-e="num" @focus="foucsComp3"></global-compt-3>
-        <div class="fenge"></div>
-      </div>
-    </div>
-    <div class="demo-item-group">
-      <label class="hasMao">使用组件is="component_name"</label>
-      <div class="demo-item">
-        <ol>
-          <li is="global-compt-1"></li>
-          <li is="global-compt-3"></li>
-        </ol>
-        <div class="fenge"></div>
-      </div>
-    </div>
-    <div class="demo-item-group">
-      <label class="hasMao">局部组件</label>
-      <div class="demo-item">
-        <local-compt-01></local-compt-01>
-        <div class="fenge"></div>
-        <localCompt02 message="hello local component" :num="666"></localCompt02>
-        <div class="fenge"></div>
-      </div>
-    </div>
-    <div class="demo-item-group">
       <label class="hasMao">全局属性指令</label>
     </div>
     <div class="form-group">
@@ -112,128 +79,10 @@ var localFocus = {
   }
 }
 
-// 全局组件
-Vue.component('global-compt-1', {
-  template: '<h3 v-vc-focus>global-component01</h3>'
-})
-// 全局组件可以不生明就互相引用
-Vue.component('global-compt-2', {
-  props: ['message', 'num', 'counter', 'msg', 'age'],
-  data () {
-    return {
-      name: 'global-component02',
-      btnStyle: {
-        background: '#3cc',
-        padding: '10px 20px',
-        border: 'none',
-        'border-radius': '4px',
-        'font-size': '16px',
-        cursor: 'pointer',
-        'margin-right': '10px'
-      }
-    }
-  },
-  template: '<div><h3>{{name}}: {{message + num}}</h3>' +
-    '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent">Event-no-emit-value</button>' +
-    '<button :style="btnStyle" @click="emitEvent2">Event2-emit2-values</button>' +
-    '<button :style="btnStyle" @click="emitEvent1">Event2-emit1-values</button>' +
-    '<button :style="btnStyle" @click="emitCounter">双向绑定-emit-update:counter</button>' +
-    '<div>双向绑定-emit-update:object-msg: <input @change="emitObject1" :value="msg"/></div>' +
-    '<div>双向绑定-emit-update:object-age: <input type="numner" @change.number="emitObject2" :value="age"/></div></div>',
-  methods: {
-    emitEvent: function () {
-      this.$emit('eventCompt2')
-    },
-    emitEvent2: function () {
-      this.$emit('eventCompt02', this.name, 666)
-    },
-    emitEvent1: function () {
-      this.$emit('eventCompt01', 666)
-    },
-    emitCounter: function ($event) {
-      let cout = this.counter + 5
-      this.$emit('update:counter', cout)
-    },
-    emitObject1: function ($event) {
-      this.$emit('update:msg', $event.target.value)
-    },
-    emitObject2: function ($event) {
-      this.$emit('update:age', $event.target.value)
-    }
-  }
-})
-Vue.component('global-compt-3', {
-  inheritAttrs: false,
-  props: {
-    propA: Number,
-    propB: [Number, String],
-    propC: {
-      type: String,
-      required: true,
-      default: 'hello vue'
-    },
-    propD: {
-      type: Date,
-      default: function () {
-        return new Date()
-      }
-    },
-    propE: {
-      type: Number,
-      validator: function (value) {
-        return value > 10
-      }
-    }
-  },
-  computed: {
-    inputListeners: function () {
-      // `Object.assign` 将所有的对象合并为一个新对象
-      return Object.assign({},
-        // 我们从父级添加所有的监听器
-        this.$listeners
-      )
-    }
-  },
-  methods: {
-    focusIt: function () {
-      alert('focusIt')
-    }
-  },
-  template: '<div><h3>global-component03</h3><input type="text" v-on="inputListeners" >' +
-    '<div>{{propC}} : {{propE}} : {{propD}}</div></div>'
-})
-// 局部组件
-var localCompt01 = {
-  props: {
-    propdd: {
-      type: Object,
-      default: {
-        color: '#cc00ff',
-        fontsizee: '20px',
-        text: 'hello vue directive!',
-        bgColor: '#ffffcc'
-      }
-    }
-  },
-  template: '<h1 v-local-focus="propdd">局部组件01</h1>',
-  directives: {localFocus}
-}
-var localCompt02 = {
-  props: ['message', 'num'],
-  data () {
-    return {
-      name: '局部组件02'
-    }
-  },
-  template: '<div><h1>{{name}}: </h1><div>{{message}}##{{num}}</div></div>'
-}
-
 export default {
   name: 'basicDirective',
   data () {
     return {
-      msg1: {text: 'I am global component', num: 66},
-      num: 666,
       message: 'hello directive',
       focusData: {
         fontsizee: '20px',
@@ -246,16 +95,8 @@ export default {
         fontsizee: '20px',
         text: 'hello vue directive!',
         bgColor: '#ffffcc'
-      },
-      msg2: 'compt',
-      clickCounter: 3,
-      personObj: {msg: 'lilei', age: 18}
+      }
     }
-  },
-  components: {
-    'local-compt-01': localCompt01,
-    // tong 'localCompt02': localCompt02
-    localCompt02
   },
   directives: {
     localFocus
@@ -285,19 +126,10 @@ export default {
     console.log('basicDirective ===== destroyed')
   },
   methods: {
-    handleEventCompt2: function () {
-      alert('React Event compt2')
-    },
-    handleEvent2Compt2: function (value1, value2) {
-      alert('React Event2 compt2: ' + value1 + value2)
-    },
     changeFontSize: function () {
       var tmpindex = Math.random() * 10 > 5 ? 0 : 1
       // 无效果 this.focusData.fontsizee = this.sizess[tmpindex]
       this.focusData = {text: 'hello vue directive!', fontsizee: this.sizess[tmpindex]}
-    },
-    foucsComp3: function () {
-      alert('Focus Event compt2')
     }
   }
 }
@@ -313,6 +145,9 @@ export default {
     font-size: 24px;
     color: #000080;
     margin-bottom: 5px;
+  }
+  .demo-item-group > label.hasMao {
+    font-weight: 600;
   }
   .demo-item-group > label.hasMao:after {
     content: ":";
@@ -367,5 +202,8 @@ export default {
     color: #009973;
     cursor: pointer;
     margin-right: 10px;
+  }
+  h4 {
+    color: #008000;
   }
 </style>
