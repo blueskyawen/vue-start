@@ -71,6 +71,6 @@ export default {
     opacity: 1;
   }
   .v-enter-active, .v-leave-active {
-    transition: all .5s linear;
+    transition: all .6s linear;
   }
 </style>

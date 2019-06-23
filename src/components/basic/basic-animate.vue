@@ -31,7 +31,7 @@
       <span class="input-oper" @click="show3 = !show3">showIt</span>
     </div>
     <div class="form-group">
-      <label class="for-input">过渡-使用js在过渡钩子里构造动画</label>
+      <label class="for-input">过渡-使用js在过渡钩子里构造动画---待补充/到多组件了</label>
       <div class="input-item">
         <transition name="fade4" v-bind:css="false"
                     v-on:before-enter="beforeEnter"
@@ -60,9 +60,9 @@
       <span class="input-oper" @click="appear = !appear">showIt</span>
     </div>
     <div class="form-group">
-      <label class="for-input">过渡-多个元素列表</label>
+      <label class="for-input">过渡-多个元素列表-mode(out-in)</label>
       <div class="input-item">
-        <transition name="save">
+        <transition name="save" mode="out-in">
           <button :key="isEditing" @click="saveIt">{{saveTitle}}</button>
         </transition>
       </div>
@@ -91,6 +91,8 @@ export default {
   methods: {
     beforeEnter: function (el) {
       console.log('beforeEnter')
+      el.style.opacity = 0
+      el.style.transformOrigin = 'left'
     },
     enter: function (el, done) {
       console.log('enter')
@@ -235,6 +237,6 @@ export default {
     transition: all 1s linear;
   }
   .save-leave-active {
-    transition: all 50ms linear;
+    transition: all 1s linear;
   }
 </style>

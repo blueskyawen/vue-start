@@ -43,7 +43,7 @@ export default {
         {label: '过渡&动画', value: 'animate', selected: false},
         {label: '混入', value: 'extend', selected: false},
         {label: '插槽', value: 'slot', selected: false},
-        {label: '动态检测', value: 'dynmacDetect', selected: false},
+        {label: '边界', value: 'dynmacDetect', selected: false},
         {label: 'Axios', value: 'axios', selected: false}
       ],
       curTab: 'component'

@@ -7,7 +7,9 @@
           {{tabItem.label}}</div>
       </div>
       <div class="vc-tab-content">
-        <component v-bind:is="curCompt"></component>
+        <transition>
+          <component v-bind:is="curCompt"></component>
+        </transition>
       </div>
     </div>
   </div>
@@ -70,5 +72,11 @@ export default {
   .vc-tabs .vc-tab-content {
     width: inherit;
     padding: 20px;
+  }
+  .v-enter-active, .v-leave-active {
+    transition: opacity .5s ease;
+  }
+  .v-enter, .v-leave-to {
+    opacity: 0;
   }
 </style>
