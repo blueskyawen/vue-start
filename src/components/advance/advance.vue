@@ -7,7 +7,7 @@
           {{tabItem.label}}</div>
       </div>
       <div class="vc-tab-content">
-        <transition>
+        <transition mode="in-out">
           <component v-bind:is="curCompt"></component>
         </transition>
       </div>
