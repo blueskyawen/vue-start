@@ -12,9 +12,15 @@
         <button @click.stop="hello()">hellos</button>
       </div>
     </div>
+    <div class="form-group">
+      <label>Filter</label>
+      <div class="input-item">
+        <p>{{message2 | capitalize | capitalize2}}</p>
+      </div>
+    </div>
     <p>1. 当混入的是组件生命钩子函数时，如created，则混入对象和原组建生命钩子函数将合并成数组一起调用，调用顺序：全局混入 --> [实例混入1, -> 实例混入2] --> 组件</p>
     <p>2. data会递归合并，遇见同名属性时优先级顺序同created初始化调用方向相反，即：组件 > 实例混入2 > 实例混入1 > 全局混入 </p>
-    <p>3. 值为对象的选项，例如 methods、computed, components 和 directives，将被合并为同一个对象, 两个对象键名冲突时，优先级顺序同created初始化方向相反,同上</p>
+    <p>3. 值为对象的选项，例如 methods、computed, components, filters 和 directives，将被合并为同一个对象, 两个对象键名冲突时，优先级顺序同created初始化方向相反,同上</p>
     <p>4. 混入里面也可以嵌套混入，规则同上，最后在组件初始化时将层层"递归合并"</p>
     <p>5. watch对象也是合并成数组，触发顺序同钩子函数</p>
     <p>6. 对于数组类的选项也是采用合并为新数组的方式，顺序同created</p>
@@ -28,11 +34,16 @@
 <script>
 import Vue from 'vue'
 
+Vue.filter('globalFilter', function (value) {
+  if (!value) return ''
+  return value + ' global'
+})
+
 // 实例混入
 var localMix3 = {
   data () {
     return {
-      msg5: 'localMix3-msg3'
+      msg5: 'localMix3-msg5'
     }
   },
   created: function () {
@@ -44,7 +55,6 @@ var localMix1 = {
     return {
       msg2: 'localMix1',
       msg3: 'localMix1-msg3',
-      msg4: 'localMix1-msg3',
       numList: [7, 8],
       site: {
         name: '淘宝',
@@ -64,6 +74,12 @@ var localMix1 = {
     hello: function () {
       console.log('实例混入: localMix1 --- hello')
     }
+  },
+  filters: {
+    capitalize2: function (value) {
+      if (!value) return ''
+      return value + ' localMix1!!'
+    }
   }
 }
 var localMix2 = {
@@ -72,11 +88,13 @@ var localMix2 = {
       msg2: 'localMix2',
       msg3: 'localMix2-msg3',
       msg4: 'localMix2-msg3',
-      numList: [4, 5],
+      msg5: 'localMix2-msg5',
+      numList: [4, 5, 9],
       site: {
         name: '阿里巴巴',
         url: 'www.alibaba.com',
-        title: '我是阿里巴巴'
+        title: '我是阿里巴巴',
+        haha: 'haha localMix2'
       }
     }
   },
@@ -99,10 +117,12 @@ Vue.mixin({
     return {
       msg2: '全局混入',
       msg3: '全局混入-msg3',
+      msg4: '全局混入-msg4',
       numList: [2, 3],
       site: {
         name: '腾讯',
-        url: 'www.tenant.com'
+        url: 'www.tenant.com',
+        haha: 'haha 全局混入'
       }
     }
   },
@@ -128,12 +148,14 @@ export default {
       numList: [1, 2],
       site: {
         name: '百度'
-      }
+      },
+      message2: 'hello Vue extend'
     }
   },
   mixins: [localMix2, localMix1],
   created: function () {
     console.log('basicExtend --- created')
+    console.log(this.$options)
   },
   methods: {
     startMix: function () {
@@ -143,6 +165,15 @@ export default {
   computed: {
     showData: function () {
       return JSON.stringify(this.$data)
+    }
+  },
+  filters: {
+    capitalize: function (value) {
+      if (!value) return ''
+      var tmpvalues = value.toString().split(' ').map(function (item) {
+        return item.charAt(0).toUpperCase() + item.slice(1)
+      })
+      return tmpvalues.join(' ')
     }
   }
 }
