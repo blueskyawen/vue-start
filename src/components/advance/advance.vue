@@ -18,6 +18,7 @@
 <script>
 import componentd from './component'
 import directived from './directive'
+import filterd from './filter'
 
 export default {
   name: 'advance',
@@ -25,13 +26,14 @@ export default {
     return {
       tabItems: [
         {label: '基础组件设计', value: 'component', comp: 'componentd'},
-        {label: '基础指令设计', value: 'directive', comp: 'directived'}
+        {label: '基础指令设计', value: 'directive', comp: 'directived'},
+        {label: '基础过滤器设计', value: 'filter', comp: 'filterd'}
       ],
       curTab: 'component',
       curCompt: 'componentd'
     }
   },
-  components: {componentd, directived},
+  components: {componentd, directived, filterd},
   methods: {
     selectTab: function (item) {
       this.curTab = item.value

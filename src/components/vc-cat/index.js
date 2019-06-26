@@ -7,6 +7,7 @@ import vcTextArea from './vc-textarea'
 import vcCheckbox from './vc-checkbox'
 import vcMutilCheckbox from './vc-mutil-checkbox'
 import vcRadio from './vc-radio'
+import * as vcFilter from './vc-filter'
 
 const vcCat = {
   install: function (Vue) {
@@ -19,6 +20,20 @@ const vcCat = {
     Vue.component('vc-checkbox', vcCheckbox)
     Vue.component('vc-mutil-checkbox', vcMutilCheckbox)
     Vue.component('vc-radio', vcRadio)
+    Vue.directive('regIf', function (el, binding) {
+      if (binding.value.reg.test(binding.value.value)) {
+        el.style.display = 'block'
+      } else {
+        el.style.display = 'none'
+      }
+    })
+    Vue.filter('vcLowercase', vcFilter.lowercase)
+    Vue.filter('vcUppercase', vcFilter.upperCase)
+    Vue.filter('vcKeyValue', vcFilter.keyValue)
+    Vue.filter('vcSlice', vcFilter.slice)
+    Vue.filter('vcPercent', vcFilter.percent)
+    Vue.filter('vcJson', vcFilter.json)
+    Vue.filter('vcDate', vcFilter.date)
   }
 }
 
