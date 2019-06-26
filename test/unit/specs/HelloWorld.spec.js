@@ -1,11 +1,11 @@
 import Vue from 'vue'
-import HelloWorld from '@/components/HelloWorld'
+import Help from '@/components/Help'
 
-describe('HelloWorld.vue', () => {
+describe('Help.vue', () => {
   it('should render correct contents', () => {
-    const Constructor = Vue.extend(HelloWorld)
+    const Constructor = Vue.extend(Help)
     const vm = new Constructor().$mount()
-    expect(vm.$el.querySelector('.hello h1').textContent)
-      .toEqual('Welcome to Your Vue.js App')
+    expect(vm.$el.querySelector('.help h1').textContent)
+      .toEqual('Welcome to Vue.js App')
   })
 })
