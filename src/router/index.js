@@ -9,6 +9,8 @@ import helloEvent from '@/components/hello/hello-event'
 import Basic from '@/components/basic/Basic'
 import Advance from '@/components/advance/advance'
 import Help from '@/components/Help'
+import Dashboard from '@/components/advance/heros/dashborad'
+import Herolist from '@/components/advance/heros/hero-list'
 
 Vue.use(VueRouter)
 
@@ -26,7 +28,13 @@ const routes = [
     ]
   },
   { path: '/basic', component: Basic },
-  { path: '/advance', component: Advance },
+  { path: '/advance',
+    component: Advance,
+    children: [
+      {path: 'dashboard', component: Dashboard},
+      {path: 'herolist', component: Herolist}
+    ]
+  },
   { path: '/help', component: Help }
 ]
 

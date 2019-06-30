@@ -19,6 +19,7 @@
 import componentd from './component'
 import directived from './directive'
 import filterd from './filter'
+import heros from './heros/heros'
 
 export default {
   name: 'advance',
@@ -27,13 +28,14 @@ export default {
       tabItems: [
         {label: '基础组件设计', value: 'component', comp: 'componentd'},
         {label: '基础指令设计', value: 'directive', comp: 'directived'},
-        {label: '基础过滤器设计', value: 'filter', comp: 'filterd'}
+        {label: '基础过滤器设计', value: 'filter', comp: 'filterd'},
+        {label: '英雄指南', value: 'heros', comp: 'heros'}
       ],
       curTab: 'component',
       curCompt: 'componentd'
     }
   },
-  components: {componentd, directived, filterd},
+  components: {componentd, directived, filterd, heros},
   methods: {
     selectTab: function (item) {
       this.curTab = item.value
