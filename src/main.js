@@ -6,6 +6,7 @@ import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import vcCat from './components/vc-cat'
+import './mock/mock'
 
 Vue.use(VueAxios, axios)
 Vue.use(vcCat)

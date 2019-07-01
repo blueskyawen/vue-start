@@ -57,8 +57,10 @@ export default {
   methods: {
     getHttp: function () {
       this.axios
-        .get('data01.json')
-        .then(response => (this.dataInfo = response))
+        .get('api/advance/heros')
+        .then(response => {
+          this.rspInfo = response.data
+        })
         .catch((error) => { // 请求失败处理
           this.errInfo = error
         })

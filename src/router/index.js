@@ -11,6 +11,8 @@ import Advance from '@/components/advance/advance'
 import Help from '@/components/Help'
 import Dashboard from '@/components/advance/heros/dashborad'
 import Herolist from '@/components/advance/heros/hero-list'
+import HeroDetail from '@/components/advance/heros/hero-detail'
+import NotFound from '@/components/not-found'
 
 Vue.use(VueRouter)
 
@@ -31,11 +33,25 @@ const routes = [
   { path: '/advance',
     component: Advance,
     children: [
-      {path: 'dashboard', component: Dashboard},
-      {path: 'herolist', component: Herolist}
+      {path: '', component: Dashboard},
+      {path: 'dashboard',
+        name: 'dashboard',
+        component: Dashboard,
+        children: [
+          {path: 'detail/:id', component: HeroDetail, props: {navFrom: 'dashboard'}}
+        ]
+      },
+      {path: 'herolist',
+        name: 'herolist',
+        component: Herolist,
+        children: [
+          {path: 'detail/:id', component: HeroDetail, props: {navFrom: 'list'}}
+        ]
+      }
     ]
   },
-  { path: '/help', component: Help }
+  { path: '/help', component: Help },
+  { path: '*', component: NotFound }
 ]
 
 export default new VueRouter({
