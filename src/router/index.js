@@ -12,6 +12,7 @@ import Help from '@/components/Help'
 import Dashboard from '@/components/advance/heros/dashborad'
 import Herolist from '@/components/advance/heros/hero-list'
 import HeroDetail from '@/components/advance/heros/hero-detail'
+import AddHero from '@/components/advance/heros/add-hero'
 import NotFound from '@/components/not-found'
 
 Vue.use(VueRouter)
@@ -45,8 +46,16 @@ const routes = [
         name: 'herolist',
         component: Herolist,
         children: [
-          {path: 'detail/:id', component: HeroDetail, props: {navFrom: 'list'}}
+          {path: 'detail/:id',
+            component: HeroDetail,
+            props: {navFrom: 'list'},
+            beforeEnter: (to, from, next) => { console.log('beforeEnter 01'); next() }
+          }
         ]
+      },
+      {
+        path: 'addhero',
+        component: AddHero
       }
     ]
   },
@@ -54,7 +63,33 @@ const routes = [
   { path: '*', component: NotFound }
 ]
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: routes,
   linkActiveClass: 'link-active'
 })
+router.beforeEach((to, from, next) => {
+  console.log('route beforeEach 01')
+  console.log(to)
+  console.log(from)
+  next()
+})
+router.beforeEach((to, from, next) => {
+  console.log('route beforeEach 02')
+  next()
+})
+router.beforeResolve((to, from, next) => {
+  console.log('route beforeResolve 01')
+  next()
+})
+router.beforeResolve((to, from, next) => {
+  console.log('route beforeResolve 02')
+  next()
+})
+router.afterEach((to, from, next) => {
+  console.log('route afterEach 01')
+})
+router.afterEach((to, from, next) => {
+  console.log('route afterEach 02')
+})
+
+export default router

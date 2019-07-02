@@ -23,7 +23,7 @@
         <vc-form-control class="vc-from-control">
           <vc-button v-if="!isEditState" @click="edit">Edit</vc-button>
           <vc-button v-if="isEditState" @click="save" :disabled="disabledBtn">{{saveTitle}}</vc-button>
-          <vc-button @click="cancel">Cancel</vc-button>
+          <vc-button @click="cancel" :type="'cancel'">Cancel</vc-button>
         </vc-form-control>
       </vc-form-group>
     </div>
@@ -46,6 +46,21 @@ export default {
   created () {
     // this.navFrom2 = this.$route.query.navFrom
     this.getHero(this.$route.params.id)
+  },
+  beforeRouteEnter: function (to, from, next) {
+    console.log('beforeRouteEnter')
+    console.log(to)
+    next(vm => { console.log(vm.saveTitle) })
+  },
+  beforeRouteUpdate: function (to, from, next) {
+    console.log('beforeRouteUpdate')
+    console.log(to)
+    next()
+  },
+  beforeRouteLeave: function (to, from, next) {
+    console.log('beforeRouteLeave')
+    console.log(to)
+    next()
   },
   methods: {
     getHero: function (id) {

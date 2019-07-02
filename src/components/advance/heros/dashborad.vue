@@ -2,12 +2,19 @@
   <div class="dashboard">
     <div class="dashboard-head">Top Heros</div>
     <div class="dashboard-content">
+      <transition-group name="heroList">
       <div class="dash-item" v-for="hero in heros" :key="hero.id">
         <div class="dash" @click="selectHero(hero)">{{hero.name}}</div>
       </div>
+      </transition-group>
+    </div>
+    <div class="hero-add">
+      <vc-button @click="addhero">Add Hero</vc-button>
     </div>
     <div style="width: 100%">
-      <router-view></router-view>
+      <transition name="detail" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
@@ -23,6 +30,18 @@ export default {
   created: function () {
     this.getHeros()
   },
+  beforeRouteEnter: function (to, from, next) {
+    console.log('dashborad-beforeRouteEnter')
+    next()
+  },
+  beforeRouteUpdate: function (to, from, next) {
+    console.log('dashborad-beforeRouteUpdate')
+    next()
+  },
+  beforeRouteLeave: function (to, from, next) {
+    console.log('dashborad-beforeRouteLeave')
+    next()
+  },
   methods: {
     getHeros: function () {
       this.axios
@@ -37,6 +56,9 @@ export default {
     selectHero: function (hero) {
       this.$router.push(`/advance/dashboard/detail/${hero.id}`)
       // this.$router.push(`/advance/dashboard/detail/${hero.id}?navFrom=dashboard`)
+    },
+    addhero: function () {
+      this.$router.push(`/advance/addhero`)
     }
   },
   watch: {
@@ -83,5 +105,30 @@ export default {
     cursor: pointer;
     background-color: #e6e6e6;
     color: #607d8b;
+  }
+  .hero-add {
+    padding: 10px;
+  }
+  .heroList-enter-active, .heroList-leave-active {
+    transition: all 1s;
+    position: relative;
+  }
+  .heroList-enter, .heroList-leave-to {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  .heroList-move {
+    transition: transform 1s;
+  }
+  .detail-enter, .detail-leave-to {
+    opacity: 0;
+    margin-left: 50px;
+  }
+  .detail-enter-to, .detail-leave {
+    opacity: 1;
+    margin-left: 0;
+  }
+  .detail-enter-active, .detail-leave-active {
+    transition: all 1s linear;
   }
 </style>
