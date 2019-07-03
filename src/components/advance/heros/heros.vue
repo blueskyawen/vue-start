@@ -1,10 +1,14 @@
 <template>
   <div class="heros">
     <h2>Heros</h2>
+    <div>
+      <span>Auth: {{auth}}</span>
+      <vc-button @click="setAuth">Set Auth</vc-button>
+    </div>
     <div class="hero-show">
       <div class="hero-header">
         <router-link class="show-item" to="/advance/dashboard">Dashboard</router-link>
-        <router-link class="show-item" to="/advance/herolist">HeroList</router-link>
+        <router-link class="show-item" :to="`/advance/herolist?auth=${this.auth}`">HeroList</router-link>
       </div>
       <div class="hero-content">
         <router-view></router-view>
@@ -15,7 +19,22 @@
 
 <script>
 export default {
-  name: 'heros'
+  name: 'heros',
+  data () {
+    return {
+      auth: false
+    }
+  },
+  methods: {
+    setAuth: function () {
+      this.auth = !this.auth
+    }
+  },
+  computed: {
+    getAuth: function () {
+      return this.auth
+    }
+  }
 }
 </script>
 

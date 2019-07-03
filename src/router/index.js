@@ -45,6 +45,7 @@ const routes = [
       {path: 'herolist',
         name: 'herolist',
         component: Herolist,
+        meta: {requireAuth: true},
         children: [
           {path: 'detail/:id',
             component: HeroDetail,
@@ -65,13 +66,29 @@ const routes = [
 
 const router = new VueRouter({
   routes: routes,
-  linkActiveClass: 'link-active'
+  linkActiveClass: 'link-active',
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
+    }
+  }
 })
 router.beforeEach((to, from, next) => {
   console.log('route beforeEach 01')
   console.log(to)
   console.log(from)
-  next()
+  if (to.matched.some(item => item.meta.requireAuth)) {
+    if (from.path === '/advance' && to.path === '/advance/herolist' && to.query.auth === 'false') {
+      alert('have to set auth to true !')
+      next('/advance')
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 router.beforeEach((to, from, next) => {
   console.log('route beforeEach 02')

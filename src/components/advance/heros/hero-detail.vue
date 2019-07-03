@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'hero-detail',
   props: ['navFrom'],
@@ -45,17 +47,33 @@ export default {
   },
   created () {
     // this.navFrom2 = this.$route.query.navFrom
-    this.getHero(this.$route.params.id)
+    // this.getHero(this.$route.params.id)
   },
   beforeRouteEnter: function (to, from, next) {
     console.log('beforeRouteEnter')
     console.log(to)
-    next(vm => { console.log(vm.saveTitle) })
+    Vue.axios
+      .get('api/advance/heroDetail/' + to.params.id)
+      .then(response => {
+        next(vm => vm.setHeroData(response.data.hero))
+      })
+      .catch(error => {
+        console.log(error)
+        next('/advance')
+      })
   },
   beforeRouteUpdate: function (to, from, next) {
     console.log('beforeRouteUpdate')
     console.log(to)
-    next()
+    Vue.axios
+      .get('api/advance/heroDetail/' + to.params.id)
+      .then(response => {
+        this.setHeroData(response.data.hero)
+      })
+      .catch(error => {
+        console.log(error)
+        next('/advance')
+      })
   },
   beforeRouteLeave: function (to, from, next) {
     console.log('beforeRouteLeave')
@@ -63,6 +81,9 @@ export default {
     next()
   },
   methods: {
+    setHeroData: function (hero) {
+      this.hero = hero
+    },
     getHero: function (id) {
       this.axios
         .get('api/advance/heroDetail/' + id)
@@ -105,7 +126,7 @@ export default {
   },
   watch: {
     '$route': function (to, from) {
-      this.getHero(to.params.id)
+      // this.getHero(to.params.id)
     }
   }
 }
