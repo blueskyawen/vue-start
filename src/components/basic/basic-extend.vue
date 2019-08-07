@@ -87,7 +87,7 @@ var localMix2 = {
     return {
       msg2: 'localMix2',
       msg3: 'localMix2-msg3',
-      msg4: 'localMix2-msg3',
+      msg4: 'localMix2-msg4',
       msg5: 'localMix2-msg5',
       numList: [4, 5, 9],
       site: {
@@ -118,11 +118,13 @@ Vue.mixin({
       msg2: '全局混入',
       msg3: '全局混入-msg3',
       msg4: '全局混入-msg4',
+      msg6: '全局混入-msg6',
       numList: [2, 3],
       site: {
         name: '腾讯',
         url: 'www.tenant.com',
-        haha: 'haha 全局混入'
+        haha: 'haha 全局混入',
+        city: 'shenzhen'
       }
     }
   },

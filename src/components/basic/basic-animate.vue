@@ -236,6 +236,7 @@ export default {
     padding: 5px 20px;
     border: solid 1px #e6e6e6;
     border-radius: 2px;
+    transition: all 1s;
   }
   .form-group .input-oper {
     color: #009973;
@@ -328,7 +329,6 @@ export default {
     transition: all 3s linear;
   }
   .numList-enter-active, .numList-leave-active {
-    transition: all 1s;
     position: absolute;
   }
   .numList-enter, .numList-leave-to {
