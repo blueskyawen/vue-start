@@ -27,6 +27,7 @@
     <p>7. Vue对于每一类选项都有自己的混入策略和规则，如：Vue.config.optionMergeStrategies.methods，参考源码我们可以改变各个选项的合并策略，或者
     当我们为Vue实例增加了新的选项时，也可以自定义新选项的混入策略，比如：Vue.config.optionMergeStrategies.newOption = {自定义...} 或
       Vue.config.optionMergeStrategies.newOption = Vue.config.optionMergeStrategies.methods</p>
+    <p>8. 全局混入按照声明顺序进行合并，后声明的覆盖先声明的，也就是 先-perant -> 后-child</p>
     <p>{{showData}}</p>
   </div>
 </template>
@@ -43,7 +44,8 @@ Vue.filter('globalFilter', function (value) {
 var localMix3 = {
   data () {
     return {
-      msg5: 'localMix3-msg5'
+      msg5: 'localMix3-msg5',
+      msg3: 'localMix3-msg3',
     }
   },
   created: function () {
@@ -115,10 +117,39 @@ var localMix2 = {
 Vue.mixin({
   data () {
     return {
+      msg2: '全局混入1',
+      msg7: '全局混入1-msg7',
+      msg8: '全局混入1-msg8',
+      numList: [2, 3],
+      site: {
+        name: '腾讯',
+        url: 'www.tenant.com',
+        haha: 'haha 全局混入',
+        city: 'shenzhen'
+      }
+    }
+  },
+  created: function () {
+    console.log('全局混入 --- created')
+  },
+  methods: {
+    startMix: function () {
+      console.log('全局混入 --- startMix')
+    },
+    hello: function () {
+      console.log('全局混入 --- hello')
+    }
+  }
+})
+
+Vue.mixin({
+  data () {
+    return {
       msg2: '全局混入',
       msg3: '全局混入-msg3',
       msg4: '全局混入-msg4',
       msg6: '全局混入-msg6',
+      msg7: '全局混入-msg7',
       numList: [2, 3],
       site: {
         name: '腾讯',
