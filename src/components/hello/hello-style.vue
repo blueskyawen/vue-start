@@ -15,6 +15,7 @@
     <div class="form-group">
       <label>class-bind</label>
       <div class="text-items">
+        <div :class="'textClass1 textClass2'">{{classText[0]}}</div>
         <div :class="['textClass1']">{{classText[0]}}</div>
         <div :class="{textClass1: num1 > 5, 'textClass2': num2 > 10}">{{classText[0]}}只适合切换式的绑定</div>
         <div :class="classObj">{{classText[1]}}</div>
