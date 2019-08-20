@@ -7,6 +7,7 @@ import vcTextArea from './vc-textarea'
 import vcCheckbox from './vc-checkbox'
 import vcMutilCheckbox from './vc-mutil-checkbox'
 import vcRadio from './vc-radio'
+import vcSwitch from './vc-switch'
 import * as vcFilter from './vc-filter'
 
 const vcCat = {
@@ -20,6 +21,7 @@ const vcCat = {
     Vue.component('vc-checkbox', vcCheckbox)
     Vue.component('vc-mutil-checkbox', vcMutilCheckbox)
     Vue.component('vc-radio', vcRadio)
+    Vue.component('vc-switch', vcSwitch)
     Vue.directive('regIf', function (el, binding) {
       if (binding.value.reg.test(binding.value.value)) {
         el.style.display = 'block'

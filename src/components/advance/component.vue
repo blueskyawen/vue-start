@@ -52,6 +52,14 @@
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
+        <vc-form-label class="vc-from-label">是否同意</vc-form-label>
+        <vc-form-control class="vc-from-control">
+          <vc-switch v-model="isAggre[0]"></vc-switch>
+          <vc-switch v-model="isAggre[1]" :tip-labels="['是','否']"></vc-switch>
+          <vc-switch v-model="isAggre[2]" :type="'min'" :disabled="true"></vc-switch>
+        </vc-form-control>
+      </vc-form-group>
+      <vc-form-group class="vc-from-group">
         <label class="vc-from-label"></label>
         <vc-form-control class="vc-from-control">
           <vc-button @click="login">登录</vc-button>
@@ -91,7 +99,8 @@ export default {
         {value: 'duck', name: '烤鸭', checked: false},
         {value: 'watermelon', name: '西瓜', checked: false}
       ],
-      selectedLikes: ['fish']
+      selectedLikes: ['fish'],
+      isAggre: [true, false, true]
     }
   },
   computed: {

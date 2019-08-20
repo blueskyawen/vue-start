@@ -45,7 +45,7 @@ var localMix3 = {
   data () {
     return {
       msg5: 'localMix3-msg5',
-      msg3: 'localMix3-msg3',
+      msg3: 'localMix3-msg3'
     }
   },
   created: function () {
