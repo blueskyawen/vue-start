@@ -13,9 +13,19 @@
       </div>
     </div>
     <div class="form-group">
+      <label>getMsg</label>
+      <div class="input-item">
+        <p>getMsg: {{getMsg}}</p>
+        <p>getMsg2: {{getMsg2}}</p>
+        <p>getMsg3: {{getMsg3}}</p>
+        <p>getMsg4: {{getMsg4}}</p>
+        <p>getMsg5: {{getMsg5}}</p>
+      </div>
+    </div>
+    <div class="form-group">
       <label>Filter</label>
       <div class="input-item">
-        <p>{{message2 | capitalize | capitalize2}}</p>
+        <p>{{msg | capitalize2}}</p>
       </div>
     </div>
     <p>1. 当混入的是组件生命钩子函数时，如created，则混入对象和原组建生命钩子函数将合并成数组一起调用，调用顺序：全局混入 --> [实例混入1, -> 实例混入2] --> 组件</p>
@@ -40,155 +50,211 @@ Vue.filter('globalFilter', function (value) {
   return value + ' global'
 })
 
-// 实例混入
-var localMix3 = {
+Vue.mixin({
   data () {
     return {
-      msg5: 'localMix3-msg5',
-      msg3: 'localMix3-msg3'
-    }
-  },
-  created: function () {
-    console.log('实例混入: localMix3 --- created')
-  }
-}
-var localMix1 = {
-  data () {
-    return {
-      msg2: 'localMix1',
-      msg3: 'localMix1-msg3',
-      numList: [7, 8],
+      msg: '全局混入-msg',
+      msg1: '全局混入1-msg-1',
+      msg2: '全局混入1-msg-2',
+      msg4: '全局混入1-msg4',
+      msg5: '全局混入1-msg5',
       site: {
-        name: '淘宝',
-        url: 'www.taobao.com',
-        title: '我是淘宝'
+        name: '腾讯',
+        url: 'www.tenant.com',
+        hahaList: [3, 4],
+        city: 'shenzhen'
       }
     }
   },
-  mixins: [localMix3],
   created: function () {
-    console.log('实例混入: localMix1 --- created')
+    console.log('全局混入1 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('实例混入: localMix1 --- startMix')
-    },
-    hello: function () {
-      console.log('实例混入: localMix1 --- hello')
+      console.log('全局混入1 --- startMix')
     }
   },
-  filters: {
-    capitalize2: function (value) {
-      if (!value) return ''
-      return value + ' localMix1!!'
+  computed: {
+    getMsg: function () {
+      return 'getMsg 全局混入1!!'
+    },
+    getMsg2: function () {
+      return 'getMsg2 全局混入1!!'
+    },
+    getMsg5: function () {
+      return 'getMsg5 全局混入1!!'
+    }
+  }
+})
+
+Vue.mixin({
+  data () {
+    return {
+      msg: '全局混入2-msg',
+      msg1: '全局混入2-msg-1',
+      msg4: '全局混入2-msg4',
+      numList: [4, 5],
+      site: {
+        name: 'alibaba',
+        hahaList: [3, 4],
+        url: 'www.alibaba.com',
+        people: 30000
+      }
+    }
+  },
+  created: function () {
+    console.log('全局混入2 --- created')
+  },
+  methods: {
+    startMix: function () {
+      console.log('全局混入2 --- startMix')
+    },
+    hello: function () {
+      console.log('全局混入2 --- hello')
+    }
+  },
+  computed: {
+    getMsg: function () {
+      return 'getMsg 全局混入2!!'
+    },
+    getMsg2: function () {
+      return 'getMsg2 全局混入2!!'
+    }
+  }
+})
+
+var localMix3 = {
+  data () {
+    return {
+      msg: '实例混入3',
+      msg1: '实例混入3-msg1',
+      msg2: '实例混入3-msg2',
+      msg3: '实例混入3-msg3',
+      site: {
+        name: '淘宝111',
+        url: 'www',
+        country: 'China'
+      }
+    }
+  },
+  created: function () {
+    console.log('实例混入3 --- created')
+  },
+  methods: {
+    startMix: function () {
+      console.log('实例混入3 --- startMix')
+    },
+    hello: function () {
+      console.log('实例混入3 --- hello')
+    }
+  },
+  computed: {
+    getMsg: function () {
+      return 'getMsg 实例混入3!!'
+    },
+    getMsg2: function () {
+      return 'getMsg2 实例混入3!!'
+    },
+    getMsg3: function () {
+      return 'getMsg3 实例混入3!!'
+    },
+    getMsg4: function () {
+      return 'getMsg4 实例混入3!!'
     }
   }
 }
 var localMix2 = {
   data () {
     return {
-      msg2: 'localMix2',
-      msg3: 'localMix2-msg3',
-      msg4: 'localMix2-msg4',
-      msg5: 'localMix2-msg5',
-      numList: [4, 5, 9],
+      msg: '实例混入2',
+      msg1: '实例混入2-msg1',
+      msg2: '实例混入2-msg2',
       site: {
-        name: '阿里巴巴',
-        url: 'www.alibaba.com',
-        title: '我是阿里巴巴',
-        haha: 'haha localMix2'
+        name: '淘宝',
+        url: 'www.taobao.com',
+        title: 'I am 淘宝'
       }
     }
   },
   created: function () {
-    console.log('实例混入: localMix2 --- created')
+    console.log('实例混入2 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('实例混入: localMix2 --- startMix')
+      console.log('实例混入2 --- startMix')
     },
     hello: function () {
-      console.log('实例混入: localMix2 --- hello')
+      console.log('实例混入2 --- hello')
+    }
+  },
+  computed: {
+    getMsg: function () {
+      return 'getMsg 实例混入2!!'
+    },
+    getMsg2: function () {
+      return 'getMsg2 实例混入2!!'
+    },
+    getMsg3: function () {
+      return 'getMsg3 实例混入2!!'
     }
   }
 }
-
-// 全局混入
-Vue.mixin({
+var localMix1 = {
   data () {
     return {
-      msg2: '全局混入1',
-      msg7: '全局混入1-msg7',
-      msg8: '全局混入1-msg8',
+      msg: '实例混入1',
+      msg1: '实例混入1-msg1',
       numList: [2, 3],
       site: {
-        name: '腾讯',
-        url: 'www.tenant.com',
-        haha: 'haha 全局混入',
-        city: 'shenzhen'
+        name: '淘宝',
+        url: 'www.taobao.com',
+        hahaList: [3, 4]
       }
     }
   },
+  mixins: [localMix2],
   created: function () {
-    console.log('全局混入 --- created')
+    console.log('实例混入1 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('全局混入 --- startMix')
+      console.log('实例混入1 --- startMix')
     },
     hello: function () {
-      console.log('全局混入 --- hello')
-    }
-  }
-})
-
-Vue.mixin({
-  data () {
-    return {
-      msg2: '全局混入',
-      msg3: '全局混入-msg3',
-      msg4: '全局混入-msg4',
-      msg6: '全局混入-msg6',
-      msg7: '全局混入-msg7',
-      numList: [2, 3],
-      site: {
-        name: '腾讯',
-        url: 'www.tenant.com',
-        haha: 'haha 全局混入',
-        city: 'shenzhen'
-      }
+      console.log('实例混入1 --- hello')
     }
   },
-  created: function () {
-    console.log('全局混入 --- created')
+  filters: {
+    capitalize2: function (value) {
+      if (!value) return ''
+      return value + ' 实例混入1!!'
+    }
   },
-  methods: {
-    startMix: function () {
-      console.log('全局混入 --- startMix')
+  computed: {
+    getMsg: function () {
+      return 'getMsg 实例混入1!!'
     },
-    hello: function () {
-      console.log('全局混入 --- hello')
+    getMsg2: function () {
+      return 'getMsg2 实例混入1!!'
     }
   }
-})
+}
 
 export default {
   name: 'basicExtend',
   data () {
     return {
-      message: 'hello vue 混入',
-      msg2: 'basic',
+      msg: 'basicExtend',
       numList: [1, 2],
       site: {
-        name: '百度'
-      },
-      message2: 'hello Vue extend'
+        name: '百度',
+        hahaList: [1, 2]
+      }
     }
   },
-  mixins: [localMix2, localMix1],
+  mixins: [localMix3, localMix1],
   created: function () {
     console.log('basicExtend --- created')
-    console.log(this.$options)
   },
   methods: {
     startMix: function () {
@@ -198,15 +264,9 @@ export default {
   computed: {
     showData: function () {
       return JSON.stringify(this.$data)
-    }
-  },
-  filters: {
-    capitalize: function (value) {
-      if (!value) return ''
-      var tmpvalues = value.toString().split(' ').map(function (item) {
-        return item.charAt(0).toUpperCase() + item.slice(1)
-      })
-      return tmpvalues.join(' ')
+    },
+    getMsg: function () {
+      return this.msg + ' !!!'
     }
   }
 }
