@@ -25,7 +25,7 @@
     <div class="form-group">
       <label>Filter</label>
       <div class="input-item">
-        <p>{{msg | capitalize2}}</p>
+        <p>{{msg | capitalize2 | capitalize3 | globalFilter}}</p>
       </div>
     </div>
     <p>1. 当混入的是组件生命钩子函数时，如created，则混入对象和原组建生命钩子函数将合并成数组一起调用，调用顺序：全局混入 --> [实例混入1, -> 实例混入2] --> 组件</p>
@@ -196,6 +196,12 @@ var localMix2 = {
     },
     getMsg3: function () {
       return 'getMsg3 实例混入2!!'
+    }
+  },
+  filters: {
+    capitalize3: function (value) {
+      if (!value) return ''
+      return value + ' local-filter1!!'
     }
   }
 }
