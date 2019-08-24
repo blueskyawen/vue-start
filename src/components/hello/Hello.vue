@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .Hello {
     width: 90%;
     margin-left: auto;
@@ -40,29 +40,29 @@ export default {
   }
   .vc-tabs {
     width: 100%;
-  }
-  .vc-tabs .vc-tab-items {
-    width: inherit;
-    border-bottom: solid 1px #ccc;
-  }
-  .vc-tabs .vc-tab-items .vc-tab-item {
-    display: inline-block;
-    color: #666;
-    font-size: 14px;
-    padding: 15px 30px;
-    text-decoration: none;
-  }
-  .vc-tabs .vc-tab-items .vc-tab-item:hover {
-    cursor: pointer;
-    background: #f2f2f2;
-  }
-  .vc-tabs .vc-tab-items .vc-tab-item.tab-actived {
-    border-bottom: solid 4px #00cc99;
-    margin-bottom: -3px;
-  }
-  .vc-tabs .vc-tab-content {
-    width: inherit;
-    padding: 20px;
+    .vc-tab-items {
+      width: inherit;
+      border-bottom: solid 1px #ccc;
+      .vc-tab-item {
+        display: inline-block;
+        color: #666;
+        font-size: 14px;
+        padding: 15px 30px;
+        text-decoration: none;
+        &:hover {
+          cursor: pointer;
+          background: #f2f2f2;
+        }
+        &.tab-actived {
+          border-bottom: solid 4px #00cc99;
+          margin-bottom: -3px;
+        }
+      }
+    }
+    .vc-tab-content {
+      width: inherit;
+      padding: 20px;
+    }
   }
   .v-enter, .v-leave-to {
     opacity: 0;
