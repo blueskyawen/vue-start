@@ -69,6 +69,7 @@ export default {
       .get('api/advance/heroDetail/' + to.params.id)
       .then(response => {
         this.setHeroData(response.data.hero)
+        next()
       })
       .catch(error => {
         console.log(error)
