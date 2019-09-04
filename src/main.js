@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
+import store from './store'
 import VueAxios from 'vue-axios'
 import vcCat from './components/vc-cat'
 import './mock/mock'
@@ -30,6 +31,7 @@ Vue.directive('yc-color', {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
