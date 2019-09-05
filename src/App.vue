@@ -9,7 +9,7 @@
         <router-link class="menu-item" to="/hello">Hello</router-link>
         <router-link class="menu-item" :to="'/basic'" >Basic</router-link>
         <router-link class="menu-item" :to="{ path: '/advance' }" >Advance</router-link>
-        <router-link class="menu-item" v-bind:to="'/help'">Help</router-link>
+        <router-link class="menu-item" v-bind:to="'/vuex'">Vuex</router-link>
       </div>
     </header>
     <article>

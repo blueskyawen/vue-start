@@ -7,7 +7,7 @@
           {{tabItem.label}}</router-link>
       </div>
       <div class="vc-tab-content">
-        <transition>
+        <transition mode="out-in">
           <router-view></router-view>
         </transition>
       </div>
@@ -56,6 +56,7 @@ export default {
         &.tab-actived {
           border-bottom: solid 4px #00cc99;
           margin-bottom: -3px;
+          color: #000;
         }
       }
     }

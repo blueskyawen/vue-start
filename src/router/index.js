@@ -8,11 +8,15 @@ import helloForm from '@/components/hello/hello-form'
 import helloEvent from '@/components/hello/hello-event'
 import Basic from '@/components/basic/Basic'
 import Advance from '@/components/advance/advance'
-import Help from '@/components/Help'
+import Vuexd from '@/components/vuex/vuex'
 import Dashboard from '@/components/advance/heros/dashborad'
 import Herolist from '@/components/advance/heros/hero-list'
 import HeroDetail from '@/components/advance/heros/hero-detail'
 import AddHero from '@/components/advance/heros/add-hero'
+import state from '@/components/vuex/state/state'
+import getter from '@/components/vuex/getter/getter'
+import action from '@/components/vuex/action/action'
+import module from '@/components/vuex/module/module'
 import NotFound from '@/components/not-found'
 
 Vue.use(VueRouter)
@@ -60,7 +64,16 @@ const routes = [
       }
     ]
   },
-  { path: '/help', component: Help },
+  { path: '/vuex',
+    component: Vuexd,
+    children: [
+      { path: '', redirect: 'state' },
+      { path: 'state', component: state },
+      { path: 'getter', component: getter },
+      { path: 'action', component: action },
+      { path: 'module', component: module }
+    ]
+  },
   { path: '*', component: NotFound }
 ]
 

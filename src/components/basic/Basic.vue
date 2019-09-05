@@ -126,6 +126,7 @@ export default {
   .vc-tabs .vc-tab-items .vc-tab-item.tab-actived {
     border-bottom: solid 4px #00cc99;
     margin-bottom: -3px;
+    color: #000;
   }
   .vc-tabs .vc-tab-content {
     width: inherit;
