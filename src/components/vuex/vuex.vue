@@ -2,6 +2,11 @@
   <div class="vuex">
     <div class="az">
       <h2>{{ msg }}</h2>
+      <p>person: {{person}}</p>
+      <div class="opers">
+        <vc-button :type="'cancel'" @click="ModAge">Mod-Age</vc-button>
+        <vc-button :type="'cancel'" @click="ModWeight">Mod-Weight</vc-button>
+      </div>
     </div>
     <div class="vc-tabs">
       <div class="vc-tab-items">
@@ -30,6 +35,20 @@ export default {
         {label: 'Action', value: 'action', routeLink: 'action'},
         {label: 'Module', value: 'module', routeLink: 'module'}
       ]
+    }
+  },
+  computed: {
+    person: function () {
+      return `name=${this.$store.state.person.name} , age=${this.$store.state.person.age} ,
+              weight=${this.$store.state.person.weight}`
+    }
+  },
+  methods: {
+    ModAge: function () {
+      this.$store.commit('changeAge')
+    },
+    ModWeight: function () {
+      this.$store.commit('changeWeight')
     }
   }
 }
@@ -69,6 +88,9 @@ export default {
         width: inherit;
         padding: 20px;
       }
+    }
+    .opers {
+      padding-left: 20px;
     }
     .v-enter, .v-leave-to {
       opacity: 0;

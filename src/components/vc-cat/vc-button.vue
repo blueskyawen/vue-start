@@ -64,6 +64,7 @@ export default {
     cursor: pointer;
     min-width: 60px;
     min-height: 20px;
+    outline: none;
   }
   .button-add{
     background-color: #4db251;
