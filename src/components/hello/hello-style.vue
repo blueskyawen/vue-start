@@ -21,6 +21,7 @@
         <div :class="classObj">{{classText[1]}}</div>
         <div :class="['textClass2', num1 > 6 ? 'textClass3' : '']">{{classText[2]}}使用变量或常量加引号</div>
         <div :class="[baseClass.class2, { textClass3: num1 > 8} ]">{{classText[2]}}数组对象成员里必须使用class常量</div>
+        <div :class="arrayClasses">{{classText[2]}}多对象数组class合并一起</div>
       </div>
     </div>
     <div class="form-group">
@@ -40,8 +41,9 @@ export default {
   name: 'helloStyle',
   data () {
     return {
-      num1: 3,
+      num1: 5,
       num2: 8,
+      num3: 6,
       classText: ['class 属性绑定 - object', 'class 属性绑定 - computed', 'class 属性绑定 - Array'],
       styleText: ['style 属性绑定 - object', 'style 属性绑定 - computed', 'style 属性绑定 - Array'],
       baseStyle: {
@@ -74,6 +76,24 @@ export default {
     },
     styleObj: function () {
       return {'color': 'red', fontSize: this.num2 > 12 ? '30px' : '14px'}
+    },
+    classObj1: function () {
+      return { 'textClass1': this.num1 <= 3,
+        'textClass2': this.num1 > 3 && this.num1 < 6,
+        'textClass3': this.num1 >= 6 }
+    },
+    classObj2: function () {
+      return { 'textClass4': this.num2 <= 3,
+        'textClass5': this.num2 > 3 && this.num2 < 6,
+        'textClass6': this.num2 >= 6 }
+    },
+    classObj3: function () {
+      return { 'textClass7': this.num3 <= 3,
+        'textClass8': this.num3 > 3 && this.num3 < 6,
+        'textClass9': this.num3 >= 6 }
+    },
+    arrayClasses: function () {
+      return [this.classObj2, this.classObj1, this.classObj3]
     }
   }
 }
