@@ -22,6 +22,7 @@
         <div :class="['textClass2', num1 > 6 ? 'textClass3' : '']">{{classText[2]}}使用变量或常量加引号</div>
         <div :class="[baseClass.class2, { textClass3: num1 > 8} ]">{{classText[2]}}数组对象成员里必须使用class常量</div>
         <div :class="arrayClasses">{{classText[2]}}多对象数组class合并一起</div>
+        <div :class="arrayClass3">{{classText[2]}}多数组对象的数组class合并一起</div>
       </div>
     </div>
     <div class="form-group">
@@ -94,6 +95,15 @@ export default {
     },
     arrayClasses: function () {
       return [this.classObj2, this.classObj1, this.classObj3]
+    },
+    arrayClass1: function () {
+      return ['textClass1', 'textClass5', 'textClass23']
+    },
+    arrayClass2: function () {
+      return ['textClass56', 'textClass15']
+    },
+    arrayClass3: function () {
+      return [this.arrayClass1, this.arrayClass2]
     }
   }
 }
