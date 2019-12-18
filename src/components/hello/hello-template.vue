@@ -46,7 +46,7 @@ export default {
   data () {
     return {
       message: 'hello template',
-      htmlMsg: '<span style="color:blue">菜鸟教程(会替换原子节点)</span>',
+      htmlMsg: '<span class="clor-red">菜鸟教程(会替换原子节点){{helloMsg}}</span>',
       disableInputMsg: false,
       helloMsg: 'hello vue',
       site: { name: '菜鸟教程', url: 'http://www.runoob.com' },
@@ -128,5 +128,8 @@ export default {
   .form-group .input-oper {
     color: #009973;
     cursor: pointer;
+  }
+  .clor-red {
+    color: red;
   }
 </style>
