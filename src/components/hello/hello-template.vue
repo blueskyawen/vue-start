@@ -37,6 +37,12 @@
       <label>计算属性</label>
       <div class="input-item">{{message}}</div>
     </div>
+    <div class="form-group">
+      <label>Dom模板解析限制</label>
+      <ul>
+        <vc-button v-for="item in sitess" :key="item">{{item}}</vc-button>
+      </ul>
+    </div>
   </div>
 </template>
 
