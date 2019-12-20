@@ -7,7 +7,7 @@
         <button @click.prevent="clickBtn2(message, $event)">clickBtn2(message, $event)</button>
         <button @click.once="clickBtn2(message, $event)">@click.once</button>
         <button @click.shift="clickBtn2(message, $event)">@click.shift</button>
-        <button @keyup.enter="clickBtn2(message, $event)">@keyup.enter</button>
+        <button @keyup.enter.exact="clickBtn2(message, $event)">@keyup.enter</button>
         <button @click.exact="clickBtn2(message, $event)">@click.exact</button>
       </div>
     </div>

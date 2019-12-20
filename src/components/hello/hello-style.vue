@@ -21,8 +21,8 @@
         <div :class="classObj">{{classText[1]}}</div>
         <div :class="['textClass2', num1 > 6 ? 'textClass3' : '']">{{classText[2]}}使用变量或常量加引号</div>
         <div :class="[baseClass.class2, { textClass3: num1 > 8} ]">{{classText[2]}}数组对象成员里必须使用class常量</div>
-        <div :class="arrayClasses">{{classText[2]}}多对象数组class合并一起</div>
-        <div :class="arrayClass3">{{classText[2]}}多数组对象的数组class合并一起</div>
+        <div :class="arrayClasses">{{classText[2]}}多对象数组class合并一起，直接contact</div>
+        <div :class="arrayClass3">{{classText[2]}}多数组对象的数组class合并一起，直接contact</div>
       </div>
     </div>
     <div class="form-group">
@@ -46,7 +46,7 @@ export default {
       num2: 8,
       num3: 6,
       classText: ['class 属性绑定 - object', 'class 属性绑定 - computed', 'class 属性绑定 - Array'],
-      styleText: ['style 属性绑定 - object', 'style 属性绑定 - computed', 'style 属性绑定 - Array'],
+      styleText: ['style 属性绑定 - object', 'style 属性绑定 - computed', 'style 属性绑定 - Array,，以extend(a,b,..)方式合并'],
       baseStyle: {
         color: '#2eb8b8',
         bgColor: '#ffffcc',
@@ -57,7 +57,8 @@ export default {
         fontSize: '30px'
       },
       baseStyles2: {
-        'font-weight': 'bold'
+        'font-weight': 'bold',
+        backgroundColor: 'red'
       },
       baseStyles3: {
         backgroundColor: '#ccffff'
@@ -91,16 +92,16 @@ export default {
     classObj3: function () {
       return { 'textClass7': this.num3 <= 3,
         'textClass8': this.num3 > 3 && this.num3 < 6,
-        'textClass9': this.num3 >= 6 }
+        'textClass6': this.num3 >= 6 }
     },
     arrayClasses: function () {
-      return [this.classObj2, this.classObj1, this.classObj3]
+      return [this.classObj1, this.classObj2, this.classObj3]
     },
     arrayClass1: function () {
       return ['textClass1', 'textClass5', 'textClass23']
     },
     arrayClass2: function () {
-      return ['textClass56', 'textClass15']
+      return ['textClass1', 'textClass15']
     },
     arrayClass3: function () {
       return [this.arrayClass1, this.arrayClass2]
