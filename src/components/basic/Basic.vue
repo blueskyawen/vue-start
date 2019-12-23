@@ -6,12 +6,13 @@
              :class="{'tab-actived': tabItem.value === curTab}" @click="selectTab(tabItem.value)">
           {{tabItem.label}}</div>
       </div>
+      <vc-button @click="changeTitle">changeTitle</vc-button>
       <div class="vc-tab-content">
         <transition name="tabShow" appear appear-class="tabShow-enter"
                     appear-to-class="tabShow-enter-to"
                     appear-active-class="tabShow-enter-active">
           <basicComponent v-if="curTab === 'component'"></basicComponent>
-          <basicDirective v-else-if="curTab === 'directive'"></basicDirective>
+          <basicDirective v-else-if="curTab === 'directive'" :mytitle="title"></basicDirective>
           <basicAnimate v-else-if="curTab === 'animate'"></basicAnimate>
           <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
           <basicSlot v-else-if="curTab === 'slot'"></basicSlot>
@@ -46,7 +47,8 @@ export default {
         {label: '边界', value: 'dynmacDetect', selected: false},
         {label: 'Axios', value: 'axios', selected: false}
       ],
-      curTab: 'component'
+      curTab: 'component',
+      title: 'AAA'
     }
   },
   components: { basicDirective,
@@ -89,6 +91,9 @@ export default {
   methods: {
     selectTab: function (value) {
       this.curTab = value
+    },
+    changeTitle: function () {
+      this.title = 'BBB' + Math.round(Math.random() * 1000)
     }
   },
   computed: {

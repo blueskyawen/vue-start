@@ -81,6 +81,7 @@ var localFocus = {
 
 export default {
   name: 'basicDirective',
+  props: ['mytitle'],
   data () {
     return {
       message: 'hello directive',
@@ -102,10 +103,13 @@ export default {
     localFocus
   },
   beforeCreate: function () {
-    console.log('basicDirective ===== beforeCreate')
+    console.log('basicDirective ===== beforeCreate===start')
+    console.log(this && this.mytitle)
+    console.log('basicDirective ===== beforeCreate===end')
   },
   created: function () {
     console.log('basicDirective ===== created')
+    console.log(this.mytitle)
   },
   beforeMount: function () {
     console.log('basicDirective ===== beforeMount')
@@ -114,7 +118,9 @@ export default {
     console.log('basicDirective ===== mounted')
   },
   beforeUpdate: function () {
-    console.log('basicDirective ===== beforeUpdate')
+    console.log('basicDirective ===== beforeUpdate-start')
+    console.log(this.mytitle)
+    console.log('basicDirective ===== beforeUpdate-end')
   },
   updated: function () {
     console.log('basicDirective ===== updated')

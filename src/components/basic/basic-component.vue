@@ -8,7 +8,7 @@
         <div class="fenge"></div>
         <h4>2. 全局组件互相引用, 事件通信</h4>
         <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt01="handleEventCompt1"
-                        @eventCompt02="handleEventCompt2" @eventCompt03="msg2 += $event"></global-compt-2>
+                        @eventCompt02="handleEventCompt2" @eventCompt03="msg2 += $event.target.value"></global-compt-2>
         <p>msg2: {{msg2}}</p>
         <div class="fenge"></div>
         <h4>3. 双向绑定-emit-update:prop, 修饰符.sync</h4>
@@ -16,12 +16,13 @@
         <p>clickCounter: {{clickCounter}}; personObj: {{personObj}}</p>
         <div class="fenge"></div>
         <h4>4. props校验, 原生事件绑定到组件</h4>
-        <global-compt-4 prop-c="hello vue" :prop-e="num" @focus="foucsComp4"></global-compt-4>
+        <global-compt-4 prop-c="hello vue" :prop-e="num" :propA="1024" @focus="foucsComp4"></global-compt-4>
         <div class="fenge"></div>
         <h4>5. 动态组件, 使用is="componentName"</h4>
         <ol>
           <li is="global-compt-1"></li>
           <li is="global-compt-2" :message="msg3.text" :num="msg3.num"></li>
+          <li is="comptBB"></li>
         </ol>
         <div class="fenge"></div>
       </div>
@@ -35,6 +36,11 @@
         <div class="fenge"></div>
         <local-compt-02 message="hello local component" :num="666"></local-compt-02>
         <div class="fenge"></div>
+        <h4>使用require引用局部组件</h4>
+        <localComptA :num="999"></localComptA>
+        <h4>使用import/export引用局部组件</h4>
+        <comptBB :num="888"></comptBB>
+        <compt-cc :num="777"></compt-cc>
       </div>
     </div>
 
@@ -43,6 +49,7 @@
 
 <script>
 import Vue from 'vue'
+import {comptBB, comptCC} from './componentss/local-component-b'
 
 // 全局指令
 Vue.directive('vc-focus', {
@@ -95,7 +102,7 @@ Vue.component('global-compt-2', {
       this.$emit('eventCompt02', this.name, 666)
     },
     emitEvent3: function () {
-      this.$emit('eventCompt03', 666)
+      this.$emit('eventCompt03', 666, 'ABC')
     }
   }
 })
@@ -169,7 +176,7 @@ Vue.component('global-compt-4', {
     }
   },
   template: '<div><h3>global-component04</h3><input type="text" v-on="inputListeners" >' +
-    '<div>{{propC}} : {{propE}} : {{propD}}</div></div>'
+    '<div>{{propC}} : {{propE}} : {{propD}} : {{propA}}</div></div>'
 })
 
 // 局部组件
@@ -198,6 +205,8 @@ var localCompt02 = {
   template: '<div><h1>{{name}}: </h1><div>{{message}}##{{num}}</div></div>'
 }
 
+// var localComptA = require('./componentss/local-component-a.js')
+
 export default {
   name: 'basic-component',
   data: function () {
@@ -213,7 +222,10 @@ export default {
   components: {
     'local-compt-01': localCompt01,
     // 同 'localCompt02': localCompt02 or 'local-compt-02': localCompt02
-    localCompt02
+    localCompt02,
+    localComptA: require('./componentss/local-component-a'), // 或localComptA： localComptA
+    comptBB,
+    'compt-cc': comptCC
   },
   methods: {
     handleEventCompt1: function () {
