@@ -87,11 +87,13 @@ Vue.component('global-compt-2', {
         'font-size': '16px',
         cursor: 'pointer',
         'margin-right': '10px'
-      }
+      },
+      clickName1: 'click',
+      styleName: 'style'
     }
   },
   template: '<div><h3>{{name}}: {{message + num}}</h3>' +
-    '<global-compt-1></global-compt-1><button :style="btnStyle" @click="emitEvent1">Event-no-emit-value</button>' +
+    '<global-compt-1></global-compt-1><button :[styleName]="btnStyle" @[clickName1]="emitEvent1">Event-no-emit-value</button>' +
     '<button :style="btnStyle" @click="emitEvent2">Event2-emit1-values</button>' +
     '<button :style="btnStyle" @click="emitEvent3">Event2-emit2-values</button></div>',
   methods: {

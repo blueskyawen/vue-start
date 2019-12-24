@@ -46,7 +46,7 @@
             <p>I am 内容 in slot1</p>
           </template>
           <template #default>
-            <p>新方式的简写版</p>
+            <p>新方式的简写版,简写必须带上名字</p>
             <p>I am 内容2 in default slot</p>
           </template>
           <template #slot2>
@@ -59,15 +59,19 @@
       <label>3. 动态插槽名</label>
       <div class="demo-item">
         <p>I am 内容1 in default slot</p>
-        <p>I am 内容2 in default slot</p>
-        <!--local-compt-2>
-          <template v-slot:[slot1]>
+        <p>使用编译出错</p>
+        <!--localCompt2>
+          <template v-slot:[slotName1]>
             <p>I am 内容 in slot1</p>
           </template>
-          <template v-slot:[slot2]>
+          <template v-slot:default>
+            <p>新方式的简写版,简写必须带上名字</p>
+            <p>I am 内容2 in default slot</p>
+          </template>
+          <template v-slot:[slotName2]>
             <p>I am 内容 in slot2</p>
           </template>
-        </local-compt-2>-->
+        </localCompt2>-->
       </div>
     </div>
     <div class="demo-item-group">
@@ -84,8 +88,8 @@
             <p>2.6+新实现方式</p>
             <p>default: {{Aha}}, 结构变量重命名</p>
           </template>
-          <template #slot2="{slotColor}">
-            <p>slot2: 内容颜色, solt1: {{slotColor.color1}}; default: {{slotColor.color2}}; slot2: {{slotColor.color3}}</p>
+          <template #slot2="{slotColor2}">
+            <p>slot2: 内容颜色, solt1: {{slotColor2.color1}}; default: {{slotColor2.color2}}; slot2: {{slotColor2.color3}}</p>
           </template>
         </local-compt3>
       </div>
@@ -99,8 +103,8 @@
             <p>老实现方式</p>
             <p>default: {{Aha}}, 结构变量重命名</p>
           </template>
-          <template slot="slot2" slot-scope="{slotColor}">
-            <p>slot2: 内容颜色, solt1: {{slotColor.color1}}; default: {{slotColor.color2}}; slot2: {{slotColor.color3}}</p>
+          <template slot="slot2" slot-scope="{slotColor2}">
+            <p>slot2: 内容颜色, solt1: {{slotColor2.color1}}; default: {{slotColor2.color2}}; slot2: {{slotColor2.color3}}</p>
           </template>
         </local-compt3>
       </div>
@@ -174,7 +178,7 @@ var localCompt3 = {
   template: `<div><h3>{{name}}</h3>
              <div :style="{color: styleObj.color1}"><slot name="slot1" v-bind:msg="message"></slot></div>
              <div :style="{color: styleObj.color2}"><slot v-bind:aha="aha"></slot></div>
-             <div :style="{color: styleObj.color3}"><slot name="slot2" v-bind:slotColor="styleObj"></slot></div>
+             <div :style="{color: styleObj.color3}"><slot name="slot2" v-bind:slotColor2="styleObj"></slot></div>
             </div>`
 }
 
@@ -183,8 +187,8 @@ export default {
   data: function () {
     return {
       message: 'hello slot',
-      slot1: 'slot1',
-      slot2: 'slot2',
+      slotName1: 'slot1',
+      slotName2: 'slot2',
       title: 'hello 作用域插槽 !'
     }
   },

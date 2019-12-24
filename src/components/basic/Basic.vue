@@ -6,7 +6,7 @@
              :class="{'tab-actived': tabItem.value === curTab}" @click="selectTab(tabItem.value)">
           {{tabItem.label}}</div>
       </div>
-      <vc-button @click="changeTitle">changeTitle</vc-button>
+      <!--vc-button @click="changeTitle">changeTitle</vc-button>-->
       <div class="vc-tab-content">
         <transition name="tabShow" appear appear-class="tabShow-enter"
                     appear-to-class="tabShow-enter-to"
@@ -16,6 +16,7 @@
           <basicAnimate v-else-if="curTab === 'animate'"></basicAnimate>
           <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
           <basicSlot v-else-if="curTab === 'slot'"></basicSlot>
+          <basicKeepAlive v-else-if="curTab === 'keepAlive'"></basicKeepAlive>
           <basicSetter v-else-if="curTab === 'dynmacDetect'"></basicSetter>
           <basicAxios v-else-if="curTab === 'axios'"></basicAxios>
           <div v-else>Not Found</div>
@@ -33,6 +34,7 @@ import basicSetter from './basic-setter'
 import basicAxios from './basic-axios'
 import basicComponent from './basic-component'
 import basicSlot from './basic-slot'
+import basicKeepAlive from './basic-keepalive'
 
 export default {
   name: 'Basic',
@@ -45,6 +47,7 @@ export default {
         {label: '混入', value: 'extend', selected: false},
         {label: '插槽', value: 'slot', selected: false},
         {label: '边界', value: 'dynmacDetect', selected: false},
+        {label: 'KeepAlive', value: 'keepAlive', selected: false},
         {label: 'Axios', value: 'axios', selected: false}
       ],
       curTab: 'component',
@@ -57,7 +60,8 @@ export default {
     basicSetter,
     basicAxios,
     basicComponent,
-    basicSlot },
+    basicSlot,
+    basicKeepAlive},
   beforeCreate: function () {
     console.log('Basic ===== beforeCreate')
   },
