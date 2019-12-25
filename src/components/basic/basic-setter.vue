@@ -11,6 +11,7 @@
             <p>Not parent's transclusion content.</p>
           </div>
         </localCompt5>
+        <localCompt5 :ref="refCmpt5"></localCompt5>
       </div>
       <div class="demo-item">
         <localCompt6 ref="RelCompt6"></localCompt6>
@@ -30,9 +31,11 @@
       <p>$refs.RefNames包含对应数据源的这些子组件的数组</p>
     </div>
     <div class="demo-item-group">
-      <label>3. 依赖注入：只可用于属性的注入获取，不允许修改和注入方法, 只用于祖先级逐渐的属性共享，用处有限</label>
-      <p>provide不能注入变量或方法或计算属性，只能注入常量或新建对象，如：new Date()</p>
-      <p>而且注入的属性是非响应的，不能直接用于模版语法里</p>
+      <label>3. 依赖注入：可用于属性的注入获取,修改,计算属性和方法, 只用于祖先级逐渐的属性共享，用处有限</label>
+      <p>provide设置纯对象时只能注入只能注入常量或新建对象，如: provide: {key：new Date()}</p>
+      <p>要能注入变量或方法或计算属性的话，provide必须设置为返回对象的函数,比如：provide：function() {return {key: this.getName}}</p>
+      <p>而且注入的属性是非响应的，不能直接用于模版语法里, 但可用于初始化prop和data;
+        然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的https://cn.vuejs.org/v2/api/#provide-inject</p>
       <div class="demo-item">
         <localCompt6 :ref="'RelCompt6'"></localCompt6>
       </div>
@@ -83,7 +86,7 @@ var localCompt6 = {
   template: `<div><span>{{name}}; {{injectMsg2}}</span><button @click="useParent">use perant provides</button></div>`,
   methods: {
     useParent: function () {
-      this.injectMsg2 += this.injectMsg + ' 哈哈'
+      this.injectMsg2 += this.injectMsg() + ' 哈哈'
     }
   }
 }
@@ -122,10 +125,19 @@ export default {
     },
     modCount: function (index) {
       this.$refs.temps[index].addCount()
+    },
+    getName: function () {
+      return this.name + 'getName'
+    },
+    modName: function () {
+      this.name += 'hahahahaha'
+      return this.name
     }
   },
-  provide: {
-    injectMsg: new Date()
+  provide: function () {
+    return {
+      injectMsg: this.modName
+    }
   },
   computed: {
     getData: function () {
