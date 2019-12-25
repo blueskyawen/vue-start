@@ -17,6 +17,7 @@
           <basicExtend v-else-if="curTab === 'extend'"></basicExtend>
           <basicSlot v-else-if="curTab === 'slot'"></basicSlot>
           <basicKeepAlive v-else-if="curTab === 'keepAlive'"></basicKeepAlive>
+          <basicAsync v-else-if="curTab === 'basicAsync'"></basicAsync>
           <basicSetter v-else-if="curTab === 'dynmacDetect'"></basicSetter>
           <basicAxios v-else-if="curTab === 'axios'"></basicAxios>
           <div v-else>Not Found</div>
@@ -35,6 +36,7 @@ import basicAxios from './basic-axios'
 import basicComponent from './basic-component'
 import basicSlot from './basic-slot'
 import basicKeepAlive from './basic-keepalive'
+import basicAsync from './basic-async-component'
 
 export default {
   name: 'Basic',
@@ -48,6 +50,7 @@ export default {
         {label: '插槽', value: 'slot', selected: false},
         {label: '边界', value: 'dynmacDetect', selected: false},
         {label: 'KeepAlive', value: 'keepAlive', selected: false},
+        {label: '异步组件', value: 'basicAsync', selected: false},
         {label: 'Axios', value: 'axios', selected: false}
       ],
       curTab: 'component',
@@ -61,7 +64,8 @@ export default {
     basicAxios,
     basicComponent,
     basicSlot,
-    basicKeepAlive},
+    basicKeepAlive,
+    basicAsync},
   beforeCreate: function () {
     console.log('Basic ===== beforeCreate')
   },
