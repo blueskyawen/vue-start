@@ -42,6 +42,10 @@
       <div class="demo-item">
         <localCompt7></localCompt7>
       </div>
+      <div class="demo-item">
+        <h3>注入一个对象</h3>
+        <p>site: country={{site.country}}; city={{site.city}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -82,26 +86,38 @@ var localCompt6 = {
       injectMsg2: 'Inject msg'
     }
   },
-  inject: ['injectMsg'],
-  template: `<div><span>{{name}}; {{injectMsg2}}</span><button @click="useParent">use perant provides</button></div>`,
+  inject: ['injectMsg', 'mysite'],
+  template: `<div><span>{{name}}; {{injectMsg2}}</span>
+            <span>site: country={{mysite.country}}; city={{mysite.city}}</span>
+            <button @click="useParent">use perant provides</button></div>`,
   methods: {
     useParent: function () {
       this.injectMsg2 += this.injectMsg() + ' 哈哈'
+      // this.$parent.modSiteCity()
+      this.mysite.city = '杭州'
     }
   }
 }
 var localCompt7 = {
+  props: {
+    myMsg: {
+      type: String,
+      default: function () { return this.perantMsg() }
+    }
+  },
   data: function () {
     return {
       name: 'localCompt7',
-      injectMsg2: 'Inject '
+      injectMsg2: 'injectMsg',
+      inhirtMsg: this.perantMsg()
     }
   },
   inject: {perantMsg: {from: 'injectMsg', default: 'Inject'}},
-  template: `<div><span>{{name}}; {{injectMsg2}}</span><button @click="useParent">use perant provides</button></div>`,
+  template: `<div><span>{{name}}; {{injectMsg2}}; {{inhirtMsg}}: {{myMsg}}</span>
+            <button @click="useParent">use perant provides</button></div>`,
   methods: {
     useParent: function () {
-      this.injectMsg2 += this.perantMsg + ' 哈哈'
+      this.injectMsg2 += this.perantMsg() + ' 哈哈'
     }
   }
 }
@@ -114,7 +130,11 @@ export default {
       message: 'hello setter !',
       injectMsg: 'Inject basicSetter',
       tempsss: ['temps', 'temps', 'temps'],
-      refCmpt5: 'RelCompt5'
+      refCmpt5: 'RelCompt5',
+      site: {
+        country: 'China',
+        city: 'shanghai'
+      }
     }
   },
   components: {localCompt6, localCompt7},
@@ -132,11 +152,18 @@ export default {
     modName: function () {
       this.name += 'hahahahaha'
       return this.name
+    },
+    modSiteCity () {
+      this.site.city = 'hangzhou'
     }
   },
+  /* provide: {
+    injectMsg: '蒋平'
+  }, */
   provide: function () {
     return {
-      injectMsg: this.modName
+      injectMsg: this.modName,
+      mysite: this.site
     }
   },
   computed: {
