@@ -4,7 +4,5 @@ module.exports = {
       name: '异步组件--AA'
     }
   },
-  template: '<div><h1>{{name}}</h1>></div>'
+  template: '<div><h1>{{name}}</h1></div>'
 }
-
-  

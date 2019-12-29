@@ -4,5 +4,5 @@ export default {
       name: '异步组件--BB'
     }
   },
-  template: '<div><h1>{{name}}</h1>></div>'
+  template: '<div><h1>{{name}}</h1></div>'
 }
