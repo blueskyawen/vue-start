@@ -18,8 +18,8 @@
 </template>
 <script>
 import Vue from 'vue'
-import asyncLoading from './componentss/async-loading-component'
-import asyncError from './componentss/async-error-component'
+import asyncLoading from './componentss/async-loading-component.vue'
+import asyncError from './componentss/async-error-component.vue'
 
 Vue.component('async-webpack-example-c', function (resolve) {
   // 这个特殊的 `require` 语法将会告诉 webpack
@@ -40,10 +40,10 @@ const AsyncComponentA = () => ({
   // 加载失败时使用的组件
   error: asyncError,
   // 展示加载时组件的延时时间。默认值是 200 (毫秒)
-  delay: 2000,
+  delay: 200,
   // 如果提供了超时时间且组件加载也超时了，
   // 则使用加载失败时使用的组件。默认值是：`Infinity`
-  timeout: 5000
+  timeout: 15000
 })
 
 export default {
