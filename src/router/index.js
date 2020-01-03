@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Hello from '@/components/hello/Hello'
 import helloTemplate from '@/components/hello/hello-template'
-import helloDirective from '@/components/hello/hello-directive'
+// import helloDirective from '@/components/hello/hello-directive'
 import helloStyle from '@/components/hello/hello-style'
-import helloForm from '@/components/hello/hello-form'
+// import helloForm from '@/components/hello/hello-form'
 import helloEvent from '@/components/hello/hello-event'
 import Basic from '@/components/basic/Basic'
 import Advance from '@/components/advance/advance'
@@ -18,8 +18,26 @@ import getter from '@/components/vuex/getter/getter'
 import action from '@/components/vuex/action/action'
 import module from '@/components/vuex/module/module'
 import NotFound from '@/components/not-found'
+import asyncLoading from '@/components/vc-cat/vc-async-loading.vue'
+import asyncError from '@/components/vc-cat/vc-async-error.vue'
 
 Vue.use(VueRouter)
+
+function lazyLoadView () {
+  const asyncComponentForm = () => ({
+    component: import('@/components/hello/hello-form'),
+    loading: asyncLoading,
+    error: asyncError,
+    delay: 200,
+    timeout: 15000
+  })
+  return Promise.resolve({
+    functional: true,
+    render (h, {data, children}) {
+      return h(asyncComponentForm, data, children)
+    }
+  })
+}
 
 const routes = [
   { path: '/', redirect: '/hello' },
@@ -28,9 +46,9 @@ const routes = [
     children: [
       { path: '', redirect: 'template' },
       { path: 'template', component: helloTemplate },
-      { path: 'innerDirective', component: helloDirective },
+      { path: 'innerDirective', component: () => import('@/components/hello/hello-directive') },
       { path: 'styles', component: helloStyle },
-      { path: 'form', component: helloForm },
+      { path: 'form', component: () => lazyLoadView() },
       { path: 'event', component: helloEvent }
     ]
   },
