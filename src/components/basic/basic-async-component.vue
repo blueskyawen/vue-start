@@ -14,6 +14,39 @@
       <div>
         <component :is="curComponentName"></component>
       </div>
+      <div class="fenge"></div>
+      <h1>动态异步组件</h1>
+      <div style="width: 700px;">
+        <vc-form-group class="vc-from-group">
+          <vc-form-label class="vc-from-label">组件名</vc-form-label>
+          <vc-form-control class="vc-from-control">
+            <vc-input v-model="path" placeholder="输入组件名" autocomplete="on" required></vc-input>
+          </vc-form-control>
+        </vc-form-group>
+        <vc-form-group class="vc-from-group">
+          <vc-form-label class="vc-from-label">是否KeepAlive</vc-form-label>
+          <vc-form-control class="vc-from-control">
+            <vc-switch :type="'min'" v-model="isKeepAlive"></vc-switch>
+          </vc-form-control>
+        </vc-form-group>
+        <vc-form-group class="vc-from-group">
+          <vc-form-label class="vc-from-label">是否Transition</vc-form-label>
+          <vc-form-control class="vc-from-control">
+            <vc-switch :type="'min'" v-model="isTransition"></vc-switch>
+          </vc-form-control>
+        </vc-form-group>
+        <vc-form-group class="vc-from-group">
+          <label class="vc-from-label"></label>
+          <vc-form-control class="vc-from-control">
+            <vc-button @click="loadComp">Load</vc-button>
+          </vc-form-control>
+        </vc-form-group>
+      </div>
+      <div>
+        <vc-async-component :path="comptName" :timeout="timeoutLen" :keep-alive="isKeepAlive"
+                            :transition="isTransition" :transition-class="asyncClass">
+        </vc-async-component>
+      </div>
     </div>
 </template>
 <script>
@@ -53,12 +86,31 @@ export default {
       showCcc: false,
       comptIsNames: ['async-webpack-example-c', 'async-webpack-example-d', 'aync-component-b',
         'aync-component-a'],
-      curComponentName: 'global-compt-1'
+      curComponentName: 'global-compt-1',
+      path: 'components/basic/componentss/async-component-c.vue',
+      delayLen: 200,
+      timeoutLen: 5000,
+      comptName: 'components/basic/componentss/async-component-c.vue',
+      isKeepAlive: false,
+      isTransition: false,
+      asyncClass: {
+        enter: 'async-enter',
+        enterActive: 'async-enter-active',
+        enterTo: 'async-enter-to',
+        leave: 'async-leave',
+        leaveActive: 'async-leave-active',
+        leaveTo: 'async-leave-to'
+      }
     }
   },
   components: {
     'aync-component-b': () => import('./componentss/async-component-b.js'),
     'aync-component-a': AsyncComponentA
+  },
+  methods: {
+    loadComp: function () {
+      this.comptName = this.path
+    }
   }
 }
 </script>
@@ -93,5 +145,25 @@ export default {
       margin-bottom: 3px;
       border-bottom: dashed 1px #999;
     }
+  }
+  .vc-from-group {
+    width: 100%;
+  }
+  .vc-from-group .vc-from-label {
+    width: 20%;
+  }
+  .vc-from-group .vc-from-control {
+    width: 80%;
+  }
+  .async-enter,.async-leave-to {
+    opacity: 0;
+    margin-left: 100px;
+  }
+  .async-enter-to,.async-leave {
+    opacity: 1;
+    margin-left: 0;
+  }
+  .async-enter-active,.async-leave-active {
+    transition: all 1s;
   }
 </style>

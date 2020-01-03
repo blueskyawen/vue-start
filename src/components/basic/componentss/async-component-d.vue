@@ -1,5 +1,7 @@
 <template>
-  <div><h1>{{name}}</h1></div>
+  <div><h1>{{name}}</h1>
+    <vc-input v-model="name"></vc-input>
+  </div>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
   <div class="nc-form-group-item">
-    <input v-bind="$attrs" @input="valueChange" />
+    <input v-bind="$attrs" :value="value" @input="valueChange" />
   </div>
 </template>
 

@@ -9,6 +9,7 @@ import vcMutilCheckbox from './vc-mutil-checkbox'
 import vcRadio from './vc-radio'
 import vcSwitch from './vc-switch'
 import vcLoading from './vc-loading'
+import vcAsyncComponent from './vc-async-component'
 import * as vcFilter from './vc-filter'
 
 const vcCat = {
@@ -24,6 +25,7 @@ const vcCat = {
     Vue.component('vc-radio', vcRadio)
     Vue.component('vc-switch', vcSwitch)
     Vue.component('vc-loading', vcLoading)
+    Vue.component('vc-async-component', vcAsyncComponent)
     Vue.directive('regIf', function (el, binding) {
       if (binding.value.reg.test(binding.value.value)) {
         el.style.display = 'block'
