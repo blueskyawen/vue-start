@@ -1,0 +1,2 @@
+webpackJsonp([4],{qqCq:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={data:function(){return{name:"异步组件--BB"}},template:"<div><h1>{{name}}</h1></div>"}}});
+//# sourceMappingURL=4.bdc8ec8abab613592e00.js.map
