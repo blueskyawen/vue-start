@@ -13,9 +13,9 @@
       <div class="demo-item">
         <async-webpack-example></async-webpack-example>
       </div>
-      <div class="demo-item">
+      <!--div class="demo-item">
         <my-component></my-component>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>

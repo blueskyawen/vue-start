@@ -25,7 +25,7 @@
         <transition name="fade3"  enter-class="bounce-enter" leave-class="bounce-leave"
                     enter-to-class="bounce-enter-to" leave-to-class="bounce-leave-to"
                     enter-active-class="animated bounce-enter-active" leave-active-class="animated bounce-leave-active"
-                    :duration="{enter: 1000, leave: 2000}">
+                    :duration="{enter: 3000, leave: 3000}">
           <span v-if="show3" :style="shtyleobj">我是过渡的动画003号</span>
         </transition>
       </div>
@@ -78,7 +78,7 @@
     <div class="form-group" style="display: flex;flex-direction: column">
       <label class="for-input">列表元素过渡</label>
       <div class="input-item">
-        <transition-group name="numList">
+        <transition-group name="numList" tag="div">
           <span class="numItem" v-for="item in items" :key="item">{{item}}</span>
         </transition-group>
       </div>
@@ -129,6 +129,16 @@ export default {
     },
     enter: function (el, done) {
       console.log('enter')
+      /* el.style.transition = 'all 1s'
+      setTimeout(() => {
+        el.style.opacity = 1
+        el.style.fontSize = '2.4em'
+        el.style.color = 'red'
+      }, 0)
+      setTimeout(() => {
+        el.style.fontSize = '1em'
+      }, 1000)
+      done() */
       Velocity(el, { opacity: 1, fontSize: '2.4em', color: '#ff33bb' }, { duration: 1000 })
       Velocity(el, { fontSize: '1em' }, { complete: done })
     },
@@ -256,9 +266,10 @@ export default {
   }
   .v-enter-to, .v-leave {
     opacity: 1;
+    color: #00cc99;
   }
   .v-enter-active, .v-leave-active {
-    transition: all 1s linear;
+    transition: all 2s linear;
   }
   .fade-enter, .fade-leave-to {
     opacity: 0;
@@ -273,13 +284,15 @@ export default {
     margin-left: 0;
   }
   .fade-enter-active, .fade-leave-active {
-    transition: all 1s linear;
+    transition: all 3s linear;
   }
   .bounce-enter-active {
     animation: bounce-in 1s;
+    animation-delay: 2s;
   }
   .bounce-leave-active {
     animation: bounce-in 1s reverse;
+    animation-delay: 2s;
   }
   .bounce-enter, .bounce-leave-to {
     color: blue;
