@@ -12,7 +12,7 @@
     <div class="form-group">
       <label class="for-input">全局指令02</label>
       <div class="input-item">
-        <input type="text" v-model.trim="message" v-focus2:#cc00ff.a="focusData" />
+        <input type="text" v-model.trim="message" v-focus2:[color].a="focusData" />
       </div>
       <span class="input-oper" v-on:click="changeFontSize">changeFontSize</span>
     </div>
@@ -53,12 +53,14 @@ Vue.directive('focus2', {
     el.value = binding.value.text
     el.focus()
   },
-  update: function (el, binding) {
+  update: function (el, binding, vnode, oldVnode) {
     console.log('focus2 ***** update')
     console.log(binding)
+    console.log(vnode)
+    console.log(oldVnode)
     el.style.fontSize = binding.value.fontsizee
   },
-  componentUpdated: function (el, binding) {
+  componentUpdated: function (el, binding, vnode, oldVnode) {
     console.log('focus2 ***** componentUpdated')
     console.log(binding)
   },
@@ -69,12 +71,20 @@ Vue.directive('focus2', {
 })
 // 局部指令
 var localFocus = {
-  inserted: function (el, binding, vnode, oldVnode) {
-    console.log('local_focus ***** inserted')
+  bind: function (el, binding) {
+    console.log('localFocus ***** bind')
     el.style.color = binding.value.color
     el.style.fontSize = binding.value.fontsizee
     el.value = binding.value.text
     el.style.backgroundColor = binding.value.bgColor
+    el.focus()
+  },
+  inserted: function (el, binding, vnode, oldVnode) {
+    console.log('local_focus ***** inserted')
+    /* el.style.color = binding.value.color
+    el.style.fontSize = binding.value.fontsizee
+    el.value = binding.value.text
+    el.style.backgroundColor = binding.value.bgColor */
     el.focus()
   }
 }
