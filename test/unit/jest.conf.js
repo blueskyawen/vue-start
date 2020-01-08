@@ -21,8 +21,11 @@ module.exports = {
   setupFiles: ['<rootDir>/test/unit/setup'],
   mapCoverage: true,
   coverageDirectory: '<rootDir>/test/unit/coverage',
+  testRegex: '(<rootDir>/test/unit/specs/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$',
   collectCoverageFrom: [
-    'src/**/*.{js,vue}',
+    'src/components/vc-cat/*.{js,vue}',
+    '!src/components/vc-cat/index.js',
+    //'!src/**/*.{js,vue}',
     '!src/main.js',
     '!src/router/index.js',
     '!**/node_modules/**'
