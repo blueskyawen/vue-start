@@ -52,7 +52,7 @@ export default {
   data () {
     return {
       message: 'hello template',
-      htmlMsg: '<span class="clor-red">菜鸟教程(会替换原子节点){{helloMsg}}</span>',
+      htmlMsg: '<span class="clor-red">菜鸟教程(会替换原子节点,不会处理属性绑定){{helloMsg}}</span>',
       disableInputMsg: false,
       helloMsg: 'hello vue',
       site: { name: '菜鸟教程', url: 'http://www.runoob.com' },
@@ -87,7 +87,7 @@ export default {
   computed: {
     siteMsg: {
       get: function () {
-        return this.site.name + '##' + this.site.url
+        return this.site.name + '***' + this.site.url
       },
       set: function (value) {
         var names = value.split('##')
