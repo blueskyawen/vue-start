@@ -34,8 +34,8 @@
       <label>3. 依赖注入：可用于属性的注入获取,修改,计算属性和方法, 只用于祖先级逐渐的属性共享，用处有限</label>
       <p>provide设置纯对象时只能注入只能注入常量或新建对象，如: provide: {key：new Date()}</p>
       <p>要能注入变量或方法或计算属性的话，provide必须设置为返回对象的函数,比如：provide：function() {return {key: this.getName}}</p>
-      <p>而且注入的属性是非响应的，不能直接用于模版语法里, 但可用于初始化prop和data;
-        然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的https://cn.vuejs.org/v2/api/#provide-inject</p>
+      <p>而且注入的属性是非响应的，不能直接用于模版语法里, 但可用于初始化prop和data;(这就是为啥name有hahahahahaha)</p>
+      <p>然而，如果你传入了一个可监听的对象，那么其对象的属性还是可响应的https://cn.vuejs.org/v2/api/#provide-inject</p>
       <div class="demo-item">
         <localCompt6 :ref="'RelCompt6'"></localCompt6>
       </div>
