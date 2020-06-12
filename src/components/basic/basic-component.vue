@@ -8,7 +8,7 @@
         <div class="fenge"></div>
         <h4>2. 全局组件互相引用, 事件通信</h4>
         <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt01="handleEventCompt1"
-                        @eventCompt02="handleEventCompt2" @eventCompt03="msg2 += $event.target.value"></global-compt-2>
+                        @eventCompt02="handleEventCompt2" @eventCompt03="handleEventCompt3"></global-compt-2>
         <p>msg2: {{msg2}}</p>
         <div class="fenge"></div>
         <h4>3. 双向绑定-emit-update:prop, 修饰符.sync</h4>
@@ -34,7 +34,7 @@
         <div class="fenge"></div>
         <localCompt02 message="hello local component" :num="666"></localCompt02>
         <div class="fenge"></div>
-        <local-compt-02 message="hello local component" :num="666"></local-compt-02>
+        <local-compt-02 :message="'hello local component'" :num="666"></local-compt-02>
         <div class="fenge"></div>
         <h4>使用require引用局部组件</h4>
         <localComptA :num="999"></localComptA>
@@ -93,6 +93,7 @@ Vue.component('global-compt-2', {
     }
   },
   template: '<div><h3>{{name}}: {{message + num}}</h3>' +
+    '<h3>styleName-动态属性名,clickName1-动态事件名</h3>' +
     '<global-compt-1></global-compt-1><button :[styleName]="btnStyle" @[clickName1]="emitEvent1">Event-no-emit-value</button>' +
     '<button :style="btnStyle" @click="emitEvent2">Event2-emit1-values</button>' +
     '<button :style="btnStyle" @click="emitEvent3">Event2-emit2-values</button></div>',
@@ -235,6 +236,9 @@ export default {
     },
     handleEventCompt2: function (value1, value2) {
       alert('React Event2 compt2: ' + value1 + value2)
+    },
+    handleEventCompt3: function ($event) {
+      this.msg2 += 'the $event is the first value: ' + $event
     },
     foucsComp4: function () {
       alert('Focus foucsComp4 原生事件')

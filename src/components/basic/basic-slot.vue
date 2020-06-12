@@ -110,7 +110,7 @@
       </div>
     </div>
     <div class="demo-item-group">
-      <label>5. 独占默认插槽</label>
+      <label>5. 独占默认插槽, v-slot用在非template</label>
       <div class="demo-item">
         <local-compt3>
           <template #default="{aha: Aha}">
