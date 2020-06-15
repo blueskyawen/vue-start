@@ -57,7 +57,7 @@ export default {
   methods: {
     getHttp: function () {
       this.axios
-        .get('api/advance/heros')
+        .get('http://106.75.245.131:443/users')
         .then(response => {
           this.rspInfo = response.data
         })
