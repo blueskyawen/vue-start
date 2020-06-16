@@ -12,14 +12,19 @@
         <vc-button @click="addVm">AddVms</vc-button>
       </div>
       <div class="demo-item">
-        <input v-model="delName" />
+        <input v-model="delId" />
         <vc-button @click="delVm">DelVm</vc-button>
       </div>
       <div class="demo-item">
-        <input v-model.number="viewId" />
+        <input v-model="viewId" />
         <vc-button @click="getOneVm">ViewDetail</vc-button>
       </div>
       <p>{{vmDetail}}</p>
+      <div class="demo-item">
+        id: <input v-model="editVmData.id" />
+        name: <input v-model="editVmData.name" />
+        <vc-button @click="modVm">ModVm</vc-button>
+      </div>
     </div>
     <div class="demo-item-group">
       <label>2. axios-异步加载组件</label>
@@ -64,13 +69,17 @@ export default {
       errInfo: {},
       vms: [],
       url: 'users',
-      delName: '',
-      viewId: 0,
+      delId: '1',
+      viewId: '0',
       addVmData: {
         name: '',
         status: 'active'
       },
-      vmDetail: {}
+      vmDetail: {},
+      editVmData: {
+        id: '',
+        name: ''
+      },
     }
   },
   components: {
@@ -88,14 +97,14 @@ export default {
       })
     },
     addVm: function () {
-      Vue.axios.get('vms/add', this.addVmData).then((response) => {
+      Vue.axios.post('vms/add', this.addVmData).then((response) => {
         console.log(response.data)
       }).catch((error) => {
         this.errInfo = error
       })
     },
     delVm: function () {
-      this.$http.get(`vms/${this.delName}`).then((response) => {
+      this.$http.delete(`vms/${this.delId}`).then((response) => {
         console.log(response.data)
       }).catch((error) => {
         this.errInfo = error
@@ -107,6 +116,13 @@ export default {
         url: `vms/${this.viewId}`
       }).then((response) => {
         this.vmDetail = response.data
+      }).catch((error) => {
+        this.errInfo = error
+      })
+    },
+    modVm: function () {
+      this.$http.put(`vms/${this.editVmData.id}`, {name: this.editVmData.name}).then((response) => {
+        console.log(response.data)
       }).catch((error) => {
         this.errInfo = error
       })
