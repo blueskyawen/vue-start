@@ -8,15 +8,15 @@
       <p>{{vms}}</p>
       <p style="color: red">{{errInfo}}</p>
       <div class="demo-item">
-        <input v-model="addVmData.name" />
+        name: <input v-model="addVmData.name" />
         <vc-button @click="addVm">AddVms</vc-button>
       </div>
       <div class="demo-item">
-        <input v-model="delId" />
+        id: <input v-model="delId" />
         <vc-button @click="delVm">DelVm</vc-button>
       </div>
       <div class="demo-item">
-        <input v-model="viewId" />
+        id: <input v-model="viewId" />
         <vc-button @click="getOneVm">ViewDetail</vc-button>
       </div>
       <p>{{vmDetail}}</p>
@@ -79,7 +79,7 @@ export default {
       editVmData: {
         id: '',
         name: ''
-      },
+      }
     }
   },
   components: {
