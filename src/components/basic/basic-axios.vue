@@ -3,10 +3,23 @@
     <div class="demo-item-group">
       <label>1. axios-get</label>
       <div class="demo-item">
-        <button @click.stop="getHttp()">Get</button>
+        <vc-button @click="getVms">GetVms</vc-button>
       </div>
-      <p>{{rspInfo}}</p>
+      <p>{{vms}}</p>
       <p style="color: red">{{errInfo}}</p>
+      <div class="demo-item">
+        <input v-model="addVmData.name" />
+        <vc-button @click="addVm">AddVms</vc-button>
+      </div>
+      <div class="demo-item">
+        <input v-model="delName" />
+        <vc-button @click="delVm">DelVm</vc-button>
+      </div>
+      <div class="demo-item">
+        <input v-model.number="viewId" />
+        <vc-button @click="getOneVm">ViewDetail</vc-button>
+      </div>
+      <p>{{vmDetail}}</p>
     </div>
     <div class="demo-item-group">
       <label>2. axios-异步加载组件</label>
@@ -48,33 +61,55 @@ export default {
   data () {
     return {
       rspInfo: {},
-      errInfo: {}
+      errInfo: {},
+      vms: [],
+      url: 'users',
+      delName: '',
+      viewId: 0,
+      addVmData: {
+        name: '',
+        status: 'active'
+      },
+      vmDetail: {}
     }
   },
   components: {
     'my-component': AsyncComponent
   },
+  created: function () {
+    Vue.axios.defaults.baseURL = 'http://106.75.245.131:443'
+  },
   methods: {
-    getHttp: function () {
-      this.axios
-        .get('http://106.75.245.131:443/users')
-        .then(response => {
-          this.rspInfo = response.data
-        })
-        .catch((error) => { // 请求失败处理
-          this.errInfo = error
-        })
-      /* Vue.axios.get(api).then((response) => {
-        console.log(response.data)
+    getVms: function () {
+      this.axios.get('vms').then(response => {
+        this.vms = response.data
+      }).catch((error) => { // 请求失败处理
+        this.errInfo = error
       })
-
-      this.axios.get(api).then((response) => {
+    },
+    addVm: function () {
+      Vue.axios.get('vms/add', this.addVmData).then((response) => {
         console.log(response.data)
+      }).catch((error) => {
+        this.errInfo = error
       })
-
-      this.$http.get(api).then((response) => {
+    },
+    delVm: function () {
+      this.$http.get(`vms/${this.delName}`).then((response) => {
         console.log(response.data)
-      }) */
+      }).catch((error) => {
+        this.errInfo = error
+      })
+    },
+    getOneVm: function () {
+      this.axios({
+        method: 'get',
+        url: `vms/${this.viewId}`
+      }).then((response) => {
+        this.vmDetail = response.data
+      }).catch((error) => {
+        this.errInfo = error
+      })
     }
   }
 }
