@@ -1,6 +1,13 @@
 <template>
   <div class="basicAxios">
     <div class="demo-item-group">
+      <transition mode="out-in">
+        <div v-if="isLoading">
+          <vc-loading :size="'min'"></vc-loading> 等待中...
+        </div>
+        <div v-if="showSuccess" class="oper-success">操作成功，2s后消失!</div>
+        <div v-if="showFail" class="oper-fail">操作失败，2s后消失!</div>
+      </transition>
       <label>1. axios-get</label>
       <div class="demo-item">
         <vc-button @click="getVms">GetVms</vc-button>
@@ -79,7 +86,10 @@ export default {
       editVmData: {
         id: '',
         name: ''
-      }
+      },
+      isLoading: false,
+      showSuccess: false,
+      showFail: false
     }
   },
   components: {
@@ -90,42 +100,82 @@ export default {
   },
   methods: {
     getVms: function () {
+      this.isLoading = true
       this.axios.get('vms').then(response => {
         this.vms = response.data
+        this.operSuccess()
       }).catch((error) => { // 请求失败处理
         this.errInfo = error
+        this.operFail()
+      }).finally(() => {
+        this.isLoading = false
       })
     },
     addVm: function () {
+      this.isLoading = true
       Vue.axios.post('vms/add', this.addVmData).then((response) => {
         console.log(response.data)
+        this.operSuccess()
+        this.getVms()
       }).catch((error) => {
         this.errInfo = error
+        this.operFail()
+      }).finally(() => {
+        this.isLoading = false
       })
     },
     delVm: function () {
+      this.isLoading = true
       this.$http.delete(`vms/${this.delId}`).then((response) => {
         console.log(response.data)
+        this.operSuccess()
+        this.getVms()
       }).catch((error) => {
         this.errInfo = error
+        this.operFail()
+      }).finally(() => {
+        this.isLoading = false
       })
     },
     getOneVm: function () {
+      this.isLoading = true
       this.axios({
         method: 'get',
         url: `vms/${this.viewId}`
       }).then((response) => {
         this.vmDetail = response.data
+        this.operSuccess()
       }).catch((error) => {
         this.errInfo = error
+        this.operFail()
+      }).finally(() => {
+        this.isLoading = false
       })
     },
     modVm: function () {
+      this.isLoading = true
       this.$http.put(`vms/${this.editVmData.id}`, {name: this.editVmData.name}).then((response) => {
         console.log(response.data)
+        this.operSuccess()
+        this.getVms()
       }).catch((error) => {
         this.errInfo = error
+        this.operFail()
+      }).finally(() => {
+        this.isLoading = false
       })
+    },
+    operSuccess: function () {
+      this.showSuccess = true
+      setTimeout(() => {
+        this.showSuccess = false
+      }, 2000)
+    },
+    operFail: function () {
+      this.showFail = true
+      setTimeout(() => {
+        this.showFail = false
+      }, 2000)
     }
   }
 }
@@ -194,5 +244,30 @@ export default {
     font-size: 16px;
     cursor: pointer;
     outline: none;
+  }
+  .oper-success {
+    font-size: 14px;
+    font-weight: bold;
+    color: #3cc;
+  }
+  .oper-fail {
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+  }
+  .v-enter {
+    opacity: 0.5;
+    margin-left: -20px;
+  }
+  .v-enter-to, .v-leave {
+    opacity: 1;
+    margin-left: 0;
+  }
+  .v-leave-to {
+    opacity: 0;
+    margin-left: 20px;
+  }
+  .v-enter-active {
+    transition: all 1s;
   }
 </style>
