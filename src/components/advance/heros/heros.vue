@@ -18,12 +18,17 @@
 </template>
 
 <script>
+import Vue from 'vue'
+
 export default {
   name: 'heros',
   data () {
     return {
       auth: false
     }
+  },
+  created: function () {
+    Vue.axios.defaults.baseURL = ''
   },
   methods: {
     setAuth: function () {
