@@ -43,6 +43,7 @@
         <vc-button v-for="item in sitess" :key="item">{{item}}</vc-button>
       </ul>
     </div>
+    <vc-button @click="logData">logData</vc-button>
   </div>
 </template>
 
@@ -55,7 +56,7 @@ export default {
       htmlMsg: '<span class="clor-red">菜鸟教程(会替换原子节点,不会处理属性绑定){{helloMsg}}</span>',
       disableInputMsg: false,
       helloMsg: 'hello vue',
-      site: { name: '菜鸟教程', url: 'http://www.runoob.com' },
+      site: { name: '菜鸟教程', url: 'http://www.runoob.com', haha: {value: 176} },
       sitess: ['阿里巴巴##http://www.alibaba.com', '百度##http://www.baidu.com']
     }
   },
@@ -69,6 +70,9 @@ export default {
     setSiteMsg: function () {
       var tmpindex = Math.random() * 10 > 5 ? 0 : 1
       this.siteMsg = this.sitess[tmpindex]
+    },
+    logData: function () {
+      console.log(this.$data)
     }
   },
   filters: {

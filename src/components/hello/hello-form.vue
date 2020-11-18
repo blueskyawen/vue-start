@@ -179,6 +179,7 @@ export default {
       if (event) {
         console.log(event.target.tagName)
       }
+      console.log(this.$data)
     }
   }
 }
