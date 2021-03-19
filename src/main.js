@@ -9,6 +9,7 @@ import VueAxios from 'vue-axios'
 import vcCat from './components/vc-cat'
 import './mock/mock'
 import './assets/style.css'
+import VcCat from 'vc-shadow-cat'
 
 Vue.use(VueAxios, axios)
 Vue.use(vcCat)

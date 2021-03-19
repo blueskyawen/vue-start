@@ -15,7 +15,7 @@
           {{tabItem.label}}</router-link>
       </div>
       <div class="vc-tab-content">
-        <transition mode="out-in">
+        <transition>
           <router-view></router-view>
         </transition>
       </div>
@@ -73,14 +73,30 @@ export default {
           font-size: 14px;
           padding: 15px 30px;
           text-decoration: none;
+          position: relative;
           &:hover {
             cursor: pointer;
             background: #f2f2f2;
           }
+          &:after {
+            content: "";
+            display: inline-block;
+            width: 0;
+            background: #00cc99;
+            height: 4px;
+            position: absolute;
+            top: 100%;
+            left: 30px;
+            margin-top: -2px;
+            transition: all .5s;
+            max-width: 100%;
+          }
           &.tab-actived {
-            border-bottom: solid 4px #00cc99;
-            margin-bottom: -3px;
             color: #000;
+            &:after {
+              width: 60px;
+              left: 0
+            }
           }
         }
       }
@@ -92,14 +108,17 @@ export default {
     .opers {
       padding-left: 20px;
     }
-    .v-enter, .v-leave-to {
-      opacity: 0;
+    .v-enter {
+      transform: translateX(100%);
+    }
+    .v-leave-to {
+      transform: translateX(-100%);
     }
     .v-enter-to, .v-leave {
-      opacity: 1;
+      transform: translateX(0%);
     }
     .v-enter-active, .v-leave-active {
-      transition: all .5s linear;
+      transition: transform .5s linear;
     }
   }
 </style>

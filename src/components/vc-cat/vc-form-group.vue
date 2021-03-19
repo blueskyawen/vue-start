@@ -9,6 +9,12 @@ export default {
   name: 'vc-form-group',
   props: {
     width: {type: String, default: '470px'}
+  },
+  created() {
+    console.log(this.$slots.default)
+  },
+  mounted() {
+    console.log(this.$slots.default)
   }
 }
 </script>

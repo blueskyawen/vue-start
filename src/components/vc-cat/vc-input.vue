@@ -1,6 +1,6 @@
 <template>
   <div class="nc-form-group-item">
-    <input v-bind="$attrs" :value="value" @input="valueChange" />
+    <input v-bind="$attrs" :value="active" @input="valueChange" />
   </div>
 </template>
 
@@ -13,12 +13,17 @@ export default {
   },
   data () {
     return {
-
+      active: ""
     }
   },
   methods: {
     valueChange: function ($event) {
       this.$emit('input', $event.target.value)
+    }
+  },
+  watch: {
+    value: function (newValue, oldValue) {
+      this.active = newValue;
     }
   }
 }

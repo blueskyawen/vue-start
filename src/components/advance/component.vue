@@ -60,6 +60,14 @@
         </vc-form-control>
       </vc-form-group>
       <vc-form-group class="vc-from-group">
+        <vc-form-label class="vc-from-label">虚拟滚动</vc-form-label>
+        <vc-form-control class="vc-from-control">
+          <div class="list-group" @scroll="handleScroll()">
+            <div class="list-item" v-for="num of virtualNums" :key="num">{{num}}</div>
+          </div>
+        </vc-form-control>
+      </vc-form-group>
+      <vc-form-group class="vc-from-group">
         <label class="vc-from-label"></label>
         <vc-form-control class="vc-from-control">
           <vc-button @click="login">登录</vc-button>
@@ -100,7 +108,14 @@ export default {
         {value: 'watermelon', name: '西瓜', checked: false}
       ],
       selectedLikes: ['fish'],
-      isAggre: [true, false, true]
+      isAggre: [true, false, true],
+      numList: [],
+      virtualNums: []
+    }
+  },
+  created: function () {
+    for (let i=0; i < 1000; i++) {
+      this.numList.push(i)
     }
   },
   computed: {
@@ -111,6 +126,9 @@ export default {
   methods: {
     login: function () {
       alert('===login===')
+    },
+    handleScroll: function (e) {
+      console.log(e.target.nodeName)
     }
   }
 }
@@ -125,5 +143,20 @@ export default {
   }
   .vc-from-group .vc-from-control {
     width: 80%;
+  }
+  .list-group {
+    height: 200px;
+    border: solid 1px #666;
+    overflow-y: auto;
+  }
+  .list-group .list-item {
+    height: 30px;
+    border-top: solid 1px #999;
+    line-height: 30px;
+    padding-left: 30px;
+    box-sizing: border-box;
+  }
+  .list-group .list-item:first-child {
+    border-top: none;
   }
 </style>

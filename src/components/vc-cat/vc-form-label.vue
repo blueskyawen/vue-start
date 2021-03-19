@@ -9,7 +9,13 @@
 <script>
 export default {
   name: 'vc-form-label',
-  props: ['height']
+  props: ['height'],
+  created() {
+    console.log(this.$slots.default)
+  },
+  mounted() {
+    console.log(this.$slots.default)
+  }
 }
 </script>
 

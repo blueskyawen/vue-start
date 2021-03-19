@@ -11,7 +11,7 @@
         <router-link class="show-item" :to="`/advance/herolist?auth=${this.auth}`">HeroList</router-link>
       </div>
       <div class="hero-content">
-        <router-view></router-view>
+        <router-view title="cccc"></router-view>
       </div>
     </div>
   </div>
