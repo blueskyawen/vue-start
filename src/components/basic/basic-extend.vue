@@ -264,6 +264,8 @@ export default {
   },
   methods: {
     startMix: function () {
+      this.site.hahaList.push(999)
+      this.site.title = '大娟'
       console.log('basicExtend --- startMix')
     }
   },

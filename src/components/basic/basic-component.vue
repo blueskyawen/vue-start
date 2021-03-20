@@ -7,15 +7,19 @@
         <global-compt-1></global-compt-1>
         <div class="fenge"></div>
         <h4>2. 全局组件互相引用, 事件通信</h4>
-        <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt01="handleEventCompt1"
+        <p>使用方法名只能获取自定义事件的第一个传参，$event的值是第一个参数的值</p>
+        <global-compt-2 :message="msg1.text" :num="msg1.num" v-on:eventCompt01="handleEventCompt1" @focus="foucsComp4"
+                        @click="handleEventCompt2" id="啊啊啊"
                         @eventCompt02="handleEventCompt2" @eventCompt03="handleEventCompt3"></global-compt-2>
         <p>msg2: {{msg2}}</p>
         <div class="fenge"></div>
         <h4>3. 双向绑定-emit-update:prop, 修饰符.sync</h4>
+        <p>绑定对象：v-bind.sync=personObj </p>
         <global-compt-3 v-bind:counter.sync="clickCounter" v-bind.sync="personObj"></global-compt-3>
         <p>clickCounter: {{clickCounter}}; personObj: {{personObj}}</p>
         <div class="fenge"></div>
         <h4>4. props校验, 原生事件绑定到组件</h4>
+        <p>使用inheritAttrs: false，可以在组件内处理添加到组件名上的原生事件，从而触发父组件的事件处理</p>
         <global-compt-4 prop-c="hello vue" :prop-e="num" :propA="1024" @focus="foucsComp4"></global-compt-4>
         <div class="fenge"></div>
         <h4>5. 动态组件, 使用is="componentName"</h4>
@@ -75,6 +79,7 @@ Vue.component('global-compt-1', {
   template: '<h3 v-vc-focus>global-component01</h3>'
 })
 Vue.component('global-compt-2', {
+  inheritAttrs: false,
   props: ['message', 'num'],
   data () {
     return {
@@ -93,7 +98,7 @@ Vue.component('global-compt-2', {
     }
   },
   template: '<div><h3>{{name}}: {{message + num}}</h3>' +
-    '<h3>styleName-动态属性名,clickName1-动态事件名</h3>' +
+    '<h3>styleName-动态属性名,clickName1-动态事件名 </h3><p>使用方式：:[styleName]="btnStyle" @[clickName1]="emitEvent1"</p>' +
     '<global-compt-1></global-compt-1><button :[styleName]="btnStyle" @[clickName1]="emitEvent1">Event-no-emit-value</button>' +
     '<button :style="btnStyle" @click="emitEvent2">Event2-emit1-values</button>' +
     '<button :style="btnStyle" @click="emitEvent3">Event2-emit2-values</button></div>',
@@ -106,6 +111,8 @@ Vue.component('global-compt-2', {
     },
     emitEvent3: function () {
       this.$emit('eventCompt03', 666, 'ABC')
+      console.log(this.$attrs)
+      console.log(this.$listeners)
     }
   }
 })
@@ -231,10 +238,10 @@ export default {
     'compt-cc': comptCC
   },
   methods: {
-    handleEventCompt1: function () {
+    handleEventCompt1: function ($event) {
       alert('React Event compt2')
     },
-    handleEventCompt2: function (value1, value2) {
+    handleEventCompt2: function ($event, value1, value2) {
       alert('React Event2 compt2: ' + value1 + value2)
     },
     handleEventCompt3: function ($event) {

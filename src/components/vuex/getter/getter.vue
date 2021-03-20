@@ -7,6 +7,7 @@
       <vc-button :type="'cancel'" @click="addNums">addNums</vc-button>
       <vc-button :type="'cancel'" @click="delNumIt">delNums</vc-button>
       <vc-button :type="'cancel'" @click="reverceNums">reverceNums</vc-button>
+      <vc-button :type="'cancel'" @click="addNums22">addNums22</vc-button>
     </div>
     <hr/>
     <child-state1></child-state1>
@@ -80,7 +81,12 @@ export default {
     },
     ...mapMutations([
       'addNums', 'reverceNums', 'delNums'
-    ])
+    ]),
+    ...mapMutations({
+      'addNums22': function (commit) {
+        commit('addNums')
+      }
+    })
   }
 }
 </script>
