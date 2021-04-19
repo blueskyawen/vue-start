@@ -10,10 +10,7 @@ import vcCat from './components/vc-cat'
 import './mock/mock'
 import './assets/style.css'
 import VcCat from 'vc-shadow-cat'
-<<<<<<< Updated upstream
-=======
 import 'vc-shadow-cat/vc-shadow-cat.css'
->>>>>>> Stashed changes
 
 Vue.use(VueAxios, axios)
 Vue.use(vcCat)

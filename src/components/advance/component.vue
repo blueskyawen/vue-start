@@ -114,7 +114,7 @@ export default {
     }
   },
   created: function () {
-    for (let i=0; i < 1000; i++) {
+    for (let i = 0; i < 1000; i++) {
       this.numList.push(i)
     }
   },

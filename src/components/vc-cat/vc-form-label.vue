@@ -10,10 +10,10 @@
 export default {
   name: 'vc-form-label',
   props: ['height'],
-  created() {
+  created () {
     console.log(this.$slots.default)
   },
-  mounted() {
+  mounted () {
     console.log(this.$slots.default)
   }
 }

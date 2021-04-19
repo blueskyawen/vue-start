@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import moduleA from './modules/module_a.js'
+import moduleB from './modules/module_b.js'
+import moduleC from './modules/module_c.js'
 
 Vue.use(Vuex)
 
@@ -15,6 +18,9 @@ const store = new Vuex.Store({
     count: 0
   },
   getters: {
+    city_name: (state) => {
+      return '北京'
+    },
     personInfo: state => {
       return `name=${state.person.name} , age=${state.person.age} , weight=${state.person.weight}`
     },
@@ -63,6 +69,11 @@ const store = new Vuex.Store({
     reverceNums: (state) => {
       state.nums.reverse()
     }
+  },
+  modules: {
+    moduleB,
+    moduleA,
+    moduleC
   }
 })
 
