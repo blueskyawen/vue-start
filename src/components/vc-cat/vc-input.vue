@@ -13,7 +13,7 @@ export default {
   },
   data () {
     return {
-      active: ""
+      active: ''
     }
   },
   methods: {
@@ -23,7 +23,7 @@ export default {
   },
   watch: {
     value: function (newValue, oldValue) {
-      this.active = newValue;
+      this.active = newValue
     }
   }
 }

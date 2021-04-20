@@ -21,6 +21,8 @@ import NotFound from '@/components/not-found'
 import asyncLoading from '@/components/vc-cat/vc-async-loading.vue'
 import asyncError from '@/components/vc-cat/vc-async-error.vue'
 
+import editor from '@/components/editor/editor.vue'
+
 Vue.use(VueRouter)
 
 function lazyLoadView () {
@@ -91,6 +93,10 @@ const routes = [
       { path: 'action', component: action },
       { path: 'module', component: module }
     ]
+  },
+  {
+    path: '/editor',
+    component: editor
   },
   { path: '*', component: NotFound }
 ]

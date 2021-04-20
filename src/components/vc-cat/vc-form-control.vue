@@ -7,14 +7,14 @@
 <script>
 export default {
   name: 'vc-form-control',
-  created() {
+  created () {
     console.log(this.$slots.default)
   },
-  mounted() {
+  mounted () {
     console.log(this.$slots.default[0])
     setTimeout(() => {
       console.log(this.$slots.default[0])
-    }, 5000);
+    }, 5000)
   }
 }
 </script>

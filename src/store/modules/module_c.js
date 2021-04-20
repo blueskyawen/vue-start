@@ -17,7 +17,7 @@ export default {
     },
     full_name: (state, getters, rootState, rootGetters) => {
       return state.city + getters.site_name
-    },
+    }
   },
   mutations: {
     SET_SITE (state, site) {
