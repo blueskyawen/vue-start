@@ -13,7 +13,7 @@
           <Tinymce v-if="curTab === 'Tinymce'"></Tinymce>
           <Tinymce v-else-if="curTab === 'quill'" :mytitle="title"></Tinymce>
           <Tinymce v-else-if="curTab === 'wangEditor'"></Tinymce>
-          <Tinymce v-else-if="curTab === 'mavonEditor'"></Tinymce>
+          <mavon-editor-demo v-else-if="curTab === 'mavonEditor'"></mavon-editor-demo>
           <Tinymce v-else-if="curTab === 'UEditor'"></Tinymce>
         </transition>
       </div>
@@ -22,7 +22,9 @@
 </template>
 
 <script>
-  import Tinymce from './Tinymce.vue'
+import Tinymce from './Tinymce.vue'
+import mavonEditorDemo from './mavonEditor.vue'
+
 export default {
   name: "editor",
   data () {
@@ -38,7 +40,8 @@ export default {
     }
   },
   components: {
-    Tinymce
+    Tinymce,
+    mavonEditorDemo
   },
   beforeCreate: function () {
     console.log('Basic ===== beforeCreate')
