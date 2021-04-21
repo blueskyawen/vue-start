@@ -10,6 +10,7 @@
       ref="md"
       style="height: 100%"
       :ishljs="true"
+      :boxShadow="false"
       v-model="value"
       @change="chang"
       @imgAdd="imgAdd"
@@ -103,7 +104,12 @@ export default {
 /* //导入对应样式表
 import 'mavon-editor/dist/css/index.css';
 //要显示的div设置类
-<div  class="markdown-body"   v-html="markdown_code"/> */
+<div  class="markdown-body"   v-html="markdown_code"/>
+//这里的newDate[0].content就是取出来的md格式的文本内容
+this.markdown_code=marked(newData[0].content||‘‘,{
+   sanitize:true
+})
+*/
 </script>
 
 <style scoped>
