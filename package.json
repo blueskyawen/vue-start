@@ -16,15 +16,26 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^27.1.0",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^27.1.0",
+    "@ckeditor/ckeditor5-vue2": "^1.0.5",
+    "@packy-tang/vue-tinymce": "^1.1.1",
+    "@tinymce/tinymce-vue": "^3.2.8",
+    "@toast-ui/vue-editor": "^2.5.2",
     "axios": "^0.19.0",
+    "highlight.js": "^10.7.2",
     "marked": "^2.0.3",
     "mavon-editor": "^2.9.1",
     "mockjs": "^1.0.1-beta3",
+    "tinymce": "^5.7.1",
     "velocity-animate": "^1.5.2",
     "vue": "^2.6.10",
     "vue-axios": "^2.1.4",
+    "vue-meditor": "^2.1.1",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "wangeditor": "^4.6.15"
   },
   "devDependencies": {
     "@vue/server-test-utils": "^1.0.0-beta.30",

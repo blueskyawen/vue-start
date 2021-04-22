@@ -22,6 +22,7 @@ import asyncLoading from '@/components/vc-cat/vc-async-loading.vue'
 import asyncError from '@/components/vc-cat/vc-async-error.vue'
 
 import editor from '@/components/editor/editor.vue'
+import ckeditor5 from '@/components/ckeditor5/index.vue'
 
 Vue.use(VueRouter)
 
@@ -97,6 +98,10 @@ const routes = [
   {
     path: '/editor',
     component: editor
+  },
+  {
+    path: '/ckeditor5',
+    component: ckeditor5
   },
   { path: '*', component: NotFound }
 ]

@@ -20,18 +20,9 @@
           appear-to-class="tabShow-enter-to"
           appear-active-class="tabShow-enter-active"
         >
-          <vue-tui-editor-demo v-if="curTab === 'tui'"></vue-tui-editor-demo>
-          <vue-tinymce-demo v-if="curTab === 'VueTinymce'"></vue-tinymce-demo>
-          <vue-quil-editor-demo
-            v-else-if="curTab === 'quill'"
-            :mytitle="title"
-          ></vue-quil-editor-demo>
-          <tinymce-vue-demo v-if="curTab === 'TinymceVue'"></tinymce-vue-demo>
-          <wang-editor-demo v-else-if="curTab === 'wangEditor'"></wang-editor-demo>
-          <mavon-editor-demo
-            v-else-if="curTab === 'mavonEditor'"
-          ></mavon-editor-demo>
-          <vue-markdown v-else-if="curTab === 'vueMarkdown'"></vue-markdown>
+          <ckeditor-5-classical v-if="curTab === 'classical'"></ckeditor-5-classical>
+          <ckeditor-5-doc v-if="curTab === 'doc'"></ckeditor-5-doc>
+          <ckeditor-5-doc-2 v-if="curTab === 'doc2'"></ckeditor-5-doc-2>
         </transition>
       </div>
     </div>
@@ -39,38 +30,25 @@
 </template>
 
 <script>
-import VueTuiEditorDemo from "./VueTuiEditorDemo.vue";
-import mavonEditorDemo from "./mavonEditor.vue";
-import VueQuilEditorDemo from "./vueQuilEditorDemo.vue";
-import VueTinymceDemo from "./VueTinymceDemo.vue";
-import TinymceVueDemo from "./TinymceVueDemo.vue";
-import WangEditorDemo from './WangEditorDemo.vue';
-import vueMarkdown from './VueMarkdown.vue';
-
+import CKEditor5Classical from './CKEditor5Classical.vue'
+import CKEditor5Doc from './CKEditor5Doc.vue'
+import CKEditor5Doc2 from './CKEditor5Doc2.vue'
 export default {
-  name: "editor",
+  name: "ckeditor5",
   data() {
     return {
       tabItems: [
-        { label: "VueTuiEditor", value: "tui", selected: false },
-        { label: "VueTinymce", value: "VueTinymce", selected: false },
-        { label: "vueQuillEditor", value: "quill", selected: false },
-        { label: "TinymceVue", value: "TinymceVue", selected: false },
-        { label: "wangEditor", value: "wangEditor", selected: false },
-        { label: "mavonEditor", value: "mavonEditor", selected: false },
-        { label: "vueMarkdown", value: "vueMarkdown", selected: false },
+        { label: "经典模式", value: "classical", selected: false },
+        { label: "文档模式", value: "doc", selected: false },
+        { label: "文档模式2", value: "doc2", selected: false },
       ],
-      curTab: "tui",
+      curTab: "classical",
     };
   },
   components: {
-    VueTuiEditorDemo,
-    mavonEditorDemo,
-    VueQuilEditorDemo,
-    VueTinymceDemo,
-    TinymceVueDemo,
-    WangEditorDemo,
-    vueMarkdown
+    'ckeditor-5-classical': CKEditor5Classical,
+    'ckeditor-5-doc': CKEditor5Doc,
+    'ckeditor-5-doc-2': CKEditor5Doc2
   },
   methods: {
     selectTab: function (value) {

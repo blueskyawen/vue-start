@@ -1,6 +1,6 @@
 <template>
   <div class="mavonEditor">
-    <h5>mavonEditor</h5>
+    <h5>mavonEditor-MarkDown</h5>
     <!--:ishljs为高亮-->
     <!--:v-model获取到编辑的 Markdown代码，需要用marked解析成html-->
     <!--change为更改事件，一更改触发-->
@@ -11,6 +11,7 @@
       style="height: 100%"
       :ishljs="true"
       :boxShadow="false"
+      :previewBackground="'#fff'"
       v-model="value"
       @change="chang"
       @imgAdd="imgAdd"
