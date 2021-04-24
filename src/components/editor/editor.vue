@@ -52,13 +52,13 @@ export default {
   data() {
     return {
       tabItems: [
+        { label: "mavonEditor", value: "mavonEditor", selected: false },
         { label: "VueTuiEditor", value: "tui", selected: false },
-        { label: "VueTinymce", value: "VueTinymce", selected: false },
-        { label: "vueQuillEditor", value: "quill", selected: false },
+        // { label: "VueTinymce", value: "VueTinymce", selected: false },
         { label: "TinymceVue", value: "TinymceVue", selected: false },
         { label: "wangEditor", value: "wangEditor", selected: false },
-        { label: "mavonEditor", value: "mavonEditor", selected: false },
-        { label: "vueMarkdown", value: "vueMarkdown", selected: false },
+        { label: "vueQuillEditor", value: "quill", selected: false },
+        // { label: "vueMarkdown", value: "vueMarkdown", selected: false },
       ],
       curTab: "tui",
     };
