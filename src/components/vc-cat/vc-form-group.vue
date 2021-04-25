@@ -11,10 +11,10 @@ export default {
     width: {type: String, default: '470px'}
   },
   created () {
-    console.log(this.$slots.default)
+    // console.log(this.$slots.default)
   },
   mounted () {
-    console.log(this.$slots.default)
+    // console.log(this.$slots.default)
   }
 }
 </script>

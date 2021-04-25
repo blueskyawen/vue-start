@@ -67,11 +67,11 @@ Vue.mixin({
     }
   },
   created: function () {
-    console.log('全局混入1 --- created')
+    // console.log('全局混入1 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('全局混入1 --- startMix')
+      // console.log('全局混入1 --- startMix')
     }
   },
   computed: {
@@ -103,14 +103,14 @@ Vue.mixin({
     }
   },
   created: function () {
-    console.log('全局混入2 --- created')
+    // console.log('全局混入2 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('全局混入2 --- startMix')
+      // console.log('全局混入2 --- startMix')
     },
     hello: function () {
-      console.log('全局混入2 --- hello')
+      // console.log('全局混入2 --- hello')
     }
   },
   computed: {
@@ -138,14 +138,14 @@ var localMix3 = {
     }
   },
   created: function () {
-    console.log('实例混入3 --- created')
+    // console.log('实例混入3 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('实例混入3 --- startMix')
+      // console.log('实例混入3 --- startMix')
     },
     hello: function () {
-      console.log('实例混入3 --- hello')
+      // console.log('实例混入3 --- hello')
     }
   },
   computed: {
@@ -177,14 +177,14 @@ var localMix2 = {
     }
   },
   created: function () {
-    console.log('实例混入2 --- created')
+    // console.log('实例混入2 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('实例混入2 --- startMix')
+      // console.log('实例混入2 --- startMix')
     },
     hello: function () {
-      console.log('实例混入2 --- hello')
+      // console.log('实例混入2 --- hello')
     }
   },
   computed: {
@@ -220,14 +220,14 @@ var localMix1 = {
   },
   mixins: [localMix2],
   created: function () {
-    console.log('实例混入1 --- created')
+    // console.log('实例混入1 --- created')
   },
   methods: {
     startMix: function () {
-      console.log('实例混入1 --- startMix')
+      // console.log('实例混入1 --- startMix')
     },
     hello: function () {
-      console.log('实例混入1 --- hello')
+      // console.log('实例混入1 --- hello')
     }
   },
   filters: {
@@ -260,13 +260,13 @@ export default {
   },
   mixins: [localMix3, localMix1],
   created: function () {
-    console.log('basicExtend --- created')
+    // console.log('basicExtend --- created')
   },
   methods: {
     startMix: function () {
       this.site.hahaList.push(999)
       this.site.title = '大娟'
-      console.log('basicExtend --- startMix')
+      // console.log('basicExtend --- startMix')
     }
   },
   computed: {

@@ -177,9 +177,9 @@ export default {
     submit: function (event) {
       alert(JSON.stringify(this.formData, null, 4))
       if (event) {
-        console.log(event.target.tagName)
+        // console.log(event.target.tagName)
       }
-      console.log(this.$data)
+      // console.log(this.$data)
     }
   }
 }

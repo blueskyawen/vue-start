@@ -123,12 +123,12 @@ export default {
   },
   methods: {
     beforeEnter: function (el) {
-      console.log('beforeEnter')
+      // console.log('beforeEnter')
       el.style.opacity = 0
       el.style.transformOrigin = 'left'
     },
     enter: function (el, done) {
-      console.log('enter')
+      // console.log('enter')
       /* el.style.transition = 'all 1s'
       setTimeout(() => {
         el.style.opacity = 1
@@ -143,18 +143,18 @@ export default {
       Velocity(el, { fontSize: '1em' }, { complete: done })
     },
     afterEnter: function (el) {
-      console.log('afterEnter')
+      // console.log('afterEnter')
     },
     enterCancelled: function (el) {
-      console.log('enterCancelled')
+      // console.log('enterCancelled')
     },
     beforeLeave: function (el) {
-      console.log('beforeLeave')
+      // console.log('beforeLeave')
     },
     // 此回调函数是可选项的设置
     // 与 CSS 结合时使用
     leave: function (el, done) {
-      console.log('Leave')
+      // console.log('Leave')
       Velocity(el, { translateX: '15px', rotateZ: '50deg', color: '#3399ff' }, { duration: 1000 })
       Velocity(el, { rotateZ: '100deg' }, { loop: 2 })
       Velocity(el, {
@@ -165,11 +165,11 @@ export default {
       }, { complete: done })
     },
     afterLeave: function (el) {
-      console.log('afterLeave')
+      // console.log('afterLeave')
     },
     // leaveCancelled 只用于 v-show 中
     leaveCancelled: function (el) {
-      console.log('leaveCancelled')
+      // console.log('leaveCancelled')
     },
     saveIt: function () {
       if (this.isEditing) return

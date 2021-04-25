@@ -72,7 +72,7 @@ export default {
       this.siteMsg = this.sitess[tmpindex]
     },
     logData: function () {
-      console.log(this.$data)
+      // console.log(this.$data)
     }
   },
   filters: {

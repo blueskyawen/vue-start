@@ -20,6 +20,11 @@ import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 Vue.use(mavonEditor)
 
+// toast-ui/vue-editor - markdown
+import 'codemirror/lib/codemirror.css';
+import '@toast-ui/editor/dist/toastui-editor.css';
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+
 import VueQuillEditor from 'vue-quill-editor'
 // require styles
 import 'quill/dist/quill.core.css'
@@ -31,9 +36,6 @@ import VueTinymce from "@packy-tang/vue-tinymce"
 Vue.use(VueTinymce)
 
 import 'highlight.js/styles/monokai-sublime.css'
-
-import 'codemirror/lib/codemirror.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
 
 /* import CKEditor from '@ckeditor/ckeditor5-vue2';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';

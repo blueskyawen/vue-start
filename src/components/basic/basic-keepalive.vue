@@ -44,10 +44,10 @@ Vue.component('global-compt-keep-1', {
     <p>Compt--tip: {{tip}}</p></div>
   `,
   activated: function () {
-    console.log('activated == global-compt-keep-1')
+    // console.log('activated == global-compt-keep-1')
   },
   deactivated: function () {
-    console.log('deactivated == global-compt-keep-1')
+    // console.log('deactivated == global-compt-keep-1')
   }
 })
 var localComptKeep2 = {

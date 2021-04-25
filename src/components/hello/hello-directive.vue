@@ -136,7 +136,7 @@ export default {
     },
     delObjectAtrr: function () {
       this.$delete(siteData, 'url')
-      // console.log(this)
+      // // console.log(this)
     },
     switchInput: function () {
       this.showUseName = !this.showUseName
@@ -156,7 +156,7 @@ export default {
       this.price = this.num * 2300
     },
     numList: function () {
-      console.log('addNumlist')
+      // console.log('addNumlist')
     }
   }
 }

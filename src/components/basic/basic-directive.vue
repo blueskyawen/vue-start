@@ -40,39 +40,39 @@ Vue.directive('vc-focus', {
 })
 Vue.directive('focus2', {
   bind: function (el, binding) {
-    console.log('focus2 ***** bind')
-    console.log(binding)
+    // console.log('focus2 ***** bind')
+    // console.log(binding)
   },
   inserted: function (el, binding, vnode, oldVnode) {
-    console.log('focus2 ***** inserted')
-    console.log(binding)
-    console.log(vnode)
-    console.log(oldVnode)
+    // console.log('focus2 ***** inserted')
+    // console.log(binding)
+    // console.log(vnode)
+    // console.log(oldVnode)
     el.style.color = binding.arg
     el.style.fontSize = binding.value.fontsizee
     el.value = binding.value.text
     el.focus()
   },
   update: function (el, binding, vnode, oldVnode) {
-    console.log('focus2 ***** update')
-    console.log(binding)
-    console.log(vnode)
-    console.log(oldVnode)
+    // console.log('focus2 ***** update')
+    // console.log(binding)
+    // console.log(vnode)
+    // console.log(oldVnode)
     el.style.fontSize = binding.value.fontsizee
   },
   componentUpdated: function (el, binding, vnode, oldVnode) {
-    console.log('focus2 ***** componentUpdated')
-    console.log(binding)
+    // console.log('focus2 ***** componentUpdated')
+    // console.log(binding)
   },
   unbind: function (el, binding) {
-    console.log('focus2 ***** unbind')
-    console.log(binding)
+    // console.log('focus2 ***** unbind')
+    // console.log(binding)
   }
 })
 // 局部指令
 var localFocus = {
   bind: function (el, binding) {
-    console.log('localFocus ***** bind')
+    // console.log('localFocus ***** bind')
     el.style.color = binding.value.color
     el.style.fontSize = binding.value.fontsizee
     el.value = binding.value.text
@@ -80,7 +80,7 @@ var localFocus = {
     el.focus()
   },
   inserted: function (el, binding, vnode, oldVnode) {
-    console.log('local_focus ***** inserted')
+    // console.log('local_focus ***** inserted')
     /* el.style.color = binding.value.color
     el.style.fontSize = binding.value.fontsizee
     el.value = binding.value.text
@@ -113,33 +113,33 @@ export default {
     localFocus
   },
   beforeCreate: function () {
-    console.log('basicDirective ===== beforeCreate===start')
-    console.log(this && this.mytitle)
-    console.log('basicDirective ===== beforeCreate===end')
+    // console.log('basicDirective ===== beforeCreate===start')
+    // console.log(this && this.mytitle)
+    // console.log('basicDirective ===== beforeCreate===end')
   },
   created: function () {
-    console.log('basicDirective ===== created')
-    console.log(this.mytitle)
+    // console.log('basicDirective ===== created')
+    // console.log(this.mytitle)
   },
   beforeMount: function () {
-    console.log('basicDirective ===== beforeMount')
+    // console.log('basicDirective ===== beforeMount')
   },
   mounted: function () {
-    console.log('basicDirective ===== mounted')
+    // console.log('basicDirective ===== mounted')
   },
   beforeUpdate: function () {
-    console.log('basicDirective ===== beforeUpdate-start')
-    console.log(this.mytitle)
-    console.log('basicDirective ===== beforeUpdate-end')
+    // console.log('basicDirective ===== beforeUpdate-start')
+    // console.log(this.mytitle)
+    // console.log('basicDirective ===== beforeUpdate-end')
   },
   updated: function () {
-    console.log('basicDirective ===== updated')
+    // console.log('basicDirective ===== updated')
   },
   beforeDestroy: function () {
-    console.log('basicDirective ===== beforeDestroy')
+    // console.log('basicDirective ===== beforeDestroy')
   },
   destroyed: function () {
-    console.log('basicDirective ===== destroyed')
+    // console.log('basicDirective ===== destroyed')
   },
   methods: {
     changeFontSize: function () {

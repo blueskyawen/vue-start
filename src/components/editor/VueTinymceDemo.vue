@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     setup(editor) {
-      console.log(editor);
+      // console.log(editor);
     },
   },
 };

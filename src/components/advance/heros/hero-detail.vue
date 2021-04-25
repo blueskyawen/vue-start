@@ -50,21 +50,21 @@ export default {
     // this.getHero(this.$route.params.id)
   },
   beforeRouteEnter: function (to, from, next) {
-    console.log('beforeRouteEnter')
-    console.log(to)
+    // console.log('beforeRouteEnter')
+    // console.log(to)
     Vue.axios
       .get('api/advance/heroDetail/' + to.params.id)
       .then(response => {
         next(vm => vm.setHeroData(response.data.hero))
       })
       .catch(error => {
-        console.log(error)
+        // console.log(error)
         next('/advance')
       })
   },
   beforeRouteUpdate: function (to, from, next) {
-    console.log('beforeRouteUpdate')
-    console.log(to)
+    // console.log('beforeRouteUpdate')
+    // console.log(to)
     Vue.axios
       .get('api/advance/heroDetail/' + to.params.id)
       .then(response => {
@@ -72,13 +72,13 @@ export default {
         next()
       })
       .catch(error => {
-        console.log(error)
+        // console.log(error)
         next('/advance')
       })
   },
   beforeRouteLeave: function (to, from, next) {
-    console.log('beforeRouteLeave')
-    console.log(to)
+    // console.log('beforeRouteLeave')
+    // console.log(to)
     next()
   },
   methods: {

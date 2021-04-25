@@ -128,7 +128,7 @@ export default {
       alert('===login===')
     },
     handleScroll: function (e) {
-      console.log(e.target.nodeName)
+      // console.log(e.target.nodeName)
     }
   }
 }

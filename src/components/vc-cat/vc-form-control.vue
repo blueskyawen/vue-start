@@ -8,12 +8,12 @@
 export default {
   name: 'vc-form-control',
   created () {
-    console.log(this.$slots.default)
+    // console.log(this.$slots.default)
   },
   mounted () {
-    console.log(this.$slots.default[0])
+    // console.log(this.$slots.default[0])
     setTimeout(() => {
-      console.log(this.$slots.default[0])
+      // console.log(this.$slots.default[0])
     }, 5000)
   }
 }

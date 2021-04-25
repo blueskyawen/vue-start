@@ -118,9 +118,9 @@ const router = new VueRouter({
   }
 })
 router.beforeEach((to, from, next) => {
-  console.log('route beforeEach 01')
-  console.log(to)
-  console.log(from)
+  // console.log('route beforeEach 01')
+  // console.log(to)
+  // console.log(from)
   if (to.matched.some(item => item.meta.requireAuth)) {
     if (from.path === '/advance' && to.path === '/advance/herolist' && to.query.auth === 'false') {
       alert('have to set auth to true !')
@@ -133,22 +133,22 @@ router.beforeEach((to, from, next) => {
   }
 })
 router.beforeEach((to, from, next) => {
-  console.log('route beforeEach 02')
+  // console.log('route beforeEach 02')
   next()
 })
 router.beforeResolve((to, from, next) => {
-  console.log('route beforeResolve 01')
+  // console.log('route beforeResolve 01')
   next()
 })
 router.beforeResolve((to, from, next) => {
-  console.log('route beforeResolve 02')
+  // console.log('route beforeResolve 02')
   next()
 })
 router.afterEach((to, from, next) => {
-  console.log('route afterEach 01')
+  // console.log('route afterEach 01')
 })
 router.afterEach((to, from, next) => {
-  console.log('route afterEach 02')
+  // console.log('route afterEach 02')
 })
 
 export default router

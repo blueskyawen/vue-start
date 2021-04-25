@@ -65,7 +65,7 @@ Vue.directive('vc-focus', {
 // 局部指令
 var localFocus = {
   inserted: function (el, binding, vnode, oldVnode) {
-    console.log('local_focus ***** inserted')
+    // console.log('local_focus ***** inserted')
     el.style.color = binding.value.color
     el.style.fontSize = binding.value.fontsizee
     el.value = binding.value.text
@@ -111,8 +111,8 @@ Vue.component('global-compt-2', {
     },
     emitEvent3: function () {
       this.$emit('eventCompt03', 666, 'ABC')
-      console.log(this.$attrs)
-      console.log(this.$listeners)
+      // console.log(this.$attrs)
+      // console.log(this.$listeners)
     }
   }
 })

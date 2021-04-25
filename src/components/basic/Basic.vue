@@ -67,34 +67,34 @@ export default {
     basicKeepAlive,
     basicAsync},
   beforeCreate: function () {
-    console.log('Basic ===== beforeCreate')
+    // console.log('Basic ===== beforeCreate')
   },
   created: function () {
-    console.log('Basic ===== created')
+    // console.log('Basic ===== created')
   },
   beforeMount: function () {
-    console.log('Basic ===== beforeMount')
+    // console.log('Basic ===== beforeMount')
   },
   mounted: function () {
-    console.log('Basic ===== mounted')
+    // console.log('Basic ===== mounted')
     this.$nextTick(function () {
-      console.log('all components mounted')
+      // console.log('all components mounted')
     })
   },
   beforeUpdate: function () {
-    console.log('Basic ===== beforeUpdate')
+    // console.log('Basic ===== beforeUpdate')
   },
   updated: function () {
-    console.log('Basic ===== updated')
+    // console.log('Basic ===== updated')
     this.$nextTick(function () {
-      console.log('all components updated')
+      // console.log('all components updated')
     })
   },
   beforeDestroy: function () {
-    console.log('Basic ===== beforeDestroy')
+    // console.log('Basic ===== beforeDestroy')
   },
   destroyed: function () {
-    console.log('Basic ===== destroyed')
+    // console.log('Basic ===== destroyed')
   },
   methods: {
     selectTab: function (value) {

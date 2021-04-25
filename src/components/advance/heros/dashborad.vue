@@ -31,15 +31,15 @@ export default {
     this.getHeros()
   },
   beforeRouteEnter: function (to, from, next) {
-    console.log('dashborad-beforeRouteEnter')
+    // console.log('dashborad-beforeRouteEnter')
     next()
   },
   beforeRouteUpdate: function (to, from, next) {
-    console.log('dashborad-beforeRouteUpdate')
+    // console.log('dashborad-beforeRouteUpdate')
     next()
   },
   beforeRouteLeave: function (to, from, next) {
-    console.log('dashborad-beforeRouteLeave')
+    // console.log('dashborad-beforeRouteLeave')
     next()
   },
   methods: {

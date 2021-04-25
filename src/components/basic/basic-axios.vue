@@ -114,7 +114,7 @@ export default {
     addVm: function () {
       this.isLoading = true
       Vue.axios.post('vms/add', this.addVmData).then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         this.operSuccess()
         this.getVms()
       }).catch((error) => {
@@ -127,7 +127,7 @@ export default {
     delVm: function () {
       this.isLoading = true
       this.$http.delete(`vms/${this.delId}`).then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         this.operSuccess()
         this.getVms()
       }).catch((error) => {
@@ -155,7 +155,7 @@ export default {
     modVm: function () {
       this.isLoading = true
       this.$http.put(`vms/${this.editVmData.id}`, {name: this.editVmData.name}).then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         this.operSuccess()
         this.getVms()
       }).catch((error) => {
