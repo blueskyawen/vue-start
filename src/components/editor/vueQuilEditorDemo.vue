@@ -1,6 +1,7 @@
 <template>
   <div class="vueQuilEditor">
     <h5>vue-quil-editor富文本</h5>
+<!--     <textarea id="default">Hello, World!</textarea> -->
     <quill-editor
       ref="myTextEditor"
       v-model="value"
