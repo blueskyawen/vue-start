@@ -16,6 +16,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^27.1.0",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^27.1.0",
+    "@ckeditor/ckeditor5-vue2": "^1.0.5",
     "@packy-tang/vue-tinymce": "^1.1.1",
     "@tinymce/tinymce-vue": "^3.2.8",
     "@toast-ui/vue-editor": "^2.5.2",
