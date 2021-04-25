@@ -15,8 +15,8 @@
       @stateChange="onEditorStateChange"
     ></tui-editor>
     <tui-viewer
-      v-show="showViewer"
-      :initialValue="value"
+      v-if="showViewer"
+      :initialValue="content"
       height="500px"
       @load="onEditorLoad"
       @focus="onEditorFocus"
@@ -29,18 +29,18 @@
 </template>
 
 <script>
-import { Editor } from "@toast-ui/vue-editor";
-import { Viewer } from "@toast-ui/vue-editor";
+import '@toast-ui/editor/dist/toastui-editor-viewer.css';
+import { Editor, Viewer } from "@toast-ui/vue-editor";
 import VcButton from "../vc-cat/vc-button.vue";
 export default {
   name: "VueTuiEditorDemo",
   data() {
-    const { chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml } = Editor.plugin;
+    // const { chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml } = Editor.plugin;
     return {
       value: "",
       defaultOptions: {
         minHeight: "500px",
-        language: "zh-CN",
+        language: 'zh-CN',
         useCommandShortcut: false,
         useDefaultHTMLSanitizer: true,
         usageStatistics: true,
@@ -68,9 +68,10 @@ export default {
           "codeblock",
         ],
         placeholder: '请输入内容.',
-        plugins: [[chart, chartOptions], codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]
+        // plugins: [[chart, chartOptions], codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]
       },
       showViewer: false,
+      content: ""
     };
   },
   mounted() {},
@@ -100,7 +101,11 @@ export default {
       // implement your code
     },
     saveDoc() {
-      this.showViewer = !this.showViewer;
+      this.content = this.$refs.toastuiEditor.invoke('getHtml');
+      console.log(this.content)
+      setTimeout(() => {
+        this.showViewer = !this.showViewer;
+      }, 100);
     },
   },
   components: {
