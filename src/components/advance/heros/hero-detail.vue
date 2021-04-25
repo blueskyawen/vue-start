@@ -58,7 +58,7 @@ export default {
         next(vm => vm.setHeroData(response.data.hero))
       })
       .catch(error => {
-        // console.log(error)
+        console.log(error)
         next('/advance')
       })
   },
@@ -72,7 +72,7 @@ export default {
         next()
       })
       .catch(error => {
-        // console.log(error)
+        console.log(error)
         next('/advance')
       })
   },

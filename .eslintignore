@@ -3,3 +3,6 @@
 /dist/
 /*.js
 /test/unit/coverage/
+/src/components/editor/
+/src/components/ckeditor5/
+/src/main.js

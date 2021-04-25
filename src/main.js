@@ -10,41 +10,38 @@ import vcCat from './components/vc-cat'
 import './mock/mock'
 import VcCat from 'vc-shadow-cat'
 import 'vc-shadow-cat/vc-shadow-cat.css'
-
-Vue.use(VueAxios, axios)
-Vue.use(vcCat)
-Vue.use(VcCat)
-
 // mavonEditor - markdown
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
 Vue.use(mavonEditor)
-
 // toast-ui/vue-editor - markdown
-import 'codemirror/lib/codemirror.css';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import '@toast-ui/editor/dist/toastui-editor-viewer.css';
-import '@toast-ui/editor/dist/i18n/zh-cn';
-
+import 'codemirror/lib/codemirror.css'
+import '@toast-ui/editor/dist/toastui-editor.css'
+import '@toast-ui/editor/dist/toastui-editor-viewer.css'
+import '@toast-ui/editor/dist/i18n/zh-cn'
 // VueQuillEditor - 富文本
 import VueQuillEditor from 'vue-quill-editor'
-import Quill from 'quill';
+import Quill from 'quill'
 import { container, ImageExtend, QuillWatch } from 'quill-image-extend-module'
 //import ImageResize from 'quill-image-resize-module' // 图片缩放组件。
-import { ImageDrop }  from 'quill-image-drop-module'; // 图片拖动组件。
+import { ImageDrop } from 'quill-image-drop-module' // 图片拖动组件。
 Quill.register('modules/ImageExtend', ImageExtend)
 // Quill.register('modules/imageResize', ImageResize)
-Quill.register('modules/imageDrop', ImageDrop);
+Quill.register('modules/imageDrop', ImageDrop)
 // require styles
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 Vue.use(VueQuillEditor)
 
-import VueTinymce from "@packy-tang/vue-tinymce"
+import VueTinymce from '@packy-tang/vue-tinymce'
 Vue.use(VueTinymce)
 
 import 'highlight.js/styles/monokai-sublime.css'
+
+Vue.use(VueAxios, axios)
+Vue.use(vcCat)
+Vue.use(VcCat)
 
 /* import CKEditor from '@ckeditor/ckeditor5-vue2';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';

@@ -22,10 +22,10 @@
 </template>
 
 <script>
-import { mavonEditor } from "mavon-editor";
-import marked from "marked";
+import { mavonEditor } from 'mavon-editor';
+import marked from 'marked';
 export default {
-  name: "mavonEditorDemo",
+  name: 'mavonEditorDemo',
   data() {
     return {
       value: '',
@@ -49,11 +49,11 @@ export default {
       // console.log(this.markedValue);
     },
         // 绑定@imgAdd event
-    imgAdd(pos, file) {
+    imgAdd (pos, file) {
       // 缓存图片信息（当前还是本地图片状态）
       this.imgList[pos] = file;
       // // console.log(pos)
-      // console.log("添加图片：" + this.imgList[pos]);
+      // console.log('添加图片：' + this.imgList[pos]);
       // 将图片上传到服务器.
 /*       var formdata = new FormData();
       formdata.append('image', $file);
@@ -68,24 +68,24 @@ export default {
           this.$refs.md.$img2Url(pos, _res.url);
       }) */
     },
-    imgDel(pos) {
+    imgDel (pos) {
       delete this.imgList[pos];
-      // console.log("删除图片：" + this.imgList[pos]);
+      // console.log('删除图片：' + this.imgList[pos]);
     },
-    uploadImg() {
+    uploadImg () {
       // 第一步.将图片上传到服务器（一次性上传）.
       for (var i in this.imgList) {
-        // console.log("上传图片" + this.imgList[i]);
+        // console.log('上传图片' + this.imgList[i]);
         //接口提供了一种表示表单数据的键值对的构造方式，经过它的数据可以使用
         //multipart/form-data
         var formdata = new FormData();
-        formdata.append("file", this.imgList[i]);
+        formdata.append('file', this.imgList[i]);
 
         this.$axios({
-          url: "上传图片的后台地址",
-          method: "post",
+          url: '上传图片的后台地址',
+          method: 'post',
           data: formdata,
-          headers: { "Content-Type": "multipart/form-data" }
+          headers: { 'Content-Type': 'multipart/form-data' }
         }).then(res => {
           // 第二步.将返回的url替换到文本原位置![...](./0) -> ![...](url)
           /**
@@ -99,13 +99,13 @@ export default {
         });
       }
     }
-  },
+  }
 }
 
 /* //导入对应样式表
 import 'mavon-editor/dist/css/index.css';
 //要显示的div设置类
-<div  class="markdown-body"   v-html="markdown_code"/>
+<div  class='markdown-body'   v-html='markdown_code'/>
 //这里的newDate[0].content就是取出来的md格式的文本内容
 this.markdown_code=marked(newData[0].content||‘‘,{
    sanitize:true

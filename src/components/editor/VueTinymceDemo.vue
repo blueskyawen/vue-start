@@ -7,21 +7,21 @@
 
 <script>
 export default {
-  name: "VueTinymceDemo",
-  data() {
+  name: 'VueTinymceDemo',
+  data () {
     return {
-      content: "<p>html content</p>",
+      content: '<p>html content</p>',
       setting: {
-        height: 500,
-      },
-    };
+        height: 500
+      }
+    }
   },
   methods: {
-    setup(editor) {
+    setup (editor) {
       // console.log(editor);
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>

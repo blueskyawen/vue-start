@@ -7,19 +7,18 @@
 <script>
 // import MarkdownPro from '@/components/markdown/pro';
 export default {
-  name: "vueMarkdown",
-  data() {
+  name: 'vueMarkdown',
+  data () {
     return {
-      value: value
+      value: ''
     }
   },
   components: {
     // MarkdownPro,
     // MarkdownPreview,
-  },
-};
+  }
+}
 </script>
 
 <style lang="less" scoped>
 </style>
-

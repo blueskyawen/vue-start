@@ -30,90 +30,90 @@
 
 <script>
 import '@toast-ui/editor/dist/toastui-editor-viewer.css';
-import { Editor, Viewer } from "@toast-ui/vue-editor";
-import VcButton from "../vc-cat/vc-button.vue";
+import { Editor, Viewer } from '@toast-ui/vue-editor';
+import VcButton from '../vc-cat/vc-button.vue';
 export default {
-  name: "VueTuiEditorDemo",
+  name: 'VueTuiEditorDemo',
   data() {
     // const { chart, codeSyntaxHighlight, colorSyntax, tableMergedCell, uml } = Editor.plugin;
     return {
-      value: "",
+      value: '',
       defaultOptions: {
-        minHeight: "500px",
+        minHeight: '500px',
         language: 'zh-CN',
         useCommandShortcut: false,
         useDefaultHTMLSanitizer: true,
         usageStatistics: true,
         hideModeSwitch: false,
         toolbarItems: [
-          "heading",
-          "bold",
-          "italic",
-          "strike",
-          "divider",
-          "hr",
-          "quote",
-          "divider",
-          "ul",
-          "ol",
-          "task",
-          "indent",
-          "outdent",
-          "divider",
-          "table",
-          "image",
-          "link",
-          "divider",
-          "code",
-          "codeblock",
+          'heading',
+          'bold',
+          'italic',
+          'strike',
+          'divider',
+          'hr',
+          'quote',
+          'divider',
+          'ul',
+          'ol',
+          'task',
+          'indent',
+          'outdent',
+          'divider',
+          'table',
+          'image',
+          'link',
+          'divider',
+          'code',
+          'codeblock',
         ],
         placeholder: '请输入内容.',
         // plugins: [[chart, chartOptions], codeSyntaxHighlight, colorSyntax, tableMergedCell, uml]
       },
       showViewer: false,
-      content: ""
+      content: ''
     };
   },
-  mounted() {},
+  mounted () {},
   methods: {
-    scroll() {
-      this.$refs.toastuiEditor.invoke("scrollTop", 10);
+    scroll () {
+      this.$refs.toastuiEditor.invoke('scrollTop', 10)
     },
-    moveTop() {
-      this.$refs.toastuiEditor.invoke("moveCursorToStart");
+    moveTop () {
+      this.$refs.toastuiEditor.invoke('moveCursorToStart')
     },
-    getHtml() {
-      let html = this.$refs.toastuiEditor.invoke("getHtml");
+    getHtml () {
+      let html = this.$refs.toastuiEditor.invoke('getHtml')
     },
-    onEditorLoad() {
+    onEditorLoad () {
       // implement your code
     },
-    onEditorFocus() {
+    onEditorFocus () {
       // implement your code
     },
-    onEditorBlur() {
+    onEditorBlur () {
       // implement your code
     },
-    onEditorChange() {
+    onEditorChange () {
       // implement your code
     },
-    onEditorStateChange() {
+    onEditorStateChange () {
       // implement your code
     },
-    saveDoc() {
-      this.content = this.$refs.toastuiEditor.invoke('getHtml');
+    saveDoc () {
+      this.content = this.$refs.toastuiEditor.invoke('getHtml')
       console.log(this.content)
       setTimeout(() => {
-        this.showViewer = !this.showViewer;
-      }, 100);
-    },
+        this.showViewer = !this.showViewer
+      }, 100)
+    }
   },
   components: {
-    "tui-editor": Editor,
-    "tui-viewer": Viewer,
+    'tui-editor': Editor,
+    'tui-viewer': Viewer,
     VcButton,
   },
-};
+}
 </script>
 
 <style scoped>

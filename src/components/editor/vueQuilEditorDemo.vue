@@ -37,66 +37,66 @@
 
 <script>
 export default {
-  name: "vueQuilEditor",
-  data() {
+  name: 'vueQuilEditor',
+  data () {
     return {
       editor: null,
-      value: "<h2>I am Example</h2>",
+      value: '<h2>I am Example</h2>',
       editorOption: {
-        placeholder: "编辑文章内容",
-        theme: "snow",
+        placeholder: '编辑文章内容',
+        theme: 'snow',
         readOnly: false,
         modules: {
           toolbar: [
-            ["bold", "italic", "underline", "strike"], //加粗，斜体，下划线，删除线
-            ["blockquote", "code-block"], //引用，代码块
+            ['bold', 'italic', 'underline', 'strike'], // 加粗，斜体，下划线，删除线
+            ['blockquote', 'code-block'], // 引用，代码块
             [{ header: 1 }, { header: 2 }], // 标题，键值对的形式；1、2表示字体大小
-            [{ list: "ordered" }, { list: "bullet" }], //列表
-            [{ script: "sub" }, { script: "super" }], // 上下标
-            [{ indent: "-1" }, { indent: "+1" }], // 缩进
-            [{ direction: "rtl" }], // 文本方向
-            [{ size: ["small", false, "large", "huge"] }], // 字体大小
-            [{ header: [1, 2, 3, 4, 5, 6, false] }], //几级标题
+            [{ list: 'ordered' }, { list: 'bullet' }], // 列表
+            [{ script: 'sub' }, { script: 'super' }], // 上下标
+            [{ indent: '-1' }, { indent: '+1' }], // 缩进
+            [{ direction: 'rtl' }], // 文本方向
+            [{ size: ['small', false, 'large', 'huge'] }], // 字体大小
+            [{ header: [1, 2, 3, 4, 5, 6, false] }], // 几级标题
             [{ color: [] }, { background: [] }], // 字体颜色，字体背景颜色
-            [{ font: [] }], //字体
-            [{ align: [] }], //对齐方式
-            ["clean"], //清除字体样式
-            ["image", "video"], //上传图片、上传视频
+            [{ font: [] }], // 字体
+            [{ align: [] }], // 对齐方式
+            ['clean'], // 清除字体样式
+            ['image', 'video'], // 上传图片、上传视频
           ],
-          imageDrop: true,
+          imageDrop: true
 /*           imageResize: {
             displayStyles: {
-              backgroundColor: "black",
-              border: "none",
-              color: "white",
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white',
             },
-            modules: ["Resize", "DisplaySize", "Toolbar"],
+            modules: ['Resize', 'DisplaySize', 'Toolbar'],
           }, */
-        },
-      },
-    };
+        }
+      }
+    }
   },
   computed: {
-    editor() {
-      return this.$refs.myTextEditor.quill;
-    },
+    editor2 () {
+      return this.$refs.myTextEditor.quill
+    }
   },
   methods: {
-    onEditorBlur(editor) {
-      // console.log("editor blur!", editor);
+    onEditorBlur (editor) {
+      // console.log('editor blur!', editor)
     },
-    onEditorFocus(editor) {
-      // console.log("editor focus!", editor);
+    onEditorFocus (editor) {
+      // console.log('editor focus!', editor)
     },
-    onEditorReady(editor) {
-      this.editor = editor;
-      // console.log("editor ready!", editor);
+    onEditorReady (editor) {
+      this.editor = editor
+      // console.log('editor ready!', editor)
     },
-    onEditorChange({ editor, html, text }) {
-      this.content = html;
-    },
-  },
-};
+    onEditorChange ({ editor, html, text }) {
+      this.content = html
+    }
+  }
+}
 </script>
 
 <style lang="less">
