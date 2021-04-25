@@ -28,18 +28,18 @@ export default {
   methods: {
     onReady(editor) {
       // Insert the toolbar before the editable area.
-      editor.ui
+/*       editor.ui
         .getEditableElement()
         .parentElement.insertBefore(
           editor.ui.view.toolbar.element,
           editor.ui.getEditableElement()
-        );
+        ); */
     },
   },
   destroyed() {
-    this.editor.ui.getEditableElement().parentElement.empty();
+/*     this.editor.ui.getEditableElement().parentElement.empty();
     this.editor.destroy();
-    this.editor = null;
+    this.editor = null; */
   },
 };
 </script>

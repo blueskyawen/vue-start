@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     initCKEditor() {
-      DecoupledEditor.create(
+/*       DecoupledEditor.create(
         document.querySelector(".document-editor__editable"),
         {
           language: "zh-cn",
@@ -57,12 +57,12 @@ export default {
         })
         .catch((error) => {
           console.error(error);
-        });
+        }); */
     },
   },
   destroyed() {
-    this.editor.destroy();
-    this.editor = null;
+/*     this.editor.destroy();
+    this.editor = null */;
   },
 };
 </script>

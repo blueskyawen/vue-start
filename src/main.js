@@ -15,6 +15,7 @@ Vue.use(VueAxios, axios)
 Vue.use(vcCat)
 Vue.use(VcCat)
 
+// mavonEditor - markdown
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 Vue.use(mavonEditor)
@@ -34,10 +35,10 @@ import 'highlight.js/styles/monokai-sublime.css'
 import 'codemirror/lib/codemirror.css';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
-import CKEditor from '@ckeditor/ckeditor5-vue2';
+/* import CKEditor from '@ckeditor/ckeditor5-vue2';
 import '@ckeditor/ckeditor5-build-classic/build/translations/zh-cn';
-import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn';
-Vue.use(CKEditor);
+// import '@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn';
+Vue.use(CKEditor); */
 
 Vue.config.productionTip = false
 Vue.config.keyCodes.awen = 67
