@@ -1,9 +1,11 @@
 <template>
   <div>
     <editor
+      ref="tyEditor"
       api-key="0du12wancmdh8u2beh8jknd708tymkahaz0qe73g9xlv2v1r"
       :init="editConfig_2"
       v-model="content"
+      @onSaveContent="handleSave"
     ></editor>
   </div>
 </template>
@@ -260,6 +262,11 @@ export default {
   },
   components: {
     editor: Editor,
+  },
+  methods: {
+    handleSave() {
+      console.log(this.editor)
+    }
   },
 };
 // 图片上传三个参数，图片数据，成功时的回调函数，失败时的回调函数
