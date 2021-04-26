@@ -32,6 +32,7 @@
             v-else-if="curTab === 'mavonEditor'"
           ></mavon-editor-demo>
           <vue-markdown v-else-if="curTab === 'vueMarkdown'"></vue-markdown>
+          <tinymce-vue-demo-adv v-if="curTab === 'TinymceVueDemoAdv'"></tinymce-vue-demo-adv>
         </transition>
       </div>
     </div>
@@ -44,6 +45,7 @@ import mavonEditorDemo from "./mavonEditor.vue";
 import VueQuilEditorDemo from "./vueQuilEditorDemo.vue";
 import VueTinymceDemo from "./VueTinymceDemo.vue";
 import TinymceVueDemo from "./TinymceVueDemo.vue";
+import TinymceVueDemoAdv from "./TinymceVueDemoAdv.vue";
 import WangEditorDemo from './WangEditorDemo.vue';
 import vueMarkdown from './VueMarkdown.vue';
 
@@ -58,9 +60,10 @@ export default {
         { label: "TinymceVue", value: "TinymceVue", selected: false },
         { label: "wangEditor", value: "wangEditor", selected: false },
         { label: "vueQuillEditor", value: "quill", selected: false },
+        // { label: "TinymceVuef付费高级特性", value: "TinymceVueDemoAdv", selected: false },
         // { label: "vueMarkdown", value: "vueMarkdown", selected: false },
       ],
-      curTab: "tui",
+      curTab: "mavonEditor",
     };
   },
   components: {
@@ -70,7 +73,8 @@ export default {
     VueTinymceDemo,
     TinymceVueDemo,
     WangEditorDemo,
-    vueMarkdown
+    vueMarkdown,
+    TinymceVueDemoAdv
   },
   methods: {
     selectTab: function (value) {
