@@ -1,21 +1,21 @@
 <template>
   <div class="CKEditor5">
-    <ckeditor
+<!--     <ckeditor
       :editor="editor"
       v-model="editorData"
       :config="editorConfig1"
-    ></ckeditor>
+    ></ckeditor> -->
   </div>
 </template>
 
 <script>
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import "@ckeditor/ckeditor5-build-classic/build/translations/zh-cn";
 export default {
   name: "CKEditor5Classical",
   data() {
     return {
-      editor: ClassicEditor,
+      // editor: ClassicEditor,
       editorData: "<p>Content of the editor.</p>",
       editorConfig: {
         language: "zh-cn",

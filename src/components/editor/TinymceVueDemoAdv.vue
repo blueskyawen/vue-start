@@ -19,7 +19,6 @@ export default {
       content: "",
       editConfig: {
         selector: "textarea#full-featured",
-        language: "zh_CN", //中文
         plugins:
           "print preview powerpaste casechange importcss tinydrive searchreplace autolink autosave save directionality advcode visualblocks visualchars fullscreen image link media mediaembed template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists checklist wordcount tinymcespellchecker a11ychecker imagetools textpattern noneditable help formatpainter permanentpen pageembed charmap tinycomments mentions quickbars linkchecker emoticons advtable",
         tinydrive_token_provider: "URL_TO_YOUR_TOKEN_PROVIDER",

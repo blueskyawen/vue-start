@@ -2,7 +2,6 @@
   <div>
     <editor
       ref="tyEditor"
-      api-key="0du12wancmdh8u2beh8jknd708tymkahaz0qe73g9xlv2v1r"
       :init="editConfig_2"
       v-model="content"
       @onSaveContent="handleSave"
@@ -12,6 +11,7 @@
 
 <script>
 import Editor from "@tinymce/tinymce-vue";
+import "./import_tinymce_plugins";
 import axios from "axios";
 export default {
   name: "TinymceVueDemo",
@@ -115,11 +115,13 @@ export default {
         //
       },
       editConfig_2: {
-        selector: "textarea#full-featured-non-premium",
+        language_url: "/static/tinymce/langs/zh_CN.js", //引入语言包文件
         language: "zh_CN", //中文
+        skin_url: "/static/tinymce/skins/ui/oxide",
         // 开头几个插件时收费的
-        plugins: // autoresize
-          "checklist fullpage print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
+        // checklist autoresize
+        plugins:
+          "fullpage print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
         imagetools_cors_hosts: ["picsum.photos"],
         menubar: "file edit view insert format tools table help",
         toolbar:
@@ -199,7 +201,7 @@ export default {
         contextmenu: "link image imagetools table",
         // skin: useDarkMode ? "oxide-dark" : "oxide",
         // content_css: useDarkMode ? "dark" : "document",
-        content_css: "document",
+        content_css: "/static/tinymce/skins/content/document/content.css",
         content_style:
           "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         /* enable title field in the Image dialog*/
@@ -256,7 +258,7 @@ export default {
         autoresize_bottom_margin: 50,
         autoresize_overflow_padding: 50,
         custom_undo_redo_levels: 50,
-        object_resizing: true
+        object_resizing: true,
       },
     };
   },
@@ -265,8 +267,12 @@ export default {
   },
   methods: {
     handleSave() {
-      console.log(this.editor)
-    }
+      console.log("handleSave");
+      console.log(this.editor);
+    },
+  },
+  mounted() {
+    tinymce.init({});
   },
 };
 // 图片上传三个参数，图片数据，成功时的回调函数，失败时的回调函数
