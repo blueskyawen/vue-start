@@ -83,7 +83,7 @@ export default {
               "undo",
               "redo",
             ],
-            shouldNotGroupWhenFull: true,
+            shouldNotGroupWhenFull: false,
           },
           image: {
             toolbar: [

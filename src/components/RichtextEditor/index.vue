@@ -23,6 +23,7 @@
           <ckeditor-5-classical v-if="curTab === 'classical'"></ckeditor-5-classical>
           <ckeditor-5-doc v-if="curTab === 'doc'"></ckeditor-5-doc>
           <ckeditor-5-doc-2 v-if="curTab === 'doc2'"></ckeditor-5-doc-2>
+          <ckeditor-5-doc-3 v-if="curTab === 'doc3'"></ckeditor-5-doc-3>
           <vue-tinymce-demo v-if="curTab === 'VueTinymce'"></vue-tinymce-demo>
           <vue-quil-editor-demo
             v-else-if="curTab === 'quill'"
@@ -41,6 +42,7 @@
 import CKEditor5Classical from './CKEditor5Classical.vue'
 import CKEditor5Doc from './CKEditor5Doc.vue'
 import CKEditor5Doc2 from './CKEditor5Doc2.vue'
+import CKEditor5Doc3 from './CKEditor5Doc3.vue'
 import VueQuilEditorDemo from "../MarkdownEditor/vueQuilEditorDemo.vue";
 import VueTinymceDemo from "../MarkdownEditor/VueTinymceDemo.vue";
 import TinymceVueDemo from "../MarkdownEditor/TinymceVueDemo.vue";
@@ -51,7 +53,8 @@ export default {
   data() {
     return {
       tabItems: [
-        { label: "文档模式(ckeditor5)", value: "doc2", selected: false },
+        { label: "ckeditor5文档模式(标准build版)", value: "doc3", selected: false },
+        { label: "ckeditor5文档模式(自构建版)", value: "doc2", selected: false },
         // { label: "文档模式2(ckeditor5)", value: "doc", selected: false },
         // { label: "VueTinymce", value: "VueTinymce", selected: false },
         { label: "TinymceVue", value: "TinymceVue", selected: false },
@@ -60,13 +63,14 @@ export default {
         { label: "经典模式(ckeditor5)", value: "classical", selected: false },
         // { label: "TinymceVue付费高级特性", value: "TinymceVueDemoAdv", selected: false },
       ],
-      curTab: "doc2",
+      curTab: "doc3",
     };
   },
   components: {
     'ckeditor-5-classical': CKEditor5Classical,
     'ckeditor-5-doc': CKEditor5Doc,
     'ckeditor-5-doc-2': CKEditor5Doc2,
+    'ckeditor-5-doc-3': CKEditor5Doc3,
     VueQuilEditorDemo,
     VueTinymceDemo,
     TinymceVueDemo,

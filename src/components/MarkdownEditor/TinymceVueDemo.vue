@@ -19,7 +19,7 @@ export default {
     var useDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
     const BASE_URL = process.env.NODE_ENV === 'production' ? '/vue-start/' : '/';
     return {
-      content: "",
+      content: "请输入内容...",
       editConfig: {
         height: 1000, //富文本高度
         max_height: 1000,
