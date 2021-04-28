@@ -10,7 +10,7 @@
 </template>
 
 <script>
-// import DecoupledEditor from "./AAA";
+import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document'
 export default {
   name: "CKEditor5Doc2",
   data() {
@@ -25,15 +25,71 @@ export default {
   },
   components: {},
   mounted() {
-    // this.initCKEditor();
+    this.initCKEditor();
   },
   methods: {
     initCKEditor() {
-/*       DecoupledEditor.create(
+       DecoupledEditor.create(
         document.querySelector(".document-editor__editable"),
         {
           language: "zh-cn",
           placeholder: "请输入内容...",
+          toolbar: {
+					  items: [
+						'heading',
+						'|',
+						'fontSize',
+						'fontFamily',
+						'fontColor',
+						'fontBackgroundColor',
+						'|',
+						'bold',
+						'italic',
+						'underline',
+						'strikethrough',
+						'highlight',
+						'horizontalLine',
+						'|',
+						'alignment',
+						'numberedList',
+						'bulletedList',
+						'todoList',
+						'outdent',
+						'indent',
+						'|',
+						'link',
+						'blockQuote',
+						'imageUpload',
+						'imageInsert',
+						'insertTable',
+						'code',
+						'codeBlock',
+						'|',
+						'superscript',
+						'subscript',
+						'|',
+						'CKFinder',
+						'undo',
+						'redo'
+					]
+				  },
+          image: {
+            toolbar: [
+              'imageTextAlternative',
+              'imageStyle:full',
+              'imageStyle:side',
+              'linkImage'
+            ]
+          },
+          table: {
+            contentToolbar: [
+              'tableColumn',
+              'tableRow',
+              'mergeTableCells',
+              'tableCellProperties',
+              'tableProperties'
+            ]
+          },
         }
       )
         .then((editor) => {
@@ -57,12 +113,12 @@ export default {
         })
         .catch((error) => {
           console.error(error);
-        }); */
+        });
     },
   },
   destroyed() {
-/*     this.editor.destroy();
-    this.editor = null */;
+    this.editor.destroy();
+    this.editor = null;
   },
 };
 </script>
