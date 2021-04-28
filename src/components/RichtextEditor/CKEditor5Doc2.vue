@@ -37,7 +37,6 @@ export default {
           placeholder: "正文内容...",
           toolbar: {
             items: [
-              'textPartLanguage',
               "heading",
               "|",
               "fontSize",
@@ -76,6 +75,7 @@ export default {
               "MathType",
               'ChemType',
               'specialCharacters',
+              // 'textPartLanguage',
               "|",
               "pageBreak",
               "selectAll",
