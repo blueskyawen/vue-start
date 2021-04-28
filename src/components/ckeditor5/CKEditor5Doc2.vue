@@ -9,6 +9,7 @@
 
 <script>
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
+import "@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn";
 export default {
   name: "CKEditor5Doc2",
   data() {
