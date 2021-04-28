@@ -17,6 +17,7 @@ export default {
   name: "TinymceVueDemo",
   data() {
     var useDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const BASE_URL = process.env.NODE_ENV === 'production' ? '/vue-start/' : '/';
     return {
       content: "",
       editConfig: {
@@ -115,9 +116,9 @@ export default {
         //
       },
       editConfig_2: {
-        language_url: "/static/tinymce/langs/zh_CN.js", //引入语言包文件
+        language_url: BASE_URL + "static/tinymce/langs/zh_CN.js", //引入语言包文件
         language: "zh_CN", //中文
-        skin_url: "/static/tinymce/skins/ui/oxide",
+        skin_url: BASE_URL + "static/tinymce/skins/ui/oxide",
         // 开头几个插件时收费的
         // checklist autoresize
         plugins:
@@ -201,7 +202,7 @@ export default {
         contextmenu: "link image imagetools table",
         // skin: useDarkMode ? "oxide-dark" : "oxide",
         // content_css: useDarkMode ? "dark" : "document",
-        content_css: "/static/tinymce/skins/content/document/content.css",
+        content_css: BASE_URL + "static/tinymce/skins/content/document/content.css",
         content_style:
           "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         /* enable title field in the Image dialog*/

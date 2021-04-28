@@ -2,15 +2,13 @@
   <div class="document-editor">
     <div class="document-editor__toolbar"></div>
     <div class="document-editor__editable-container">
-      <div class="document-editor__editable">
-        <p>The initial editor data.</p>
-      </div>
+      <div class="document-editor__editable"></div>
     </div>
   </div>
 </template>
 
 <script>
-import DecoupledEditor from '@ckeditor/ckeditor5-build-decoupled-document'
+import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 export default {
   name: "CKEditor5Doc2",
   data() {
@@ -29,66 +27,80 @@ export default {
   },
   methods: {
     initCKEditor() {
-       DecoupledEditor.create(
+      DecoupledEditor.create(
         document.querySelector(".document-editor__editable"),
         {
           language: "zh-cn",
+          title: {
+            placeholder: "请输入标题",
+          },
           placeholder: "请输入内容...",
           toolbar: {
-					  items: [
-						'heading',
-						'|',
-						'fontSize',
-						'fontFamily',
-						'fontColor',
-						'fontBackgroundColor',
-						'|',
-						'bold',
-						'italic',
-						'underline',
-						'strikethrough',
-						'highlight',
-						'horizontalLine',
-						'|',
-						'alignment',
-						'numberedList',
-						'bulletedList',
-						'todoList',
-						'outdent',
-						'indent',
-						'|',
-						'link',
-						'blockQuote',
-						'imageUpload',
-						'imageInsert',
-						'insertTable',
-						'code',
-						'codeBlock',
-						'|',
-						'superscript',
-						'subscript',
-						'|',
-						'CKFinder',
-						'undo',
-						'redo'
-					]
-				  },
+            items: [
+              'textPartLanguage',
+              "heading",
+              "|",
+              "fontSize",
+              "fontFamily",
+              "fontColor",
+              "fontBackgroundColor",
+              "|",
+              "bold",
+              "italic",
+              "underline",
+              "strikethrough",
+              "horizontalLine",
+              "removeFormat",
+              "highlight",
+              "|",
+              "alignment",
+              "numberedList",
+              "bulletedList",
+              'todoList',
+              "outdent",
+              "indent",
+              "|",
+              "link",
+              "blockQuote",
+              "imageTextAlternative",
+              "uploadImage",
+              "imageInsert",
+              "mediaEmbed",
+              "insertTable",
+              "code",
+              "codeBlock",
+              "htmlEmbed",
+              "|",
+              'subscript',
+              'superscript',
+              "MathType",
+              'ChemType',
+              'specialCharacters',
+              "|",
+              "pageBreak",
+              "selectAll",
+              "CKFinder",
+              "undo",
+              "redo",
+            ],
+            shouldNotGroupWhenFull: true,
+          },
           image: {
             toolbar: [
-              'imageTextAlternative',
-              'imageStyle:full',
-              'imageStyle:side',
-              'linkImage'
-            ]
+              "imageTextAlternative",
+              "imageStyle:full",
+              "imageStyle:side",
+              "linkImage",
+            ],
           },
           table: {
             contentToolbar: [
-              'tableColumn',
-              'tableRow',
-              'mergeTableCells',
-              'tableCellProperties',
-              'tableProperties'
-            ]
+              "tableColumn",
+              "tableRow",
+              "mergeTableCells",
+              "tableCellProperties",
+              "tableProperties",
+            ],
           },
         }
       )
@@ -109,16 +121,27 @@ export default {
             this.$emit("input", editor.getData());
           });
           //编辑的时候设置富文本编辑器的内容
-          editor.setData(this.value);
+          // editor.setData(this.value);
         })
         .catch((error) => {
           console.error(error);
         });
     },
   },
-  destroyed() {
-    this.editor.destroy();
-    this.editor = null;
+  beforeDestroy() {
+    if (this.editor) {
+      console.log("destroy editor");
+      this.editor
+        .destroy()
+        .then((res) => {
+          console.log("destroy editor **** success");
+          this.editor = null;
+        })
+        .catch((error) => {
+          console.log("destroy editor **** fail");
+          console.error(error);
+        });
+    }
   },
 };
 </script>
