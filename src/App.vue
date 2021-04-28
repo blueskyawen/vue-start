@@ -10,8 +10,8 @@
         <router-link class="menu-item" :to="'/basic'" >Basic</router-link>
         <router-link class="menu-item" :to="{ path: '/advance' }" >Advance</router-link>
         <router-link class="menu-item" v-bind:to="'/vuex'">Vuex</router-link>
-        <router-link class="menu-item" v-bind:to="'/editor'">Editor</router-link>
-        <router-link class="menu-item" v-bind:to="'/ckeditor5'">CKEditor5</router-link>
+        <router-link class="menu-item" v-bind:to="'/markdownEditor'">markdownEditor</router-link>
+        <router-link class="menu-item" v-bind:to="'/richtextEditor'">RichTextEditor</router-link>
       </div>
     </header>
     <article>

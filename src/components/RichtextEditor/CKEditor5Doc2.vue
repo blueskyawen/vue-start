@@ -9,7 +9,6 @@
 
 <script>
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
-import "@ckeditor/ckeditor5-build-decoupled-document/build/translations/zh-cn";
 export default {
   name: "CKEditor5Doc2",
   data() {
@@ -35,7 +34,7 @@ export default {
           title: {
             placeholder: "请输入标题",
           },
-          placeholder: "请输入内容...",
+          placeholder: "正文内容...",
           toolbar: {
             items: [
               'textPartLanguage',

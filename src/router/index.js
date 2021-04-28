@@ -21,8 +21,8 @@ import NotFound from '@/components/not-found'
 import asyncLoading from '@/components/vc-cat/vc-async-loading.vue'
 import asyncError from '@/components/vc-cat/vc-async-error.vue'
 
-import editor from '@/components/editor/editor.vue'
-import ckeditor5 from '@/components/ckeditor5/index.vue'
+import MarkdownEditor from '@/components/MarkdownEditor/editor.vue'
+import RichtextEditor from '@/components/RichtextEditor/index.vue'
 
 Vue.use(VueRouter)
 
@@ -96,12 +96,12 @@ const routes = [
     ]
   },
   {
-    path: '/editor',
-    component: editor
+    path: '/markdownEditor',
+    component: MarkdownEditor
   },
   {
-    path: '/ckeditor5',
-    component: ckeditor5
+    path: '/richtextEditor',
+    component: RichtextEditor
   },
   { path: '*', component: NotFound }
 ]

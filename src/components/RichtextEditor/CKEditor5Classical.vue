@@ -1,5 +1,6 @@
 <template>
   <div class="CKEditor5">
+    <h2>CKEditor5经典模式</h2>
 <!--     <ckeditor
       :editor="editor"
       v-model="editorData"

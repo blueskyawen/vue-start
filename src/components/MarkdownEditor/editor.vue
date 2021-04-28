@@ -20,9 +20,11 @@
           appear-to-class="tabShow-enter-to"
           appear-active-class="tabShow-enter-active"
         >
-          <ckeditor-5-classical v-if="curTab === 'classical'"></ckeditor-5-classical>
-          <ckeditor-5-doc v-if="curTab === 'doc'"></ckeditor-5-doc>
-          <ckeditor-5-doc-2 v-if="curTab === 'doc2'"></ckeditor-5-doc-2>
+          <vue-tui-editor-demo v-if="curTab === 'tui'"></vue-tui-editor-demo>
+          <mavon-editor-demo
+            v-else-if="curTab === 'mavonEditor'"
+          ></mavon-editor-demo>
+          <vue-markdown v-else-if="curTab === 'vueMarkdown'"></vue-markdown>
         </transition>
       </div>
     </div>
@@ -30,25 +32,26 @@
 </template>
 
 <script>
-import CKEditor5Classical from './CKEditor5Classical.vue'
-import CKEditor5Doc from './CKEditor5Doc.vue'
-import CKEditor5Doc2 from './CKEditor5Doc2.vue'
+import VueTuiEditorDemo from "./VueTuiEditorDemo.vue";
+import mavonEditorDemo from "./mavonEditor.vue";
+import vueMarkdown from './VueMarkdown.vue';
+
 export default {
-  name: "ckeditor5",
+  name: "editor",
   data() {
     return {
       tabItems: [
-        { label: "经典模式", value: "classical", selected: false },
-        { label: "文档模式", value: "doc", selected: false },
-        { label: "文档模式2", value: "doc2", selected: false },
+        { label: "mavonEditor", value: "mavonEditor", selected: false },
+        { label: "VueTuiEditor", value: "tui", selected: false },
+        // { label: "vueMarkdown", value: "vueMarkdown", selected: false },
       ],
-      curTab: "classical",
+      curTab: "mavonEditor",
     };
   },
   components: {
-    'ckeditor-5-classical': CKEditor5Classical,
-    'ckeditor-5-doc': CKEditor5Doc,
-    'ckeditor-5-doc-2': CKEditor5Doc2
+    VueTuiEditorDemo,
+    mavonEditorDemo,
+    vueMarkdown,
   },
   methods: {
     selectTab: function (value) {
@@ -60,7 +63,7 @@ export default {
 
 <style scoped>
 .Basic {
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -93,16 +96,13 @@ export default {
 }
 .tabShow-enter {
   opacity: 0;
-  margin-left: -100px;
 }
 .tabShow-leave-to {
   opacity: 0;
-  margin-left: 200px;
 }
 .tabShow-enter-to,
 .tabShow-leave {
   opacity: 1;
-  margin-left: 0;
 }
 .tabShow-enter-active {
   transition: all 1s linear;

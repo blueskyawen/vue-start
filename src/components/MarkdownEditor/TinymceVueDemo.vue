@@ -110,6 +110,7 @@ export default {
             items: "italic underline | superscript subscript",
           },
         },
+        skin_url: BASE_URL + "static/tinymce/skins/ui/oxide",
         // menubar: false, // 英寸菜单栏
         // 图片上传三个参数，图片数据，成功时的回调函数，失败时的回调函数
         images_upload_handler: tiny_image_upload_handler,
@@ -121,12 +122,12 @@ export default {
         skin_url: BASE_URL + "static/tinymce/skins/ui/oxide",
         // 开头几个插件时收费的
         // checklist autoresize
-        plugins:
-          "fullpage print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap quickbars emoticons",
+        plugins: // quickbars
+          "fullpage print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons",
         imagetools_cors_hosts: ["picsum.photos"],
         menubar: "file edit view insert format tools table help",
         toolbar:
-          "checklist | hr fullpage restoredraft undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl",
+          "checklist | hr fullpage restoredraft undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | table insertfile image media template link anchor codesample | ltr rtl",
         toolbar_sticky: true,
         autosave_ask_before_unload: true,
         autosave_interval: "30s",

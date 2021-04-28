@@ -14,7 +14,7 @@ export default {
   data() {
     return {
       editor: null,
-      editorData: '',
+      editorData: ''
     };
   },
   mounted () {
@@ -49,7 +49,7 @@ export default {
       'code',
       'splitLine',
       'undo',
-      'redo',
+      'redo'
     ]
     // 配置 onchange 回调函数，将数据同步到 vue 中
     editor.config.onchange = (newHtml) => {
@@ -71,7 +71,7 @@ export default {
       let data = this.editor.txt.html()
       alert(data)
     }
-  },
+  }
 }
 </script>
 
