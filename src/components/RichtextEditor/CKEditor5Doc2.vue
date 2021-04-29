@@ -199,10 +199,10 @@ ul {
   min-height: 21cm;
 
   /* Keep the "page" off the boundaries of the container. */
-  padding: 1cm 2cm 2cm;
+  padding: 1cm 2cm 2cm !important;
 
   border: 1px hsl(0, 0%, 82.7%) solid;
-  border-radius: var(--ck-border-radius);
+  border-radius: var(--ck-border-radius) !important;
   background: white;
 
   /* The "page" should cast a slight shadow (3D illusion). */
@@ -210,6 +210,7 @@ ul {
 
   /* Center the "page". */
   margin: 0 auto;
+  height: auto !important;
 }
 /* Set the default font for the "page" of the content. */
 .document-editor .ck-content,

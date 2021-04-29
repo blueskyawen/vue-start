@@ -168,6 +168,7 @@
 
     /* Center the "page". */
     margin: 0 auto;
+    height: auto !important;
   }
   /* Set the default font for the "page" of the content. */
   .document-editor .ck-content,
