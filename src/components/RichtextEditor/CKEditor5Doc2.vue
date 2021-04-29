@@ -193,13 +193,18 @@ ul {
   overflow-y: scroll;
 }
 
+.ck.ck-editor__editable_inline {
+  height: auto !important;
+  padding: 1cm 2cm 2cm;
+}
+
 .document-editor__editable-container .ck-editor__editable {
   /* Set the dimensions of the "page". */
   width: 15.8cm;
   min-height: 21cm;
 
   /* Keep the "page" off the boundaries of the container. */
-  padding: 1cm 2cm 2cm !important;
+  padding: 1cm 2cm 2cm;
 
   border: 1px hsl(0, 0%, 82.7%) solid;
   border-radius: var(--ck-border-radius) !important;
@@ -210,7 +215,6 @@ ul {
 
   /* Center the "page". */
   margin: 0 auto;
-  height: auto !important;
 }
 /* Set the default font for the "page" of the content. */
 .document-editor .ck-content,
@@ -254,7 +258,6 @@ Preserve the relative scale, though. */
 .document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
   font-size: 1.75em;
   font-weight: normal;
-  color: hsl(203, 100%, 50%);
 }
 
 .document-editor

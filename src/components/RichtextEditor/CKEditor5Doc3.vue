@@ -151,6 +151,11 @@
     overflow-y: scroll;
   }
 
+  .ck.ck-editor__editable_inline {
+    height: auto !important;
+    padding: 1cm 2cm 2cm;
+  }
+
   .document-editor__editable-container2 .ck-editor__editable {
     /* Set the dimensions of the "page". */
     width: 15.8cm;
@@ -168,7 +173,6 @@
 
     /* Center the "page". */
     margin: 0 auto;
-    height: auto !important;
   }
   /* Set the default font for the "page" of the content. */
   .document-editor .ck-content,
@@ -212,7 +216,6 @@
   .document-editor .ck-heading-dropdown .ck-heading_heading2 .ck-button__label {
     font-size: 1.75em;
     font-weight: normal;
-    color: hsl(203, 100%, 50%);
   }
 
   .document-editor
