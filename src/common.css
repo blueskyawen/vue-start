@@ -1,6 +1,10 @@
 * {
   padding: auto !important;
 }
+.ck-editor__editable_inline {
+  height: auto !important;
+  padding: 1cm 2cm 2cm !important;
+}
 ul {
   padding: auto !important;
 }
@@ -39,11 +43,6 @@ ul {
   /* Make it possible to scroll the "page" of the edited content. */
   overflow-y: scroll;
 }
-
-/*.ck.ck-editor__editable_inline {
-  height: auto !important;
-  padding: 1cm 2cm 2cm !important;
-}*/
 
 .document-editor__editable-container2 .document-editor__editable2 {
   /* Set the dimensions of the "page". */
