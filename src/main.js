@@ -10,7 +10,7 @@ import vcCat from './components/vc-cat'
 import './mock/mock'
 import VcCat from 'vc-shadow-cat'
 import 'vc-shadow-cat/vc-shadow-cat.css'
-//import './common.css'
+import './common.css'
 // mavonEditor - markdown
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
