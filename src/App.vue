@@ -2,16 +2,22 @@
   <div class="App">
     <header>
       <div class="head-logo">
-        <img src="./assets/logo.png">
+        <img src="./assets/logo.png" />
         <span class="logo-border"></span>
       </div>
       <div class="head-memu">
         <router-link class="menu-item" to="/hello">Hello</router-link>
-        <router-link class="menu-item" :to="'/basic'" >Basic</router-link>
-        <router-link class="menu-item" :to="{ path: '/advance' }" >Advance</router-link>
+        <router-link class="menu-item" :to="'/basic'">Basic</router-link>
+        <router-link class="menu-item" :to="{ path: '/advance' }"
+          >Advance</router-link
+        >
         <router-link class="menu-item" v-bind:to="'/vuex'">Vuex</router-link>
-        <router-link class="menu-item" v-bind:to="'/markdownEditor'">markdownEditor</router-link>
-        <router-link class="menu-item" v-bind:to="'/richtextEditor'">RichTextEditor</router-link>
+        <router-link class="menu-item" v-bind:to="'/markdownEditor'"
+          >MD编辑器</router-link
+        >
+        <router-link class="menu-item" v-bind:to="'/richtextEditor'"
+          >富文本编辑器</router-link
+        >
       </div>
     </header>
     <article>
@@ -22,14 +28,14 @@
 
 <script>
 export default {
-  name: 'App'
-}
+  name: "App"
+};
 </script>
 
 <style>
 #app {
   width: 100%;
-  height:100%;
+  height: 100%;
   margin-left: -8px;
   margin-top: -8px;
 }
@@ -81,5 +87,4 @@ article {
   padding: 30px;
   box-sizing: border-box;
 }
-
 </style>
