@@ -18,6 +18,9 @@
         <router-link class="menu-item" v-bind:to="'/richtextEditor'"
           >富文本编辑器</router-link
         >
+        <router-link class="menu-item" v-bind:to="'/priseEditor'"
+          >价格计算器</router-link
+        >
       </div>
     </header>
     <article>
