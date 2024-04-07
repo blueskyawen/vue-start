@@ -6,6 +6,18 @@
       <vc-button type="cancel" @click="clear" style="margin-left: 10px"
         >清空</vc-button
       >
+      <vc-button type="cancel" @click="refresh" style="margin-left: 10px"
+        >刷新</vc-button
+      >
+      <div class="product-s">
+        <span
+          v-for="pitem in products"
+          :key="pitem.id"
+          :class="{ active: pitem.id == curProducts }"
+          @click.stop="changeTable(pitem.id)"
+          >{{ pitem.label }}</span
+        >
+      </div>
     </div>
     <div class="prise-list">
       <div class="col-head">
@@ -14,7 +26,7 @@
         >
       </div>
       <div class="col-body" v-if="list.length">
-        <div class="col-line" v-for="item in list" :key="item.lineindex">
+        <div class="col-line" v-for="item in list" :key="item.id">
           <span class="col-item" v-for="col2 in columns" :key="col2.key">
             <vc-button
               v-if="col2.key == 'oper'"
@@ -92,39 +104,100 @@ export default {
           key: "oper"
         }
       ],
+      products: [
+        {
+          id: "fuli",
+          label: "福利款"
+        },
+        {
+          id: "jichu",
+          label: "基础活动款"
+        },
+        {
+          id: "lirun",
+          label: "利润款"
+        },
+        {
+          id: "xingxiang",
+          label: "形象款"
+        }
+      ],
+      curProducts: "fuli",
+      curTableName: "fuli_product",
       list: []
     };
   },
   created() {
-    let coachData = localStorage.getItem("doudianPriceList");
-    if (coachData) {
-      this.list = JSON.parse(coachData);
-    }
+    setTimeout(() => {
+      this.getTableList();
+    }, 1000);
   },
   methods: {
-    delOneline: function(item) {
+    refresh() {
+      this.getTableList();
+    },
+    getTableList() {
+      if (this.$IDB) {
+        this.$IDB
+          .query({
+            tableName: this.curTableName
+          })
+          .then(res => {
+            console.log("** getTableList **");
+            this.list = res.data || [];
+          });
+      }
+    },
+    changeTable(id) {
+      this.curProducts = id;
+      this.curTableName = this.curProducts + "_product";
+      this.list = [];
+      this.getTableList();
+    },
+    delOneline: function(lineitem) {
       if (!this.list || !this.list.length) return;
-      let delIndex = this.list.findIndex(x => x.lineindex == item.lineindex);
+      let delIndex = this.list.findIndex(x => x.id == lineitem.id);
       if (delIndex > -1) {
         this.list.splice(delIndex, 1);
       }
+      if (this.$IDB) {
+        this.$IDB
+          .delete({
+            tableName: this.curTableName,
+            condition: (item, index) => item.id === lineitem.id
+          })
+          .then(res => {
+            console.log("删除的数据：", res);
+          });
+      }
     },
     addOneline: function() {
-      this.list.push({
-        lineindex: new Date().valueOf(),
+      let newLine = {
+        id: new Date().valueOf(),
         name: "",
         oldPrice: 0,
         saleB: 1,
         yunfei: 0,
         newPrice: 0,
-        zhekou: 0.8,
+        zhekou: 0.9,
         youhuiquan: 3,
         pingtaikoudian: 0.05,
         shijiprice: 0,
         lirun: 0,
         lirunlv: "0%",
         oper: ""
-      });
+      };
+      this.list.push(newLine);
+      if (this.$IDB) {
+        this.$IDB
+          .add({
+            tableName: this.curTableName,
+            data: { ...newLine }
+          })
+          .then(res => {
+            console.log("数据添加成功");
+          });
+      }
     },
     inputChange: function(line, key) {
       let value = +line[key];
@@ -155,14 +228,42 @@ export default {
       }
     },
     saveList: function() {
-      let coachData = this.list && this.list.length ? this.list : [];
-      localStorage.setItem("doudianPriceList", JSON.stringify(coachData));
+      if (this.$IDB) {
+        this.$IDB
+          .update({
+            tableName: this.curTableName,
+            handler: (row, index) => {
+              let fdRow = this.list.find(x => x.id === row.id);
+              if (fdRow) {
+                row.name = fdRow.name;
+                row.oldPrice = fdRow.oldPrice;
+                row.saleB = fdRow.saleB;
+                row.yunfei = fdRow.yunfei;
+                row.newPrice = fdRow.newPrice;
+                row.zhekou = fdRow.zhekou;
+                row.youhuiquan = fdRow.youhuiquan;
+                row.pingtaikoudian = fdRow.pingtaikoudian;
+                row.shijiprice = fdRow.shijiprice;
+                row.lirun = fdRow.lirun;
+                row.lirunlv = fdRow.lirunlv;
+              }
+            }
+          })
+          .then(res => {
+            console.log("全部数据修改: ", res);
+          });
+      }
     },
     clear() {
       this.list = [];
-      let coachDataItem = localStorage.getItem("doudianPriceList");
-      if (coachDataItem) {
-        localStorage.setItem("doudianPriceList", JSON.stringify([]));
+      if (this.$IDB) {
+        this.$IDB
+          .delete({
+            tableName: this.curTableName
+          })
+          .then(res => {
+            console.log("删除的数据：", res);
+          });
       }
     }
   }
@@ -179,6 +280,20 @@ export default {
   width: 100%;
   display: flex;
   margin-bottom: 8px;
+}
+.prise-editor .prise-cfg .product-s {
+  margin-left: 36px;
+}
+.prise-editor .prise-cfg .product-s > span {
+  cursor: pointer;
+  display: inline-block;
+  padding: 0 10px;
+  height: 36px;
+  line-height: 36px;
+}
+.prise-editor .prise-cfg .product-s > span.active {
+  color: #1a75ff;
+  font-weight: bold;
 }
 .prise-editor .prise-list {
   border: solid 1px #999;

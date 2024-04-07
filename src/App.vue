@@ -31,7 +31,16 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  beforeDestroy() {
+    if (this.$IDB) {
+      this.$IDB.getDB().then(db => {
+        if (db && db.close) {
+          db.close();
+        }
+      });
+    }
+  }
 };
 </script>
 
