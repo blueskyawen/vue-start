@@ -18,6 +18,7 @@
           >{{ pitem.label }}</span
         >
       </div>
+      <span class="prodNum">产品数: {{ list ? list.length : 0 }}</span>
     </div>
     <div class="prise-list">
       <div class="col-head">
@@ -290,6 +291,14 @@ export default {
   padding: 0 10px;
   height: 36px;
   line-height: 36px;
+}
+.prise-editor .prise-cfg .prodNum {
+  display: inline-block;
+  height: 36px;
+  line-height: 36px;
+  padding-right: 50px;
+  position: absolute;
+  right: 0;
 }
 .prise-editor .prise-cfg .product-s > span.active {
   color: #1a75ff;
