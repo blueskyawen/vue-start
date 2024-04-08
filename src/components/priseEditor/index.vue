@@ -3,7 +3,7 @@
     <div class="prise-cfg">
       <vc-button type="add" @click="addOneline">新增一行产品</vc-button>
       <vc-button @click="saveList" style="margin-left: 10px">保存</vc-button>
-      <vc-button type="cancel" @click="clear" style="margin-left: 10px"
+      <vc-button type="cancel" @click="goClear" style="margin-left: 10px"
         >清空</vc-button
       >
       <vc-button type="cancel" @click="refresh" style="margin-left: 10px"
@@ -16,6 +16,21 @@
           :class="{ active: pitem.id == curProducts }"
           @click.stop="changeTable(pitem.id)"
           >{{ pitem.label }}</span
+        >
+      </div>
+      <div class="multi-oper">
+        <span>批量操作</span>
+        <vc-select
+          style="width: 100px;height: 28px;margin-left: 8px;"
+          :options="multiActionOptions"
+          v-model="mutilOperCol"
+        ></vc-select>
+        <vc-input class="mul-value" v-model="multiValue" required></vc-input>
+        <vc-button
+          style="margin-left: 8px;height: 28px"
+          :type="'cancel'"
+          @click="doMutilOper"
+          >设置</vc-button
         >
       </div>
       <span class="prodNum">产品数: {{ list ? list.length : 0 }}</span>
@@ -47,6 +62,30 @@
         </div>
       </div>
     </div>
+    <vc-info :type="'success'" v-model="msgShow">{{ message }}</vc-info>
+    <vc-info :type="'warn'" v-model="warnShow"
+      >数据正在处理中,请稍后尝试!</vc-info
+    >
+    <vc-dialog
+      :header="'操作确认'"
+      :type="'normal'"
+      v-model="modalShow"
+      class="clear-product-conf"
+    >
+      <template v-slot:content>
+        确认要删除全部产品数据吗?
+      </template>
+      <template v-slot:footer>
+        <span class="form-btn-group">
+          <vc-button @click="clear" type="major">确定</vc-button>
+        </span>
+        <span class="form-btn-group">
+          <vc-button :type="'cancel'" @click="modalShow = false"
+            >取消</vc-button
+          >
+        </span>
+      </template>
+    </vc-dialog>
   </div>
 </template>
 
@@ -125,7 +164,24 @@ export default {
       ],
       curProducts: "fuli",
       curTableName: "fuli_product",
-      list: []
+      list: [],
+      msgShow: false,
+      message: "操作成功",
+      isOpering: false,
+      warnShow: false,
+      modalShow: false,
+      multiActionOptions: [
+        { label: "运费", value: "yunfei", disable: false },
+        { label: "标价倍数", value: "saleB", disable: false },
+        { label: "折扣", value: "zhekou", disable: false },
+        {
+          label: "优惠券",
+          value: "youhuiquan",
+          disable: false
+        }
+      ],
+      mutilOperCol: "",
+      multiValue: ""
     };
   },
   created() {
@@ -134,18 +190,60 @@ export default {
     }, 1000);
   },
   methods: {
-    refresh() {
-      this.getTableList();
+    doMutilOper() {
+      if (
+        !this.list ||
+        !this.list.length ||
+        !this.multiValue ||
+        !this.mutilOperCol
+      ) {
+        this.multiValue = "";
+        return;
+      }
+      if (isNaN(this.multiValue)) {
+        return;
+      }
+      if (this.columns.find(x => x.key == this.mutilOperCol)) {
+        for (let item of this.list) {
+          item[this.mutilOperCol] = this.multiValue;
+          this.inputChange(item, this.mutilOperCol);
+        }
+      }
     },
-    getTableList() {
+    showWarnMsg() {
+      this.warnShow = true;
+      setTimeout(() => {
+        this.warnShow = false;
+      }, 1000);
+    },
+    showActionMsg(text) {
+      if (text) {
+        this.message = text || "操作成功";
+        this.msgShow = true;
+      } else {
+        this.message = "操作成功";
+      }
+    },
+    refresh() {
+      if (this.isOpering) {
+        this.showWarnMsg();
+        return;
+      }
+      this.isOpering = true;
+      this.getTableList("refresh");
+    },
+    getTableList(type) {
       if (this.$IDB) {
         this.$IDB
           .query({
             tableName: this.curTableName
           })
           .then(res => {
-            console.log("** getTableList **");
             this.list = res.data || [];
+            if (type) {
+              this.showActionMsg("重新获取表数据成功!");
+              this.isOpering = false;
+            }
           });
       }
     },
@@ -202,6 +300,9 @@ export default {
     },
     inputChange: function(line, key) {
       let value = +line[key];
+      if (isNaN(value)) {
+        return;
+      }
       if (key !== "name") {
         if (["newPrice", "saleB", "oldPrice", "yunfei"].includes(key)) {
           if (key == "newPrice") {
@@ -230,6 +331,11 @@ export default {
     },
     saveList: function() {
       if (this.$IDB) {
+        if (this.isOpering) {
+          this.showWarnMsg();
+          return;
+        }
+        this.isOpering = true;
         this.$IDB
           .update({
             tableName: this.curTableName,
@@ -251,19 +357,30 @@ export default {
             }
           })
           .then(res => {
-            console.log("全部数据修改: ", res);
+            this.showActionMsg("全部产品数据保存成功!");
+            this.isOpering = false;
           });
       }
     },
+    goClear() {
+      this.modalShow = true;
+    },
     clear() {
+      this.modalShow = false;
+      if (this.isOpering) {
+        this.showWarnMsg();
+        return;
+      }
       this.list = [];
       if (this.$IDB) {
+        this.isOpering = true;
         this.$IDB
           .delete({
             tableName: this.curTableName
           })
           .then(res => {
-            console.log("删除的数据：", res);
+            this.showActionMsg("删除全部产品数据成功!");
+            this.isOpering = false;
           });
       }
     }
@@ -296,7 +413,7 @@ export default {
   display: inline-block;
   height: 36px;
   line-height: 36px;
-  padding-right: 50px;
+  padding-right: 30px;
   position: absolute;
   right: 0;
 }
@@ -341,5 +458,26 @@ export default {
 }
 .col-item /deep/ .vc-inputs-item .vc-form-group-item {
   min-width: auto;
+}
+.prise-editor .clear-product-conf /deep/ .myDialog {
+  width: 420px;
+}
+.prise-editor .clear-product-conf /deep/ .myDialog .form-btn-group {
+  margin: 10px;
+}
+.prise-editor .prise-cfg .multi-oper {
+  display: flex;
+  align-items: center;
+  height: 36px;
+  position: absolute;
+  right: 115px;
+}
+.prise-editor .prise-cfg .multi-oper .mul-value {
+  width: 80px;
+  margin-left: 8px;
+}
+.prise-editor .prise-cfg .multi-oper .mul-value /deep/ .vc-form-group-item {
+  min-width: auto;
+  height: 30px !important;
 }
 </style>
