@@ -43,22 +43,72 @@
       </div>
       <div class="col-body" v-if="list.length">
         <div class="col-line" v-for="item in list" :key="item.id">
-          <span class="col-item" v-for="col2 in columns" :key="col2.key">
-            <vc-button
-              v-if="col2.key == 'oper'"
-              size="custom"
-              height="24px"
-              style="margin-top: 6px;"
-              @click="delOneline(item)"
-              >删除</vc-button
+          <div class="main-line">
+            <span class="col-item" v-for="col2 in columns" :key="col2.key">
+              <span
+                class="line-expand"
+                v-if="
+                  col2.key == 'name' && item.children && item.children.length
+                "
+                @click.stop="item.expand = !item.expand"
+                >{{ item.expand ? "-" : "+" }}</span
+              >
+              <span class="line-opers" v-if="col2.key == 'oper'">
+                <span class="line-oper" @click="delOneline(item)">删除</span>
+                <span class="line-oper" @click.stop="addChild(item)">添加</span>
+              </span>
+              <span
+                class="lirun-col"
+                :class="{
+                  'has-child': item.children && item.children.length > 0
+                }"
+                v-else-if="
+                  (item.children &&
+                    item.children.length &&
+                    col2.key !== 'name') ||
+                    ['lirun', 'lirunlv'].includes(col2.key)
+                "
+                >{{ item[col2.key] }}</span
+              >
+              <vc-input
+                v-else
+                v-model="item[col2.key]"
+                @change="inputChange(item, col2.key)"
+                required
+              ></vc-input>
+            </span>
+          </div>
+          <div
+            class="child-content"
+            v-show="item.children && item.children.length && item.expand"
+          >
+            <div
+              class="col-line"
+              v-for="item2 in item.children"
+              :key="item2.id"
             >
-            <vc-input
-              v-else
-              v-model="item[col2.key]"
-              @change="inputChange(item, col2.key)"
-              required
-            ></vc-input>
-          </span>
+              <div class="main-line">
+                <span class="col-item" v-for="col3 in columns" :key="col3.key">
+                  <span class="line-opers" v-if="col3.key == 'oper'">
+                    <span class="line-oper" @click="delOneline(item2, 'child')"
+                      >删除</span
+                    >
+                  </span>
+                  <span
+                    class="lirun-col"
+                    v-else-if="['lirun', 'lirunlv'].includes(col3.key)"
+                    >{{ item2[col3.key] }}</span
+                  >
+                  <vc-input
+                    v-else
+                    v-model="item2[col3.key]"
+                    @change="inputChange(item2, col3.key, 'child')"
+                    required
+                  ></vc-input>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -206,7 +256,14 @@ export default {
       if (this.columns.find(x => x.key == this.mutilOperCol)) {
         for (let item of this.list) {
           item[this.mutilOperCol] = this.multiValue;
-          this.inputChange(item, this.mutilOperCol);
+          if (item.children.length) {
+            item.children.forEach(x => {
+              x[this.mutilOperCol] = this.multiValue;
+              this.inputChange(x, this.mutilOperCol, "child");
+            });
+          } else {
+            this.inputChange(item, this.mutilOperCol);
+          }
         }
       }
     },
@@ -240,6 +297,14 @@ export default {
           })
           .then(res => {
             this.list = res.data || [];
+            this.list.forEach(x => {
+              if (!x.children) {
+                x.children = [];
+              }
+              if (x.expand === undefined) {
+                x.expand = false;
+              }
+            });
             if (type) {
               this.showActionMsg("重新获取表数据成功!");
               this.isOpering = false;
@@ -253,25 +318,69 @@ export default {
       this.list = [];
       this.getTableList();
     },
-    delOneline: function(lineitem) {
+    delOneline: function(lineitem, type) {
       if (!this.list || !this.list.length) return;
-      let delIndex = this.list.findIndex(x => x.id == lineitem.id);
-      if (delIndex > -1) {
-        this.list.splice(delIndex, 1);
+      if (type) {
+        let parentItem = this.list.find(x => x.id == lineitem.parentId);
+        if (parentItem && parentItem.children) {
+          let delIndex = parentItem.children.findIndex(
+            x => x.id == lineitem.id
+          );
+          if (delIndex > -1) {
+            parentItem.children.splice(delIndex, 1);
+            this.trigerParentChange(lineitem);
+          }
+        }
+      } else {
+        let delIndex = this.list.findIndex(x => x.id == lineitem.id);
+        if (delIndex > -1) {
+          this.list.splice(delIndex, 1);
+        }
       }
+
       if (this.$IDB) {
-        this.$IDB
-          .delete({
-            tableName: this.curTableName,
-            condition: (item, index) => item.id === lineitem.id
-          })
-          .then(res => {
-            console.log("删除的数据：", res);
-          });
+        if (!type) {
+          this.$IDB
+            .delete({
+              tableName: this.curTableName,
+              condition: (item, index) => item.id === lineitem.id
+            })
+            .then(res => {
+              console.log("删除的数据：", res);
+            });
+        } else {
+          this.$IDB
+            .update({
+              tableName: this.curTableName,
+              condition: (item, index) => item.id === lineitem.parentId,
+              handler: (row, index) => {
+                let fdRow = this.list.find(x => x.id === row.parentId);
+                if (fdRow) {
+                  row.name = fdRow.name;
+                  row.oldPrice = fdRow.oldPrice;
+                  row.saleB = fdRow.saleB;
+                  row.yunfei = fdRow.yunfei;
+                  row.newPrice = fdRow.newPrice;
+                  row.zhekou = fdRow.zhekou;
+                  row.youhuiquan = fdRow.youhuiquan;
+                  row.pingtaikoudian = fdRow.pingtaikoudian;
+                  row.shijiprice = fdRow.shijiprice;
+                  row.lirun = fdRow.lirun;
+                  row.lirunlv = fdRow.lirunlv;
+                  row.children = fdRow.children || [];
+                }
+              }
+            })
+            .then(res => {
+              this.showActionMsg("全部产品数据保存成功!");
+              this.isOpering = false;
+            });
+        }
       }
     },
-    addOneline: function() {
-      let newLine = {
+    addChild(item) {
+      item.children.push({
+        parentId: item.id,
         id: new Date().valueOf(),
         name: "",
         oldPrice: 0,
@@ -285,6 +394,27 @@ export default {
         lirun: 0,
         lirunlv: "0%",
         oper: ""
+      });
+      item.expand = true;
+    },
+    addOneline: function() {
+      let lineID = new Date().valueOf();
+      let newLine = {
+        id: lineID,
+        name: "",
+        oldPrice: 0,
+        saleB: 1,
+        yunfei: 0,
+        newPrice: 0,
+        zhekou: 0.9,
+        youhuiquan: 3,
+        pingtaikoudian: 0.05,
+        shijiprice: 0,
+        lirun: 0,
+        lirunlv: "0%",
+        oper: "",
+        expand: false,
+        children: []
       };
       this.list.push(newLine);
       if (this.$IDB) {
@@ -298,7 +428,7 @@ export default {
           });
       }
     },
-    inputChange: function(line, key) {
+    inputChange: function(line, key, type) {
       let value = +line[key];
       if (isNaN(value)) {
         return;
@@ -327,6 +457,63 @@ export default {
         ).toFixed(2);
         line.lirunlv =
           ((+line.lirun * 100) / +line.shijiprice).toFixed(2) + "%";
+        if (type) {
+          this.trigerParentChange(line);
+        }
+      }
+    },
+    getPriceArr(arr, key) {
+      if (arr.length == 1) {
+        return arr[0][key];
+      } else {
+        let min, max;
+        let trmpArr = arr
+          .map(x => {
+            if (key == "lirunlv") {
+              return parseFloat(x[key]);
+            } else {
+              return +x[key];
+            }
+          })
+          .sort((x, y) => x - y);
+        min = trmpArr[0];
+        max = trmpArr[trmpArr.length - 1];
+        if (key == "lirunlv") {
+          return min + "~" + max + "%";
+        } else {
+          return min + "~" + max;
+        }
+      }
+    },
+    trigerParentChange(line) {
+      let lineId = line.parentId;
+      let row = this.list.find(x => x.id == lineId);
+      if (row) {
+        if (row.children && row.children.length) {
+          row.oldPrice = this.getPriceArr(row.children, "oldPrice");
+          row.saleB = row.children[0].saleB;
+          row.yunfei = row.children[0].yunfei;
+          row.newPrice = this.getPriceArr(row.children, "newPrice");
+          row.zhekou = row.children[0].zhekou;
+          row.youhuiquan = row.children[0].youhuiquan;
+          row.pingtaikoudian = row.children[0].pingtaikoudian;
+          row.shijiprice = this.getPriceArr(row.children, "shijiprice");
+          row.lirun = this.getPriceArr(row.children, "lirun");
+          row.lirunlv = this.getPriceArr(row.children, "lirunlv");
+        } else {
+          row.children = [];
+          row.oldPrice = 0;
+          row.saleB = 1;
+          row.yunfei = 0;
+          row.newPrice = 0;
+          row.zhekou = 0.9;
+          row.youhuiquan = 0;
+          row.pingtaikoudian = 0.05;
+          row.shijiprice = 0;
+          row.lirun = 0;
+          row.lirunlv = "";
+          row.expand = false;
+        }
       }
     },
     saveList: function() {
@@ -353,6 +540,8 @@ export default {
                 row.shijiprice = fdRow.shijiprice;
                 row.lirun = fdRow.lirun;
                 row.lirunlv = fdRow.lirunlv;
+                row.children = fdRow.children || [];
+                row.expand = fdRow.expand;
               }
             }
           })
@@ -449,9 +638,79 @@ export default {
 .prise-editor .prise-list .col-body .col-line {
   display: flex;
   border-bottom: solid 1px #999;
+  flex-direction: column;
 }
-.prise-editor .prise-list .col-body .col-line > .col-item:first-of-type {
+.prise-editor
+  .prise-list
+  .col-body
+  .col-line
+  .main-line
+  > .col-item:first-of-type {
   width: 20%;
+  display: inline-flex;
+  align-items: center;
+}
+.prise-editor .prise-list .col-body .col-line .main-line {
+  display: flex;
+  background: #ffffff;
+}
+.prise-editor .prise-list .col-body .col-line .main-line .line-expand {
+  display: inline-block;
+  font-size: 16px;
+  border: solid 1px;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 13px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.prise-editor .prise-list .col-body .col-line .child-content {
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px #999;
+  padding-left: 66px;
+  background: #ccffff;
+}
+.prise-editor
+  .prise-list
+  .col-body
+  .col-line
+  .child-content
+  .col-line
+  .main-line
+  > .col-item:first-of-type {
+  width: calc(20% - 68.5px);
+  border-left: solid 1px #66ccff;
+}
+.prise-editor .prise-list .col-body .lirun-col {
+  height: 36px;
+  display: inline-block;
+  line-height: 36px;
+  font-size: 14px;
+  padding-left: 10px;
+}
+.prise-editor .prise-list .col-body .lirun-col.has-child {
+  box-sizing: border-box;
+  font-size: 12px;
+  word-break: break-all;
+  line-height: 18px;
+  display: inline-flex;
+  align-items: center;
+}
+.prise-editor .prise-list .col-body .line-opers {
+  display: inline-flex;
+  align-items: center;
+  height: 35px;
+}
+.prise-editor .prise-list .col-body .line-opers .line-oper {
+  cursor: pointer;
+  padding: 0 8px;
+  font-size: 13px;
+}
+.prise-editor .prise-list .col-body .line-opers .line-oper:hover {
+  color: #0099ff;
 }
 .col-item /deep/ .vc-inputs-item .vc-form-group-item input {
   border: none;
