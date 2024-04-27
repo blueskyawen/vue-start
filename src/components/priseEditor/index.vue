@@ -1,7 +1,7 @@
 <template>
   <div class="prise-editor">
     <div class="prise-cfg">
-      <vc-button type="add" @click="addOneline">新增一行产品</vc-button>
+      <vc-button type="add" @click="addOneline">新增</vc-button>
       <vc-button @click="saveList" style="margin-left: 10px">保存</vc-button>
       <vc-button type="cancel" @click="goClear" style="margin-left: 10px"
         >清空</vc-button
@@ -19,6 +19,14 @@
         >
       </div>
       <div class="multi-oper">
+        <span>
+          <vc-input
+            class="search-input"
+            type="text"
+            v-model="searchValue"
+            :search="true"
+          ></vc-input>
+        </span>
         <span>批量操作</span>
         <vc-select
           style="width: 100px;height: 28px;margin-left: 8px;"
@@ -42,7 +50,12 @@
         >
       </div>
       <div class="col-body" v-if="list.length">
-        <div class="col-line" v-for="item in list" :key="item.id">
+        <div
+          class="col-line"
+          v-for="item in list"
+          :key="item.id"
+          v-show="isShowLine(item.name)"
+        >
           <div class="main-line">
             <span class="col-item" v-for="col2 in columns" :key="col2.key">
               <span
@@ -215,6 +228,7 @@ export default {
       curProducts: "fuli",
       curTableName: "fuli_product",
       list: [],
+      cloneList: [],
       msgShow: false,
       message: "操作成功",
       isOpering: false,
@@ -231,7 +245,8 @@ export default {
         }
       ],
       mutilOperCol: "",
-      multiValue: ""
+      multiValue: "",
+      searchValue: ""
     };
   },
   created() {
@@ -240,6 +255,10 @@ export default {
     }, 1000);
   },
   methods: {
+    isShowLine(name) {
+      if (!this.searchValue) return true;
+      return name && name.includes(this.searchValue);
+    },
     doMutilOper() {
       if (
         !this.list ||
@@ -738,5 +757,14 @@ export default {
 .prise-editor .prise-cfg .multi-oper .mul-value /deep/ .vc-form-group-item {
   min-width: auto;
   height: 30px !important;
+}
+.prise-editor .prise-cfg .search {
+  margin-right: 8px;
+}
+.prise-editor .prise-cfg .search .search-input /deep/ .vc-form-group-item {
+  height: 30px;
+}
+.prise-editor .prise-cfg .search .search-input /deep/ .nc-form-group-search {
+  scale: 0.9;
 }
 </style>
