@@ -51,6 +51,10 @@ Vue.use(VueAxios, axios);
 Vue.use(vcCat);
 Vue.use(VcCat);
 
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+Vue.use(ElementUI);
+
 Vue.config.productionTip = false;
 Vue.config.keyCodes.awen = 67;
 

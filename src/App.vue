@@ -87,7 +87,7 @@ export default {
           url: "/richtextEditor"
         },
         { value: "priseEditor", name: "价格计算器", url: "/priseEditor" },
-        { value: "doudianDayly", name: "电商日记", url: "/doudianDayly" },
+        { value: "saleDairy", name: "电商日记", url: "/saleDairy" },
         {
           value: "xiapiPriseEditor",
           name: "虾皮价格计算器",
