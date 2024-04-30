@@ -72,16 +72,12 @@
       <el-table-column fixed="right" label="操作" width="90">
         <template slot-scope="scope">
           <span class="line-opers">
-            <i
-              class="line-oper el-icon-edit"
-              title="编辑"
-              @click.stop="editOneLine(scope.row)"
-            ></i>
-            <i
-              class="line-oper el-icon-delete"
-              title="删除"
-              @click.stop="delOneline(scope.row)"
-            ></i>
+            <span class="line-oper" @click.stop="editOneLine(scope.row)"
+              >编辑</span
+            >
+            <span class="line-oper" @click.stop="delOneline(scope.row)"
+              >删除</span
+            >
           </span>
         </template>
       </el-table-column>
