@@ -69,7 +69,7 @@
           <p style="padding: 5px" v-html="scope.row['tomorrow']"></p>
         </template>
       </el-table-column>
-      <el-table-column fixed="right" label="操作" width="90">
+      <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <span class="line-opers">
             <span class="line-oper" @click.stop="editOneLine(scope.row)"
