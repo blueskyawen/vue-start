@@ -50,57 +50,42 @@
       </div>
       <span class="prodNum">行数: {{ list ? list.length : 0 }}</span>
     </div>
-    <div class="prise-list" v-show="!disableTableAction">
-      <div class="col-head">
-        <span
-          class="col-head-item"
-          v-for="col in columns"
-          :key="col.key"
-          :style="{ width: col.width }"
-        >
-          {{ col.label }}</span
-        >
-      </div>
-      <div class="col-body" v-if="list.length">
-        <div
-          class="col-line"
-          v-for="item in list"
-          :key="item.id"
-          v-show="isShowLine(item)"
-        >
-          <div class="main-line">
-            <span
-              class="col-item"
-              v-for="col2 in columns"
-              :key="col2.key"
-              :style="{ width: col2.width }"
-            >
-              <span v-if="col2.key === 'name'" class="normal-col">
-                <span>{{ item[col2.key] }}</span>
-              </span>
-              <span class="line-opers" v-else-if="col2.key == 'oper'">
-                <i
-                  class="line-oper el-icon-edit"
-                  title="编辑"
-                  @click.stop="editOneLine(item)"
-                ></i>
-                <i
-                  class="line-oper el-icon-delete"
-                  title="删除"
-                  @click.stop="delOneline(item)"
-                ></i>
-              </span>
-              <p
-                style="padding: 5px"
-                v-else-if="['today', 'tomorrow'].includes(col2.key)"
-                v-html="item[col2.key]"
-              ></p>
-              <span class="normal-col" v-else>{{ item[col2.key] }}</span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <el-table
+      v-if="showTable"
+      v-show="!disableTableAction"
+      :data="list"
+      :height="tableHeight"
+      border
+      style="width: 100%"
+    >
+      <el-table-column prop="name" label="日期" width="160"></el-table-column>
+      <el-table-column prop="today" label="今日计划" width="420">
+        <template slot-scope="scope">
+          <p style="padding: 5px" v-html="scope.row['today']"></p>
+        </template>
+      </el-table-column>
+      <el-table-column prop="tomorrow" label="今日进展">
+        <template slot-scope="scope">
+          <p style="padding: 5px" v-html="scope.row['tomorrow']"></p>
+        </template>
+      </el-table-column>
+      <el-table-column fixed="right" label="操作" width="90">
+        <template slot-scope="scope">
+          <span class="line-opers">
+            <i
+              class="line-oper el-icon-edit"
+              title="编辑"
+              @click.stop="editOneLine(scope.row)"
+            ></i>
+            <i
+              class="line-oper el-icon-delete"
+              title="删除"
+              @click.stop="delOneline(scope.row)"
+            ></i>
+          </span>
+        </template>
+      </el-table-column>
+    </el-table>
     <xiapiStatic v-if="disableTableAction"></xiapiStatic>
     <vc-info :type="'success'" v-model="msgShow">{{ message }}</vc-info>
     <vc-info :type="'warn'" v-model="warnShow"
@@ -151,7 +136,8 @@ export default {
       columns_xiapi: [
         {
           label: "日期",
-          key: "date"
+          key: "name",
+          width: "160px"
         },
         {
           label: "今日",
@@ -184,6 +170,7 @@ export default {
       curPlane: "doudian",
       curTableName: "doudian_dairly",
       list: [],
+      cloneList: [],
       showAddLine: false,
       msgShow: false,
       message: "操作成功",
@@ -223,11 +210,15 @@ export default {
       searchValue: [],
       searchArr: [],
       addType: "add",
-      editRow: {}
+      editRow: {},
+      showTable: false,
+      tableHeight: 300
     };
   },
   created() {
     this.setColumns();
+    this.tableHeight = window.innerHeight - 145;
+    this.showTable = true;
     setTimeout(() => {
       this.getTableList();
     }, 1000);
@@ -250,27 +241,28 @@ export default {
     },
     isShowLine(item) {
       if (!this.searchArr || !this.searchArr.length) return true;
-      console.log(this.searchArr);
-      console.log(item.date);
+      let lineDate = item.date ? new Date(item.date) : null;
       return (
-        item.date &&
-        item.date > this.searchArr[0] &&
-        item.date < this.searchArr[1]
+        lineDate && lineDate > this.searchArr[0] && lineDate < this.searchArr[1]
       );
     },
     filterDate() {
-      if (!this.list || !this.list.length) {
+      if (!this.cloneList || !this.cloneList.length) {
         return;
       }
       console.log(this.searchValue);
       if (!this.searchValue || this.searchValue.length < 2) {
+        this.searchValue = [];
         this.searchArr = [];
+        this.refresh();
         return;
       }
       this.searchArr = [
         new Date(this.searchValue[0].toLocaleDateString() + " 00:00:00"),
         new Date(this.searchValue[1].toLocaleDateString() + " 23:59:59")
       ];
+      console.log(this.cloneList);
+      this.list = this.cloneList.filter(x => this.isShowLine(x));
     },
     showWarnMsg() {
       this.warnShow = true;
@@ -304,6 +296,7 @@ export default {
           .then(res => {
             this.list = res.data || [];
             this.list.sort((x, y) => x.date - y.date);
+            this.cloneList = JSON.parse(JSON.stringify(this.list));
             if (type) {
               this.showActionMsg("重新获取数据成功!");
               this.isOpering = false;
@@ -325,6 +318,8 @@ export default {
       let delIndex = this.list.findIndex(x => x.id == lineitem.id);
       if (delIndex > -1) {
         this.list.splice(delIndex, 1);
+        let delIndex2 = this.cloneList.findIndex(x => x.id == lineitem.id);
+        this.cloneList.splice(delIndex2, 1);
         if (this.$IDBM) {
           this.$IDBM
             .delete({
@@ -351,6 +346,7 @@ export default {
       let newLine = { ...v, oper: "" };
       if (this.addType === "add") {
         this.list.push(newLine);
+        this.cloneList.push(newLine);
         if (this.$IDBM) {
           this.$IDBM
             .add({
@@ -368,6 +364,13 @@ export default {
           fdRow.date = newLine.date;
           fdRow.today = newLine.today;
           fdRow.tomorrow = newLine.tomorrow;
+          let fdRow2 = this.cloneList.find(x => x.id === newLine.id);
+          if (fdRow2) {
+            fdRow2.name = newLine.name;
+            fdfdRow2Row.date = newLine.date;
+            fdRow2.today = newLine.today;
+            fdRow2.tomorrow = newLine.tomorrow;
+          }
           if (this.$IDBM) {
             this.$IDBM
               .update({
@@ -404,7 +407,7 @@ export default {
           .update({
             tableName: this.curTableName,
             handler: (row, index) => {
-              let fdRow = this.list.find(x => x.id === row.id);
+              let fdRow = this.cloneList.find(x => x.id === row.id);
               if (fdRow) {
                 row.name = fdRow.name;
                 row.date = fdRow.date;
@@ -495,17 +498,17 @@ export default {
   padding: 8px;
   box-sizing: border-box;
 }
-.prise-editor .prise-list .col-body .line-opers {
+.prise-editor .line-opers {
   display: inline-flex;
   align-items: center;
   height: 35px;
 }
-.prise-editor .prise-list .col-body .line-opers .line-oper {
+.prise-editor .line-opers .line-oper {
   cursor: pointer;
   font-size: 14px;
   padding: 8px;
 }
-.prise-editor .prise-list .col-body .line-opers .line-oper:hover {
+.prise-editor .line-opers .line-oper:hover {
   color: #0099ff;
 }
 .col-item /deep/ .vc-inputs-item .vc-form-group-item input {
