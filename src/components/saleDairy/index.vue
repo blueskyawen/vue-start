@@ -363,7 +363,7 @@ export default {
           let fdRow2 = this.cloneList.find(x => x.id === newLine.id);
           if (fdRow2) {
             fdRow2.name = newLine.name;
-            fdfdRow2Row.date = newLine.date;
+            fdRow2.date = newLine.date;
             fdRow2.today = newLine.today;
             fdRow2.tomorrow = newLine.tomorrow;
           }
@@ -375,10 +375,10 @@ export default {
                 handler: (row, index) => {
                   let fdRow = this.list.find(x => x.id === row.id);
                   if (fdRow) {
-                    row.name = newLine.name;
-                    row.date = newLine.date;
-                    row.today = newLine.today;
-                    row.tomorrow = newLine.tomorrow;
+                    row.name = fdRow.name;
+                    row.date = fdRow.date;
+                    row.today = fdRow.today;
+                    row.tomorrow = fdRow.tomorrow;
                   }
                 }
               })
