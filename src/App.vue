@@ -72,7 +72,7 @@ export default {
         "markdownEditor",
         "richtextEditor",
         "priseEditor",
-        "doudianDayly",
+        "saleDairy",
         "xiapiPriseEditor"
       ],
       menuOptions: [
@@ -98,7 +98,8 @@ export default {
         "markdownEditor",
         "richtextEditor",
         "priseEditor",
-        "doudianDayly"
+        "saleDairy",
+        "xiapiPriseEditor"
       ],
       tableName: "select_menus"
     };
@@ -126,6 +127,11 @@ export default {
   },
   methods: {
     getMenus() {
+      let userRole = this.$route.query.role;
+      if (userRole !== "admin") {
+        this.selectMenus = ["priseEditor", "saleDairy", "xiapiPriseEditor"];
+        return;
+      }
       let menusCoach = localStorage.getItem("menus-coach");
       if (menusCoach) {
         console.log("1111*******");

@@ -358,7 +358,7 @@ export default {
         (100 - +row.yongjin - +row.jiaoyishouxu - +row.fuwu - +row.other)
       ).toFixed(2);
       row.soldPrice = (
-        row.wulirunprice *
+        +row.wulirunprice *
         2 *
         (100 / (100 - +row.lirunlv))
       ).toFixed(2);
@@ -371,7 +371,7 @@ export default {
         (100 - +row.yongjin - +row.jiaoyishouxu - +row.fuwu - +row.other)
       ).toFixed(2);
       row.soldPrice = (
-        row.wulirunprice *
+        +row.wulirunprice *
         2 *
         ((100 - +row.lirunlv) / 100)
       ).toFixed(2);
@@ -379,9 +379,9 @@ export default {
     // 利润率变化, 引发变化值: 当地最终商品售价
     handleLiRunlvChange(row) {
       row.soldPrice = (
-        row.wulirunprice *
+        +row.wulirunprice *
         2 *
-        ((100 + +row.lirunlv) / 100)
+        (100 / (100 - +row.lirunlv))
       ).toFixed(2);
     },
     // 国内运费/货代贴单费变化, 引发变化值: 当地汇率换算的成本值, 无利润定价, 当地最终商品售价
@@ -395,7 +395,7 @@ export default {
         (100 - +row.yongjin - +row.jiaoyishouxu - +row.fuwu - +row.other)
       ).toFixed(2);
       row.soldPrice = (
-        row.wulirunprice *
+        +row.wulirunprice *
         2 *
         (100 / (100 - +row.lirunlv))
       ).toFixed(2);
@@ -422,7 +422,7 @@ export default {
             (100 - +row.yongjin - +row.jiaoyishouxu - +row.fuwu - +row.other)
           ).toFixed(2);
           row.soldPrice = (
-            row.wulirunprice *
+            +row.wulirunprice *
             2 *
             (100 / (100 - +row.lirunlv))
           ).toFixed(2);
