@@ -91,7 +91,7 @@ export default {
         {
           value: "xiapiPriseEditor",
           name: "虾皮价格计算器",
-          url: "/xiapiPriseEditor"
+          url: "/xiapi"
         }
       ],
       selectMenus: [

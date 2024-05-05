@@ -25,6 +25,7 @@ import MarkdownEditor from "@/components/MarkdownEditor/editor.vue";
 import RichtextEditor from "@/components/RichtextEditor/index.vue";
 import priseEditor from "@/components/priseEditor/index.vue";
 import saleDairy from "@/components/saleDairy/index.vue";
+import xiapi from "@/components/xiapi/index.vue";
 
 Vue.use(VueRouter);
 
@@ -128,6 +129,10 @@ const routes = [
   {
     path: "/saleDairy",
     component: saleDairy
+  },
+  {
+    path: "/xiapi",
+    component: xiapi
   },
   { path: "*", component: NotFound }
 ];
