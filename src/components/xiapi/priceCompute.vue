@@ -161,8 +161,8 @@ export default {
     return {
       list: [],
       formInline: {
-        chengbenPrice: "10",
-        weight: "1"
+        chengbenPrice: "",
+        weight: ""
       },
       columns: [
         {
@@ -243,7 +243,7 @@ export default {
       newLine: {
         id: "",
         name: "taiwan",
-        huilv: "1",
+        huilv: 4.46,
         type: "pujian",
         lvrunlv: "0",
         soldPrice: "",
