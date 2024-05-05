@@ -162,7 +162,7 @@ export default {
       list: [],
       formInline: {
         chengbenPrice: "10",
-        weight: "100"
+        weight: "1"
       },
       columns: [
         {
