@@ -321,7 +321,8 @@ export default {
         row.huilv = this.huilvMap[row.name];
         this.ha;
         row.dangdichengben = (
-          row.huilv * +this.formInline.chengbenPrice
+          row.huilv *
+          (+this.formInline.chengbenPrice + +row.myyunfei + +row.tiedan)
         ).toFixed(2);
         this.handleHuilvChange(row);
         return;
