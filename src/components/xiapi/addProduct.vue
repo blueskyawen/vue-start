@@ -67,19 +67,34 @@
           <el-input class="col-input" v-model="form.lirunlv"></el-input>
         </el-form-item>
         <el-form-item label="售价(*2)当地货币" :label-width="formLabelWidth">
-          <el-input class="col-input" v-model="form.soldPrice"></el-input>
+          <el-input
+            class="col-input"
+            v-model="form.soldPrice"
+            @change="handlezhekouchange"
+          ></el-input>
         </el-form-item>
-        <el-form-item
-          label="当地成本价(汇率换算)"
-          :label-width="formLabelWidth"
-        >
-          <el-input class="col-input" v-model="form.dangdichengben"></el-input>
+        <el-form-item label="折扣%" :label-width="formLabelWidth">
+          <span
+            ><el-input
+              class="col-input"
+              v-model="form.zhekou"
+              width="260"
+              @change="handlezhekouchange"
+            ></el-input>
+            <span> 折扣后售价: {{ form.zhekouhouPrice }}</span></span
+          >
         </el-form-item>
         <el-form-item label="无利润定价" :label-width="formLabelWidth">
           <el-input class="col-input" v-model="form.wulirunprice"></el-input>
         </el-form-item>
         <el-form-item label="卖家承担运费(藏价)" :label-width="formLabelWidth">
           <el-input class="col-input" v-model="form.cangjia"></el-input>
+        </el-form-item>
+        <el-form-item
+          label="当地成本价(汇率换算)"
+          :label-width="formLabelWidth"
+        >
+          <el-input class="col-input" v-model="form.dangdichengben"></el-input>
         </el-form-item>
         <el-form-item label="国内运费RMB" :label-width="formLabelWidth">
           <el-input class="col-input" v-model="form.myyunfei"></el-input>
@@ -156,6 +171,8 @@ export default {
         pTYpe: "",
         lirunlv: "",
         soldPrice: "",
+        zhekou: "100",
+        zhekouhouPrice: "",
         dangdichengben: "",
         wulirunprice: "",
         cangjia: "",
@@ -266,6 +283,14 @@ export default {
         id: this.type == "add" ? lineId : this.row.id,
         siteName: this.siteOptions.find(x => x.value == this.form.site).name
       });
+    },
+    handlezhekouchange() {
+      if (this.form.soldPrice && this.form.zhekou) {
+        this.form.zhekouhouPrice = (
+          (+this.form.soldPrice * +this.form.zhekou) /
+          100
+        ).toFixed(1);
+      }
     }
   },
   watch: {

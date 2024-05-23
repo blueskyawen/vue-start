@@ -10,7 +10,7 @@
       <span class="search">搜索区</span>
     </div>
     <div class="list">
-      <el-table :data="list" border style="width: 100%">
+      <el-table :data="list" border style="width: 100%" :height="tableHeight">
         <el-table-column prop="siteName" label="站点" width="100">
         </el-table-column>
         <el-table-column prop="huilv" label="汇率" width="80">
@@ -50,9 +50,13 @@
           width="120"
         >
         </el-table-column>
-        <el-table-column prop="cangjia" label="卖家承担运费(藏价)" width="100">
+        <el-table-column prop="zhekou" label="折扣%" width="80">
+        </el-table-column>
+        <el-table-column prop="zhekouhouPrice" label="折扣后售价" width="80">
         </el-table-column>
         <el-table-column prop="wulirunprice" label="无利润定价" width="80">
+        </el-table-column>
+        <el-table-column prop="cangjia" label="卖家承担运费(藏价)" width="100">
         </el-table-column>
         <el-table-column prop="myyunfei" label="国内运费RMB" width="80">
         </el-table-column>
@@ -154,10 +158,12 @@ export default {
         yingliu: 1,
         jichu: 2,
         lirun: 3
-      }
+      },
+      tableHeight: 300
     };
   },
   created() {
+    this.tableHeight = window.innerHeight - 180;
     this.initData();
     this.getTableList();
   },
@@ -232,19 +238,20 @@ export default {
       } else {
         let fdRow = this.list.find(x => x.id === newLine.id);
         if (fdRow) {
-          Object.keys(fdRow).forEach(k => {
+          Object.keys(newLine).forEach(k => {
             if (k !== "id") {
               fdRow[k] = newLine[k];
             }
           });
           let fdRow2 = this.cloneList.find(x => x.id === newLine.id);
           if (fdRow2) {
-            Object.keys(fdRow2).forEach(k => {
+            Object.keys(newLine).forEach(k => {
               if (k !== "id") {
                 fdRow2[k] = newLine[k];
               }
             });
           }
+          console.log(this.list);
           if (this.$IDBM2) {
             this.$IDBM2
               .update({
