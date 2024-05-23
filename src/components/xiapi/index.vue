@@ -10,7 +10,7 @@
       >
     </div>
     <priceCompute v-show="curPlane === 'price-compute'"></priceCompute>
-    <products v-show="curPlane !== 'price-compute'"></products>
+    <products v-if="curPlane !== 'price-compute'"></products>
   </div>
 </template>
 
@@ -31,16 +31,8 @@ export default {
           label: "价格计算器"
         },
         {
-          id: "baokuan",
-          label: "爆款"
-        },
-        {
-          id: "yingliukuan",
-          label: "引流款"
-        },
-        {
-          id: "lirunkuan",
-          label: "利润款"
+          id: "product",
+          label: "商品列表"
         }
       ],
       curPlane: "price-compute"

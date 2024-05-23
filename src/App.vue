@@ -124,6 +124,13 @@ export default {
         }
       });
     }
+    if (this.$IDBM2) {
+      this.$IDBM2.getDB().then(db => {
+        if (db && db.close) {
+          db.close();
+        }
+      });
+    }
   },
   methods: {
     getMenus() {
