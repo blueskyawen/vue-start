@@ -3,8 +3,9 @@
     <div class="head">
       <span class="oper"
         ><el-button type="primary" @click="addLine">新增</el-button>
-        <vc-button @click="saveList" style="margin-left: 10px"
-          >保存</vc-button
+        <vc-button @click="saveList" style="margin-left: 10px">保存</vc-button>
+        <vc-button type="cancel" @click="refresh" style="margin-left: 10px"
+          >刷新</vc-button
         ></span
       >
       <span class="search">搜索区</span>
@@ -52,7 +53,13 @@
         </el-table-column>
         <el-table-column prop="zhekou" label="折扣%" width="80">
         </el-table-column>
-        <el-table-column prop="zhekouhouPrice" label="折扣后售价" width="80">
+        <el-table-column prop="youhuiquan" label="优惠券" width="80">
+        </el-table-column>
+        <el-table-column
+          prop="zhekouhouPrice"
+          label="折扣和优惠后售价"
+          width="80"
+        >
         </el-table-column>
         <el-table-column prop="wulirunprice" label="无利润定价" width="80">
         </el-table-column>
@@ -193,7 +200,10 @@ export default {
         }
       });
     },
-    getTableList() {
+    refresh() {
+      this.getTableList("refresh");
+    },
+    getTableList(type) {
       if (this.$IDBM2) {
         this.$IDBM2
           .query({
@@ -207,6 +217,12 @@ export default {
                 this.fenleiSortMap[y.selectPtype]
             );
             this.cloneList = JSON.parse(JSON.stringify(this.list));
+            if (type) {
+              this.$message({
+                message: "重新获取数据成功!",
+                type: "success"
+              });
+            }
           });
       }
     },

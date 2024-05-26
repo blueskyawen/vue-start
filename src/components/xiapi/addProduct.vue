@@ -78,10 +78,19 @@
             ><el-input
               class="col-input"
               v-model="form.zhekou"
-              width="260"
+              width="200"
               @change="handlezhekouchange"
             ></el-input>
-            <span> 折扣后售价: {{ form.zhekouhouPrice }}</span></span
+            <span>
+              优惠券:
+              <el-input
+                class="col-input"
+                v-model="form.youhuiquan"
+                width="200"
+                @change="handlezhekouchange"
+              ></el-input
+            ></span>
+            <span> 折扣及优惠后售价: {{ form.zhekouhouPrice }}</span></span
           >
         </el-form-item>
         <el-form-item label="无利润定价" :label-width="formLabelWidth">
@@ -172,6 +181,7 @@ export default {
         lirunlv: "",
         soldPrice: "",
         zhekou: "100",
+        youhuiquan: "0",
         zhekouhouPrice: "",
         dangdichengben: "",
         wulirunprice: "",
@@ -280,6 +290,7 @@ export default {
       let lineId = new Date().valueOf();
       this.$emit("add-row", {
         ...this.form,
+        huilv: this.huilvMap[this.form.site],
         id: this.type == "add" ? lineId : this.row.id,
         siteName: this.siteOptions.find(x => x.value == this.form.site).name
       });
@@ -287,8 +298,8 @@ export default {
     handlezhekouchange() {
       if (this.form.soldPrice && this.form.zhekou) {
         this.form.zhekouhouPrice = (
-          (+this.form.soldPrice * +this.form.zhekou) /
-          100
+          (+this.form.soldPrice * +this.form.zhekou) / 100 -
+          +this.form.youhuiquan
         ).toFixed(1);
       }
     }
