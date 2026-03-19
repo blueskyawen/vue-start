@@ -16,10 +16,8 @@
         >
       </div>
       <span class="user-set">
+        <span class="nav-set" @click="openMenuSet">显示菜单</span>
         <img src="./assets/user1.jpeg" />
-        <span class="set-plate">
-          <span @click.stop="openMenuSet">菜单</span>
-        </span>
       </span>
     </header>
     <article>
@@ -73,7 +71,7 @@ export default {
         "richtextEditor",
         "priseEditor",
         "saleDairy",
-        "xiapiPriseEditor"
+        "xiapiPriseEditor",
       ],
       menuOptions: [
         { value: "hello", name: "hello", url: "/hello" },
@@ -84,24 +82,24 @@ export default {
         {
           value: "richtextEditor",
           name: "富文本编辑器",
-          url: "/richtextEditor"
+          url: "/richtextEditor",
         },
         { value: "priseEditor", name: "价格计算器", url: "/priseEditor" },
         { value: "saleDairy", name: "电商日记", url: "/saleDairy" },
         {
           value: "xiapiPriseEditor",
           name: "虾皮价格计算器",
-          url: "/xiapi"
-        }
+          url: "/xiapi",
+        },
       ],
       selectMenus: [
         "markdownEditor",
         "richtextEditor",
         "priseEditor",
         "saleDairy",
-        "xiapiPriseEditor"
+        "xiapiPriseEditor",
       ],
-      tableName: "select_menus"
+      tableName: "select_menus",
     };
   },
   created() {
@@ -111,21 +109,21 @@ export default {
   },
   beforeDestroy() {
     if (this.$IDB) {
-      this.$IDB.getDB().then(db => {
+      this.$IDB.getDB().then((db) => {
         if (db && db.close) {
           db.close();
         }
       });
     }
     if (this.$IDBM) {
-      this.$IDBM.getDB().then(db => {
+      this.$IDBM.getDB().then((db) => {
         if (db && db.close) {
           db.close();
         }
       });
     }
     if (this.$IDBM2) {
-      this.$IDBM2.getDB().then(db => {
+      this.$IDBM2.getDB().then((db) => {
         if (db && db.close) {
           db.close();
         }
@@ -134,11 +132,6 @@ export default {
   },
   methods: {
     getMenus() {
-      let userRole = this.$route.query.role;
-      if (userRole !== "admin") {
-        this.selectMenus = ["priseEditor", "saleDairy", "xiapiPriseEditor"];
-        return;
-      }
       let menusCoach = localStorage.getItem("menus-coach");
       if (menusCoach) {
         console.log("1111*******");
@@ -154,8 +147,8 @@ export default {
     menuSetConfiem() {
       localStorage.setItem("menus-coach", JSON.stringify(this.selectMenus));
       this.showMenuSet = false;
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -215,37 +208,23 @@ article {
   box-sizing: border-box;
 }
 .user-set {
-  width: 42px;
-  height: 42px;
   position: absolute;
-  top: 9px;
-  right: 10px;
+  top: 10px;
+  right: 20px;
+  display: inline-flex;
+  align-items: center;
+}
+.user-set .nav-set {
+  font-size: 13px;
+  margin-right: 14px;
+}
+.user-set .nav-set:hover {
+  cursor: pointer;
+  color: hsl(221, 89%, 46%);
 }
 .user-set > img {
-  width: 100%;
-  height: 100%;
+  width: 40px;
+  height: 40px;
   border-radius: 100%;
-}
-.user-set .set-plate {
-  position: absolute;
-  width: 60px;
-  padding: 6px;
-  display: none;
-  top: 42px;
-  right: 0;
-  border: solid 1px #a19999;
-  border-radius: 3px;
-}
-.user-set:hover .set-plate {
-  display: inline-block;
-}
-.user-set .set-plate > span {
-  width: 100%;
-  height: 28px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.user-set .set-plate > span:hover {
-  color: #006600;
 }
 </style>

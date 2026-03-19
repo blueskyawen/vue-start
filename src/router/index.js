@@ -35,13 +35,13 @@ function lazyLoadView() {
     loading: asyncLoading,
     error: asyncError,
     delay: 200,
-    timeout: 15000
+    timeout: 15000,
   });
   return Promise.resolve({
     functional: true,
     render(h, { data, children }) {
       return h(asyncComponentForm, data, children);
-    }
+    },
   });
 }
 
@@ -55,12 +55,12 @@ const routes = [
       { path: "template", component: helloTemplate },
       {
         path: "innerDirective",
-        component: () => import("@/components/hello/hello-directive")
+        component: () => import("@/components/hello/hello-directive"),
       },
       { path: "styles", component: helloStyle },
       { path: "form", component: () => lazyLoadView() },
-      { path: "event", component: helloEvent }
-    ]
+      { path: "event", component: helloEvent },
+    ],
   },
   { path: "/basic", component: Basic },
   {
@@ -76,9 +76,9 @@ const routes = [
           {
             path: "detail/:id",
             component: HeroDetail,
-            props: { navFrom: "dashboard" }
-          }
-        ]
+            props: { navFrom: "dashboard" },
+          },
+        ],
       },
       {
         path: "herolist",
@@ -93,15 +93,15 @@ const routes = [
             beforeEnter: (to, from, next) => {
               console.log("beforeEnter 01");
               next();
-            }
-          }
-        ]
+            },
+          },
+        ],
       },
       {
         path: "addhero",
-        component: AddHero
-      }
-    ]
+        component: AddHero,
+      },
+    ],
   },
   {
     path: "/vuex",
@@ -111,34 +111,35 @@ const routes = [
       { path: "state", component: state },
       { path: "getter", component: getter },
       { path: "action", component: action },
-      { path: "module", component: module }
-    ]
+      { path: "module", component: module },
+    ],
   },
   {
     path: "/markdownEditor",
-    component: MarkdownEditor
+    component: MarkdownEditor,
   },
   {
     path: "/richtextEditor",
-    component: RichtextEditor
+    component: RichtextEditor,
   },
   {
     path: "/priseEditor",
-    component: priseEditor
+    component: priseEditor,
   },
   {
     path: "/saleDairy",
-    component: saleDairy
+    component: saleDairy,
   },
   {
     path: "/xiapi",
-    component: xiapi
+    component: xiapi,
   },
-  { path: "*", component: NotFound }
+  { path: "*", component: NotFound },
 ];
 
 const router = new VueRouter({
   routes: routes,
+  mode: "history",
   linkActiveClass: "link-active",
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -146,13 +147,13 @@ const router = new VueRouter({
     } else {
       return { x: 0, y: 0 };
     }
-  }
+  },
 });
 router.beforeEach((to, from, next) => {
   // console.log('route beforeEach 01')
   // console.log(to)
   // console.log(from)
-  if (to.matched.some(item => item.meta.requireAuth)) {
+  if (to.matched.some((item) => item.meta.requireAuth)) {
     if (
       from.path === "/advance" &&
       to.path === "/advance/herolist" &&
