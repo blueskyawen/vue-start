@@ -1,47 +1,56 @@
 export default {
   namespaced: true,
   state: {
-    city: '上饶',
-    name: '广丰',
-    site: '马家柚'
+    city: "上饶",
+    name: "广丰",
+    site: "马家柚",
   },
   getters: {
     city_name: (state) => {
-      return state.city
+      return state.city;
     },
     person_name: (state) => {
-      return state.name
+      return state.name;
     },
     site_name: (state) => {
-      return state.site
+      return state.site;
     },
     full_name: (state, getters, rootState, rootGetters) => {
-      return state.city + getters.site_name
-    }
+      return state.city + getters.site_name;
+    },
   },
   mutations: {
-    SET_SITE (state, site) {
-      state.site = site
-    }
+    SET_SITE(state, site) {
+      state.site = site + " C";
+    },
   },
   actions: {
-    getName ({state, commit, dispatch, getters, rootState, rootGetters}) {
+    getName({ state, commit, dispatch, getters, rootState, rootGetters }) {
       setTimeout(() => {
-        commit('SET_SITE', getters.site_name + rootGetters.title)
-      }, 1000)
-    }
+        commit("SET_SITE", getters.site_name + " " + rootGetters.site_name);
+      }, 1000);
+    },
   },
   modules: {
     ccc: {
       namespaced: true,
       state: {
-        name: '上饶县'
+        name: "上饶县",
+        site: "上饶",
+      },
+      mutations: {
+        SET_SITE(state, site) {
+          state.site = site + " ccc";
+        },
       },
       getters: {
-        getName: state => {
-          return state.name + '!!!'
-        }
-      }
-    }
-  }
-}
+        getName: (state) => {
+          return state.name + "!!!";
+        },
+        site_name: (state) => {
+          return state.site;
+        },
+      },
+    },
+  },
+};
